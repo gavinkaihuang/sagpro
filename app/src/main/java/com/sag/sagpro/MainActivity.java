@@ -1,5 +1,6 @@
 package com.sag.sagpro;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.AdapterView;
@@ -15,6 +16,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationBarView;
 import com.sag.sagpro.databinding.ActivityMainBinding;
+import com.sag.sagpro.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.item_navigation_account:
                     navController.navigate(R.id.item_navigation_account);
+                    Intent intent = new Intent();
+                    intent.setClass(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
                     break;
                  };
                 return  false;

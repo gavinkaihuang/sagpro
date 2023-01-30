@@ -3,23 +3,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/item_navigation_home">
+
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_home"-->
+<!--        android:name="com.sag.sagpro.ui.home.HomeFragment"-->
+<!--        android:label="@string/title_home"-->
+<!--        tools:layout="@layout/fragment_home" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_dashboard"-->
+<!--        android:name="com.sag.sagpro.ui.dashboard.DashboardFragment"-->
+<!--        android:label="@string/title_dashboard"-->
+<!--        tools:layout="@layout/fragment_dashboard" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_notifications"-->
+<!--        android:name="com.sag.sagpro.ui.notifications.NotificationsFragment"-->
+<!--        android:label="@string/title_notifications"-->
+<!--        tools:layout="@layout/fragment_notifications" />-->
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/item_navigation_home"
         android:name="com.sag.sagpro.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:label="@string/tab_home"
         tools:layout="@layout/fragment_home" />
 
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.sag.sagpro.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+<!--    <fragment-->
+<!--        android:id="@+id/item_navigation_search"-->
+<!--        android:name="com.sag.sagpro.ui.search.SearchFragment"-->
+<!--        android:label="@string/tab_search"-->
+<!--        tools:layout="@layout/fragment_search" />-->
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.sag.sagpro.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/item_navigation_messages"
+        android:name="com.sag.sagpro.ui.messages.MessagesFragment"
+        android:label="@string/tab_messages"
+        tools:layout="@layout/fragment_messages" />
+
+<!--    <fragment-->
+<!--        android:id="@+id/item_navigation_cart"-->
+<!--        android:name="com.sag.sagpro.ui.cart.CartFragment"-->
+<!--        android:label="@string/tab_cart"-->
+<!--        tools:layout="@layout/fragment_cart" />-->
+
+    <fragment
+        android:id="@+id/item_navigation_account"
+        android:name="com.sag.sagpro.ui.account.AccountFragment"
+        android:label="@string/tab_account"
+        tools:layout="@layout/fragment_account" />
+
+<!--    <fragment-->
+<!--        android:id="@+id/item_navigation_login"-->
+<!--        android:name="com.sag.sagpro.ui.login.LoginFragment"-->
+<!--        android:label="@string/tab_messages"-->
+<!--        tools:layout="@layout/fragment_login" />-->
 </navigation>

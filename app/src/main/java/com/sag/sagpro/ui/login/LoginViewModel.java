@@ -73,16 +73,7 @@ public class LoginViewModel extends ViewModel {
 
     public void login(String username, String password) {
         // can be launched in a separate asynchronous job
-//        Result<LoggedInUser> result = loginRepository.login(username, password);
-
         doLoginAction(username, password);
-
-//        if (result instanceof Result.Success) {
-//            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-//            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
-//        } else {
-//            loginResult.setValue(new LoginResult(R.string.login_failed));
-//        }
     }
 
     /**
@@ -92,8 +83,6 @@ public class LoginViewModel extends ViewModel {
      */
     private void doLoginAction(String username, String password) {
         try {
-//            username = "phw82@sohu.com";
-//            password = "111111";
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("email", username);
             jsonObject.put("password", password);
@@ -102,8 +91,8 @@ public class LoginViewModel extends ViewModel {
             AndroidNetworking.post(ConstantData.SIGN_IN)
                     .addJSONObjectBody(jsonObject)
                     .setTag("login")
-                    .setPriority(Priority.MEDIUM).setExecutor(Executors.newSingleThreadExecutor())
-
+                    .setPriority(Priority.MEDIUM)
+                    .setExecutor(Executors.newSingleThreadExecutor())
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {
                         @Override
@@ -113,18 +102,27 @@ public class LoginViewModel extends ViewModel {
                             try {
                                 String code = response.getString(ConstantData.CODE);
                                 if (code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
+                                    JSONObject jdata = response.getJSONObject(ConstantData.DATA);
                                     LoggedInUser fakeUser = new LoggedInUser(null, username);
-    //                            fakeUser.setToken(response.get);
+                                    fakeUser.setPassword(password);
+                                    fakeUser.setToken(jdata.getString("token"));
+                                    fakeUser.setExpireDate(jdata.getString("expiredate"));
                                     Result result =  new Result.Success<>(fakeUser);
                                     LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-                                    loginResult.postValue(new LoginResult(new LoggedInUserView(data.getUserName())));
+                                    loginResult.postValue(new LoginResult(data));
+//                                    //save to local storeage
+//                                    loginRepository.setLoginuser(, fakeUser);
+//
+//                                    Result result =  new Result.Success<>(fakeUser);
+//                                    LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
+//                                    loginResult.postValue(new LoginResult(new LoggedInUserView(data.getUserName())));
                                 } else {
                                     String message = response.getString(ConstantData.MSG);
-//                                    Result result = new Result.Error(new Exception(message));
                                     loginResult.postValue(new LoginResult(new Integer(code), message));
                                 }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                            } catch (JSONException error) {
+                                LogUtil.i("------------------" + error.toString());
+                                loginResult.postValue(new LoginResult(new Integer(ConstantData.CODE_FAILED), error.getMessage()));
                             }
 
                         }
@@ -132,8 +130,6 @@ public class LoginViewModel extends ViewModel {
                         public void onError(ANError error) {
                             // handle error
                             LogUtil.i("------------------" + error.toString());
-//                            loginResult.setValue(new LoginResult(R.string.login_failed));
-
                             loginResult.postValue(new LoginResult(error.getErrorCode(), error.getErrorDetail()));
                         }
                     });

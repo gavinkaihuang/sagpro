@@ -1,6 +1,10 @@
 package com.sag.sagpro.data;
 
+import android.content.Context;
+
+import com.sag.sagpro.ConstantData;
 import com.sag.sagpro.data.model.LoggedInUser;
+import com.sag.sagpro.data.model.LoggedInUserHelper;
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -37,20 +41,39 @@ public class LoginRepository {
         dataSource.logout();
     }
 
-    private void setLoggedInUser(LoggedInUser user) {
-        this.user = user;
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
-    }
+//    private void setLoggedInUser(LoggedInUser user) {
+//        this.user = user;
+//        // If user credentials will be cached in local storage, it is recommended it be encrypted
+//        // @see https://developer.android.com/training/articles/keystore
+//    }
 
-    public Result<LoggedInUser> login(String username, String password) {
-        // handle login
-        Result<LoggedInUser> result = dataSource.login(username, password);
-        if (result instanceof Result.Success) {
-            setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
-        }
-        return result;
-//        dataSource.doLoginAction(username, password, LoginRepository.this);
+//    /**
+//     * TODO now not use this function
+//     * @param username
+//     * @param password
+//     * @return
+//     */
+//    private Result<LoggedInUser> login(String username, String password) {
+//        // handle login
+//        Result<LoggedInUser> result = dataSource.login(username, password);
+//        if (result instanceof Result.Success) {
+//            setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
+//        }
+//        return result;
+////        dataSource.doLoginAction(username, password, LoginRepository.this);
+//    }
+
+    public void setLoginuser(Context context, LoggedInUser loggedInUser) {
+        this.user = loggedInUser;
+
+        //save to local storeage
+        LoggedInUserHelper.saveUserToLocal(context, loggedInUser);
+//        LocalDataSaver localDataSaver = new LocalDataSaver(context, ConstantData.SHARE_DATA);
+//        localDataSaver.putString("user_id", user.getUserId());
+//        localDataSaver.putString("username", user.getUserName());
+//        localDataSaver.putString("password", user.getPassword());
+//        localDataSaver.putString("token", user.getToken());
+//        localDataSaver.putString("expireDate", user.getExpireDate());
     }
 //
 //    public Result<LoggedInUser> loginCallBack(Result result) {

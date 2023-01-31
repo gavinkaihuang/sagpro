@@ -24,6 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sag.sagpro.R;
+import com.sag.sagpro.data.model.LoggedInUser;
+import com.sag.sagpro.data.model.LoggedInUserHelper;
 import com.sag.sagpro.ui.login.LoginViewModel;
 import com.sag.sagpro.ui.login.LoginViewModelFactory;
 import com.sag.sagpro.databinding.ActivityLoginBinding;
@@ -76,19 +78,14 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult.getError() != null) {
                     showLoginFailed(loginResult.getErrorMessage());
                 } else {
-                    updateUiWithUser(loginResult.getSuccess());
+                    LoggedInUser loggedInUser = loginResult.getLoggedInUser();
+                    LoggedInUserHelper.saveUserToLocal(LoginActivity.this, loggedInUser);//save to local storeage
+
+                    updateUiWithUser(loggedInUser);
                     setResult(Activity.RESULT_OK);
                     //Complete and destroy login activity once successful
                     finish();
                 }
-//                if (loginResult.getSuccess() != null) {
-//                    updateUiWithUser(loginResult.getSuccess());
-//
-//                }
-//                setResult(Activity.RESULT_OK);
-//
-//                //Complete and destroy login activity once successful
-//                finish();
             }
         });
 
@@ -133,8 +130,8 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
+    private void updateUiWithUser(LoggedInUser model) {
+        String welcome = getString(R.string.welcome) + " " + model.getUserName();
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }

@@ -20,4 +20,7 @@
 
     <string name="default_user_name" tools:ignore="MissingTranslation">phw82@sohu.com</string>
     <string name="default_password" tools:ignore="MissingTranslation">111111</string>
+
+    <string name="account_home_page" tools:ignore="MissingTranslation">Home page</string>
+    <string name="account_my_order" tools:ignore="MissingTranslation">My Order</string>
 </resources>

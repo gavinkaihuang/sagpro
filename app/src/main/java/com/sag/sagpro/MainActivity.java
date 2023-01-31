@@ -15,6 +15,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationBarView;
+import com.sag.sagpro.data.model.LoggedInUserHelper;
 import com.sag.sagpro.databinding.ActivityMainBinding;
 import com.sag.sagpro.ui.login.LoginActivity;
 
@@ -49,10 +50,16 @@ public class MainActivity extends AppCompatActivity {
                     navController.navigate(R.id.item_navigation_messages);
                     break;
                 case R.id.item_navigation_account:
-                    navController.navigate(R.id.item_navigation_account);
-                    Intent intent = new Intent();
-                    intent.setClass(MainActivity.this, LoginActivity.class);
-                    startActivity(intent);
+
+                    boolean isUserLoggedIn =  LoggedInUserHelper.isUserLoginedIn(MainActivity.this);
+                    if (isUserLoggedIn) {
+                        navController.navigate(R.id.item_navigation_account);
+                    } else {
+                        //ask user to login
+                        Intent intent = new Intent();
+                        intent.setClass(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
                     break;
                  };
                 return  false;

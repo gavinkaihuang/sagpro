@@ -55,11 +55,12 @@ public class LoginDataSource {
                                      @Override
                                      public void onResponse(JSONObject response) {
                                          // do anything with response
-                                         LogUtil.i(response.toString());
+                                         LogUtil.i("------------------" + response.toString());
                                      }
                                      @Override
                                      public void onError(ANError error) {
                                          // handle error
+                                         LogUtil.i("------------------" + error.toString());
                                      }
                                  });
 

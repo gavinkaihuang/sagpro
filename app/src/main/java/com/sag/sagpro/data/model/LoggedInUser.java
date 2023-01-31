@@ -6,18 +6,38 @@ package com.sag.sagpro.data.model;
 public class LoggedInUser {
 
     private String userId;
-    private String displayName;
+    private String userName;
+    private String password;
+    private String token;
+    private String expireDate;
 
-    public LoggedInUser(String userId, String displayName) {
+
+    public LoggedInUser(String userId, String userName) {
         this.userId = userId;
-        this.displayName = displayName;
+        this.userName = userName;
     }
 
     public String getUserId() {
         return userId;
     }
 
-    public String getDisplayName() {
-        return displayName;
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getToken() {
+        return this.token;
+    }
+
+    public void setExpireDate(String expireDate) {
+        this.expireDate = expireDate;
+    }
+
+    public String getExpireDate() {
+        return this.expireDate;
     }
 }

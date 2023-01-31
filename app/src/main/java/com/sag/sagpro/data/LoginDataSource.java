@@ -12,17 +12,39 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.concurrent.Executors;
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
 public class LoginDataSource {
 
-    public Result<LoggedInUser> login(String username, String password) {
+
+//    public Result<LoggedInUser> login(String username, String password) {
+//
+//        try {
+//            // TODO: handle loggedInUser authentication
+//            loginAction();
+//            LogUtil.i("------------------now return result");
+//            LoggedInUser fakeUser =
+//                    new LoggedInUser(
+//                            java.util.UUID.randomUUID().toString(),
+//                            "Jane Doe");
+//            return new Result.Success<>(fakeUser);
+//        } catch (Exception e) {
+//            return new Result.Error(new IOException("Error logging in", e));
+//        }
+//    }
+
+    public void logout() {
+        // TODO: revoke authentication
+    }
+
+    public Result<LoggedInUser> login(String userName, String password) {
 
         try {
             // TODO: handle loggedInUser authentication
-            loginAction();
+            LogUtil.i("------------------now return result");
             LoggedInUser fakeUser =
                     new LoggedInUser(
                             java.util.UUID.randomUUID().toString(),
@@ -33,42 +55,41 @@ public class LoginDataSource {
         }
     }
 
-    public void logout() {
-        // TODO: revoke authentication
-    }
-
-    private void loginAction() {
-        try {
-            String username = "phw82@sohu.com";
-            String password = "111111";
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("email", username);
-            jsonObject.put("password", password);
-            LogUtil.i("------postData:$jsonObject");
-
-            AndroidNetworking.post(ConstantData.SIGN_IN)
-                .addJSONObjectBody(jsonObject)
-                .setTag("login")
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                                     @Override
-                                     public void onResponse(JSONObject response) {
-                                         // do anything with response
-                                         LogUtil.i("------------------" + response.toString());
-                                     }
-                                     @Override
-                                     public void onError(ANError error) {
-                                         // handle error
-                                         LogUtil.i("------------------" + error.toString());
-                                     }
-                                 });
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-    }
+//    public void doLoginAction(String username, String password, LoginRepository loginRepository) {
+//        try {
+//            username = "phw82@sohu.com";
+//            password = "111111";
+//            JSONObject jsonObject = new JSONObject();
+//            jsonObject.put("email", username);
+//            jsonObject.put("password", password);
+//            LogUtil.i("------postData:$jsonObject");
+//
+//            AndroidNetworking.post(ConstantData.SIGN_IN)
+//                .addJSONObjectBody(jsonObject)
+//                .setTag("login")
+//                .setPriority(Priority.MEDIUM).setExecutor(Executors.newSingleThreadExecutor())
+//
+//                .build()
+//                    .getAsJSONObject(new JSONObjectRequestListener() {
+//                                     @Override
+//                                     public void onResponse(JSONObject response) {
+//                                         // do anything with response
+//                                         LogUtil.i("------------------" + response.toString());
+//                                         loginRepository.loginCallBack();
+//                                         login(response);
+//                                     }
+//                                     @Override
+//                                     public void onError(ANError error) {
+//                                         // handle error
+//                                         LogUtil.i("------------------" + error.toString());
+//                                     }
+//                                 });
+//
+//
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//    }
 //        AndroidNetworking.post("https://fierce-cove-29863.herokuapp.com/createAnUser")
 //                .addBodyParameter("firstname", "Amit")
 //                .addBodyParameter("lastname", "Shekhar")

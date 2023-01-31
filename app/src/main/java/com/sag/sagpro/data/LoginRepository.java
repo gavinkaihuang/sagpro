@@ -50,5 +50,13 @@ public class LoginRepository {
             setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
         }
         return result;
+//        dataSource.doLoginAction(username, password, LoginRepository.this);
     }
+//
+//    public Result<LoggedInUser> loginCallBack(Result result) {
+//        if (resultresult instanceof Result.Success) {
+//            setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
+//        }
+//        return result;
+//    }
 }

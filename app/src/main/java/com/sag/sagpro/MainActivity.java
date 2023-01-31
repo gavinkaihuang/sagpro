@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.item_navigation_home:
+                        navController.navigate(R.id.item_navigation_homeitem);
                     break;
                 case R.id.item_navigation_messages:
                     navController.navigate(R.id.item_navigation_messages);

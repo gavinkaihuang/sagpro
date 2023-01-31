@@ -53,9 +53,9 @@
         android:label="@string/tab_account"
         tools:layout="@layout/fragment_account" />
 
-<!--    <fragment-->
-<!--        android:id="@+id/item_navigation_login"-->
-<!--        android:name="com.sag.sagpro.ui.login.LoginFragment"-->
-<!--        android:label="@string/tab_messages"-->
-<!--        tools:layout="@layout/fragment_login" />-->
+    <fragment
+        android:id="@+id/item_navigation_homeitem"
+        android:name="com.sag.sagpro.ui.home.HomeItemFragment"
+        android:label="@string/tab_home"
+        tools:layout="@layout/fragment_home_item" />
 </navigation>

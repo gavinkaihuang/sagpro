@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.sag.sagpro.data.model.LoggedInUser;
+import com.sag.sagpro.data.model.LoggedInUserHelper;
 import com.sag.sagpro.databinding.FragmentAccountBinding;
 
 public class AccountFragment extends Fragment {
@@ -24,8 +26,10 @@ public class AccountFragment extends Fragment {
         binding = FragmentAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textNotifications;
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        LoggedInUser loggedInUser = LoggedInUserHelper.getLoggedInUser(getContext());
+        final TextView userNameTextView = binding.userNameTextView;
+        userNameTextView.setText(loggedInUser.getUserName());
+//        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

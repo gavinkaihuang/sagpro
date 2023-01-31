@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">SAGPro</string>
     <string name="tab_home">Home</string>
     <string name="tab_search">Search</string>
@@ -6,13 +6,18 @@
     <string name="tab_cart">Cart</string>
     <string name="tab_account">Account</string>
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome!"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email" tools:ignore="MissingTranslation">Email</string>
+    <string name="prompt_password" tools:ignore="MissingTranslation">Password</string>
+    <string name="action_sign_in" tools:ignore="MissingTranslation">Sign in</string>
+    <string name="action_sign_in_short" tools:ignore="MissingTranslation">Sign in</string>
+    <string name="welcome" tools:ignore="MissingTranslation">"Welcome!"</string>
+    <string name="invalid_username" tools:ignore="MissingTranslation">Not a valid username</string>
+    <string name="invalid_password" tools:ignore="MissingTranslation">Password must be >5 characters</string>
+    <string name="login_failed" tools:ignore="MissingTranslation" >"Login failed"</string>
+    <string name="title_activity_login" tools:ignore="MissingTranslation">LoginActivity</string>
+    <string name="login_regist_prompt" tools:ignore="MissingTranslation">Don\'t have an account?</string>
+    <string name="login_regist_link" tools:ignore="MissingTranslation">Sign up now</string>
+
+    <string name="default_user_name" tools:ignore="MissingTranslation">phw82@sohu.com</string>
+    <string name="default_password" tools:ignore="MissingTranslation">111111</string>
 </resources>

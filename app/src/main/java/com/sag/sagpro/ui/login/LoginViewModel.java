@@ -20,6 +20,7 @@ import com.sag.sagpro.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.concurrent.Executors;
 
 public class LoginViewModel extends ViewModel {
@@ -91,12 +92,12 @@ public class LoginViewModel extends ViewModel {
      */
     private void doLoginAction(String username, String password) {
         try {
-            username = "phw82@sohu.com";
-            password = "111111";
+//            username = "phw82@sohu.com";
+//            password = "111111";
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("email", username);
             jsonObject.put("password", password);
-            LogUtil.i("------postData:$jsonObject");
+            LogUtil.i("------postData:" + jsonObject.toString());
 
             AndroidNetworking.post(ConstantData.SIGN_IN)
                     .addJSONObjectBody(jsonObject)
@@ -109,19 +110,31 @@ public class LoginViewModel extends ViewModel {
                         public void onResponse(JSONObject response) {
                             // do anything with response
                             LogUtil.i("------------------" + response.toString());
-                            LoggedInUser fakeUser = new LoggedInUser(
-                                            java.util.UUID.randomUUID().toString(),
-                                            "Jane Doe");
-                            Result result =  new Result.Success<>(fakeUser);
-                            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-                            loginResult.postValue(new LoginResult(new LoggedInUserView(data.getUserName())));
+                            try {
+                                String code = response.getString(ConstantData.CODE);
+                                if (code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
+                                    LoggedInUser fakeUser = new LoggedInUser(null, username);
+    //                            fakeUser.setToken(response.get);
+                                    Result result =  new Result.Success<>(fakeUser);
+                                    LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
+                                    loginResult.postValue(new LoginResult(new LoggedInUserView(data.getUserName())));
+                                } else {
+                                    String message = response.getString(ConstantData.MSG);
+//                                    Result result = new Result.Error(new Exception(message));
+                                    loginResult.postValue(new LoginResult(new Integer(code), message));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
                         }
                         @Override
                         public void onError(ANError error) {
                             // handle error
                             LogUtil.i("------------------" + error.toString());
 //                            loginResult.setValue(new LoginResult(R.string.login_failed));
-                            loginResult.postValue(new LoginResult(R.string.login_failed));
+
+                            loginResult.postValue(new LoginResult(error.getErrorCode(), error.getErrorDetail()));
                         }
                     });
 

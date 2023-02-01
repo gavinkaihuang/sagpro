@@ -1,16 +1,28 @@
 package com.sag.sagpro.ui.home;
 
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.androidnetworking.widget.ANImageView;
 import com.facebook.stetho.common.LogUtil;
+import com.sag.sagpro.R;
 import com.sag.sagpro.databinding.FragmentHomeItemBinding;
 import com.sag.sagpro.ui.home.placeholder.PlaceholderItem;
+import com.sag.sagpro.utils.AndroidNetworkingUtils;
+import com.sag.sagpro.utils.ImageLoadCallback;
 
 import java.util.List;
 
@@ -18,32 +30,73 @@ import java.util.List;
  * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
+public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>  {
 
-    private final List<PlaceholderItem> mValues;
+//public class MyItemRecyclerViewAdapter extends BaseBindingAdapter {
+    private List<PlaceholderItem> mValues;
 
     public MyItemRecyclerViewAdapter(List<PlaceholderItem> items) {
         mValues = items;
     }
 
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LogUtil.i("------------------onCreateViewHolder");
 //        return new ViewHolder(FragmentHomeItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
-        ViewHolder viewHolder = new ViewHolder(FragmentHomeItemBinding.inflate(LayoutInflater.from(parent.getContext()), null, false));
-
+        ViewHolder viewHolder = new ViewHolder(FragmentHomeItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
         return viewHolder;
+
+//        return new UserViewHolder(binding.getRoot());
+//        DataBinderMapperImpl.inflate(LayoutInflater.from(parent.getContext()), R.layout.fragment_home_item, parent, false);
+//        DataBinderMapperImpl
+
+//        FragmentHomeItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.fragment_home_item, parent, false);
+//        return new ViewHolder(binding);
+
+
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
+//        holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).getCid());
         holder.mContentView.setText(mValues.get(position).getName());
 
         String imageURL = mValues.get(position).getImg();
-        holder.aNImageView.setImageUrl(imageURL);
-        LogUtil.i("------------------" + imageURL);
+//        holder.aNImageView.setImageUrl(imageURL);
+        LogUtil.i("------------------onBindViewHolder " + imageURL);
+
+        AndroidNetworkingUtils.loadImageFromURL(imageURL, "HomeListImage", new ImageLoadCallback() {
+            @Override
+            public Bitmap loadImageSucceed(Bitmap bitmap) {
+                if (bitmap != null) {
+                    Drawable drawable = new BitmapDrawable(bitmap);
+//                    holder.imageButton.setBackground(drawable);
+//                    holder.imageButton.setImageBitmap(bitmap);
+                    holder.imageButton.setScaleType(ImageView.ScaleType.FIT_XY);
+                    holder.imageButton.setBackground(drawable);
+//                    holder.imageButton.setBackground();
+                }
+                return null;
+            }
+
+            @Override
+            public Exception loadImageFailed(Exception exception) {
+                return null;
+            }
+        });
+
+//        LogUtil.i("------------------onBindViewHolder ");
+//        FragmentHomeItemBinding binding = DataBindingUtil.getBinding(holder.itemView);
+//        binding.setItem(mValues.get(position));
+//        binding.executePendingBindings();
+
+
+    }
+
+    public void setItems(List<PlaceholderItem> items) {
+        this.mValues = items;
     }
 
     @Override
@@ -51,17 +104,22 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         return mValues.size();
     }
 
+
+
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public PlaceholderItem mItem;
-        public ANImageView aNImageView = null;
+        public View rootView = null;
+        public  TextView mIdView;
+        public  TextView mContentView;
+        public ImageButton imageButton;
+//        public PlaceholderItem mItem;
+//        public ANImageView aNImageView = null;
 
         public ViewHolder(FragmentHomeItemBinding binding) {
             super(binding.getRoot());
+            rootView = binding.getRoot();
             mIdView = binding.itemNumber;
             mContentView = binding.content;
-            aNImageView = binding.imageView;
+            imageButton = binding.button;
         }
 
         @Override
@@ -69,4 +127,6 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             return super.toString() + " '" + mContentView.getText() + "'";
         }
     }
+
+
 }

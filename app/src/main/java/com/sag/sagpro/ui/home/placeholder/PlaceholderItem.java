@@ -33,10 +33,10 @@ public class PlaceholderItem {
         this.img = img;
     }
 
-    private String cid;
-    private String name;
-    private String description;
-    private String img;
+    public String cid;
+    public String name;
+    public String description;
+    public String img;
 
     public PlaceholderItem() {
     }

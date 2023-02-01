@@ -2,9 +2,11 @@ package com.sag.sagpro;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 
+import com.facebook.stetho.common.LogUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -67,20 +69,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    public int getFooterHeight() {
+        if (binding.navView != null)
+            return binding.navView.getHeight();
+        return 0;
+    }
 }
 
-
-//    @Override
-//    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.item_navigation_home:
-//                break;
-//            case R.id.item_navigation_messages:
-//                navController.navigate(R.id.item_navigation_messages);
-//                break;
-//            case R.id.item_navigation_account:
-//                navController.navigate(R.id.item_navigation_account);
-//                break;
-//        }
-//        return false;
-//    });

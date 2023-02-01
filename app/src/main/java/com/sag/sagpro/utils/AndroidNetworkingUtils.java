@@ -16,9 +16,9 @@ import java.util.concurrent.Executors;
 
 public class AndroidNetworkingUtils {
 
-    public static void loadImageFromURL(String imageURL, ImageLoadCallback imageLoadCallback) {
+    public static void loadImageFromURL(String imageURL, String tag, ImageLoadCallback imageLoadCallback) {
         AndroidNetworking.get(imageURL)
-                .setTag("imageRequestTag")
+                .setTag(tag)
                 .setPriority(Priority.MEDIUM)
                 .setBitmapMaxHeight(100)
                 .setBitmapMaxWidth(100)

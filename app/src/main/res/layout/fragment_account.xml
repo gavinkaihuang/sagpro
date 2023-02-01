@@ -4,14 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     tools:context=".ui.account.AccountFragment">
+=======
+    tools:context=".ui.account.AccountFragment"
+    >
+>>>>>>> 71b450f79a474229aa60ab429fa06d420935792b
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="20dp"
         android:src="@drawable/tab_mine"
         app:layout_constraintEnd_toStartOf="@+id/textView4"
@@ -19,13 +24,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/userNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="TextView1"
+
         app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="@+id/imageView" /><!--        style="@style/BordText"-->
 
     <TextView
         android:id="@+id/textView4"
@@ -33,14 +39,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="TextView2"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="@+id/userNameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/userNameTextView" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="20dp"
         android:text="@string/account_home_page"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView" />
@@ -49,10 +55,103 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="@string/account_my_order"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        style="@style/BordText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" /><!--        style="@style/BordText"-->
+
+    <ImageView
+        android:id="@+id/payImageView"
+        android:layout_width="54dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/tab_mine"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <ImageView
+        android:id="@+id/reciveImageView"
+        android:layout_width="54dp"
+        android:layout_height="58dp"
+        android:src="@drawable/tab_mine"
+        app:layout_constraintEnd_toStartOf="@+id/moreImageView"
+        app:layout_constraintStart_toEndOf="@+id/payImageView"
+        app:layout_constraintTop_toTopOf="@+id/shipImageView" />
+
+    <ImageView
+        android:id="@+id/moreImageView"
+        android:layout_width="54dp"
+        android:layout_height="58dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/tab_mine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/reciveImageView" />
+
+    <ImageView
+        android:id="@+id/shipImageView"
+        android:layout_width="54dp"
+        android:layout_height="58dp"
+        android:src="@drawable/tab_mine"
+        app:layout_constraintEnd_toStartOf="@+id/reciveImageView"
+        app:layout_constraintStart_toEndOf="@+id/payImageView"
+        app:layout_constraintTop_toTopOf="@+id/payImageView" />
+
+    <ImageView
+        android:id="@+id/infoImageView"
+        android:layout_width="54dp"
+        android:layout_height="58dp"
+        android:src="@drawable/tab_mine"
+        app:layout_constraintEnd_toStartOf="@+id/moreImageView"
+        app:layout_constraintStart_toEndOf="@+id/reciveImageView"
+        app:layout_constraintTop_toTopOf="@+id/reciveImageView" />
+
+    <TextView
+        android:id="@+id/pageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/payImageView"
+        app:layout_constraintStart_toStartOf="@+id/payImageView"
+        app:layout_constraintTop_toBottomOf="@+id/payImageView" />
+
+    <TextView
+        android:id="@+id/shipTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/shipImageView"
+        app:layout_constraintStart_toStartOf="@+id/shipImageView"
+        app:layout_constraintTop_toBottomOf="@+id/shipImageView" />
+
+    <TextView
+        android:id="@+id/reciveTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/reciveImageView"
+        app:layout_constraintStart_toStartOf="@+id/reciveImageView"
+        app:layout_constraintTop_toBottomOf="@+id/reciveImageView" />
+
+    <TextView
+        android:id="@+id/infoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/infoImageView"
+        app:layout_constraintStart_toStartOf="@+id/infoImageView"
+        app:layout_constraintTop_toBottomOf="@+id/infoImageView" />
+
+    <TextView
+        android:id="@+id/moreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/moreImageView"
+        app:layout_constraintStart_toStartOf="@+id/moreImageView"
+        app:layout_constraintTop_toBottomOf="@+id/moreImageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

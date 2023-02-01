@@ -26,7 +26,7 @@ public class LoggedInUserHelper {
     public static LoggedInUser getLoggedInUser(Context context) {
         LocalDataSaver localDataSaver = new LocalDataSaver(context, ConstantData.SHARE_DATA);
         String userName = localDataSaver.getString("username");
-        if (userName != null && !"".equals(userName))
+        if (userName == null || "".equals(userName))
             return null;
 
         LoggedInUser loggedInUser = new LoggedInUser();

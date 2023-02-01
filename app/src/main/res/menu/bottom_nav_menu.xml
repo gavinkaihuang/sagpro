@@ -3,7 +3,7 @@
 
 
     <item
-        android:id="@+id/item_navigation_home"
+        android:id="@+id/item_navigation_homeitem"
         android:icon="@drawable/tab_home"
         android:title="@string/tab_home" />
 

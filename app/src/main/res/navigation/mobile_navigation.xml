@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/item_navigation_home">
+    app:startDestination="@+id/item_navigation_homeitem">
 
 <!--    <fragment-->
 <!--        android:id="@+id/navigation_home"-->
@@ -24,8 +24,8 @@
 <!--        tools:layout="@layout/fragment_notifications" />-->
 
     <fragment
-        android:id="@+id/item_navigation_home"
-        android:name="com.sag.sagpro.ui.home.HomeFragment"
+        android:id="@+id/item_navigation_homeitem"
+        android:name="com.sag.sagpro.ui.home.HomeItemFragment"
         android:label="@string/tab_home"
         tools:layout="@layout/fragment_home" />
 
@@ -53,9 +53,9 @@
         android:label="@string/tab_account"
         tools:layout="@layout/fragment_account" />
 
-    <fragment
-        android:id="@+id/item_navigation_homeitem"
-        android:name="com.sag.sagpro.ui.home.HomeItemFragment"
-        android:label="@string/tab_home"
-        tools:layout="@layout/fragment_home_item" />
+<!--    <fragment-->
+<!--        android:id="@+id/item_navigation_homeitem"-->
+<!--        android:name="com.sag.sagpro.ui.home.HomeItemFragment"-->
+<!--        android:label="@string/tab_home"-->
+<!--        tools:layout="@layout/fragment_home_item" />-->
 </navigation>

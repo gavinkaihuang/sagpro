@@ -4,12 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
     tools:context=".ui.account.AccountFragment">
-=======
-    tools:context=".ui.account.AccountFragment"
-    >
->>>>>>> 71b450f79a474229aa60ab429fa06d420935792b
 
     <ImageView
         android:id="@+id/imageView"

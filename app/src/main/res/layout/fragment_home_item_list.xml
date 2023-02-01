@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeItemFragment"
+    android:orientation="vertical"
     >
 
     <EditText
@@ -21,41 +22,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/categoriesButton"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:background="@drawable/categories"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/productButton"
-        app:layout_constraintTop_toBottomOf="@+id/serchEditText" />
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/categoriesButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:background="@drawable/categories"
+            android:layout_marginStart="20dp"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/productButton"
+            app:layout_constraintTop_toBottomOf="@+id/serchEditText" />
 
 
-    <Button
-        android:id="@+id/productButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:background="@drawable/products"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintLeft_toRightOf="@id/categoriesButton"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/serchEditText" />
+        <Button
+            android:id="@+id/productButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/products"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/categoriesButton"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/serchEditText" />
+
+    </LinearLayout>
 
 
-    <!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/list"-->
-<!--        android:name="com.sag.sagpro.ui.home.HomeItemFragment"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_marginTop="340dp"-->
-<!--        android:background="@color/bule"-->
-<!--        app:layoutManager="LinearLayoutManager"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        tools:layout_editor_absoluteX="16dp"-->
-<!--        tools:listitem="@layout/fragment_home_item" />-->
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:name="com.sag.sagpro.ui.home.HomeItemFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/bule"
+        app:layoutManager="LinearLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/productButton"
+        tools:listitem="@layout/fragment_home_item" />
 
 <!--    <Button-->
 <!--        android:id="@+id/button2"-->
@@ -109,4 +121,4 @@
 <!--&lt;!&ndash;        tools:src="@tools:sample/avatars" />&ndash;&gt;-->
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -12,5 +12,8 @@ public class ConstantData {
 
     public static String URL = "http://sag-stage.woyaoai.cn/sag/";
 
+    /** request services **/
     public static String SIGN_IN = URL + "signin";
+
+    public static String CATEGORIES = URL + "categories";
 }

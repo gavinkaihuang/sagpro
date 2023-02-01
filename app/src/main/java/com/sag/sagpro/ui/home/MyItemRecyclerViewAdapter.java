@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.androidnetworking.widget.ANImageView;
+import com.facebook.stetho.common.LogUtil;
 import com.sag.sagpro.databinding.FragmentHomeItemBinding;
-import com.sag.sagpro.ui.home.placeholder.PlaceholderContent.PlaceholderItem;
+import com.sag.sagpro.ui.home.placeholder.PlaceholderItem;
 
 import java.util.List;
 
@@ -26,16 +28,22 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LogUtil.i("------------------onCreateViewHolder");
+//        return new ViewHolder(FragmentHomeItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        ViewHolder viewHolder = new ViewHolder(FragmentHomeItemBinding.inflate(LayoutInflater.from(parent.getContext()), null, false));
 
-        return new ViewHolder(FragmentHomeItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
-
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mIdView.setText(mValues.get(position).getCid());
+        holder.mContentView.setText(mValues.get(position).getName());
+
+        String imageURL = mValues.get(position).getImg();
+        holder.aNImageView.setImageUrl(imageURL);
+        LogUtil.i("------------------" + imageURL);
     }
 
     @Override
@@ -47,11 +55,13 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         public final TextView mIdView;
         public final TextView mContentView;
         public PlaceholderItem mItem;
+        public ANImageView aNImageView = null;
 
         public ViewHolder(FragmentHomeItemBinding binding) {
             super(binding.getRoot());
             mIdView = binding.itemNumber;
             mContentView = binding.content;
+            aNImageView = binding.imageView;
         }
 
         @Override

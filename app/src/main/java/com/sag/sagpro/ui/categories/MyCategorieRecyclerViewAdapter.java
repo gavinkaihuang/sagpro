@@ -3,11 +3,10 @@ package com.sag.sagpro.ui.categories;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.sag.sagpro.databinding.FragmentItemBinding;
+import com.sag.sagpro.databinding.FragmentCategoryItemBinding;
 import com.sag.sagpro.ui.categories.placeholder.PlaceholderContent.PlaceholderItem;
 
 import java.util.List;
@@ -16,18 +15,18 @@ import java.util.List;
  * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyCateogrieRecyclerViewAdapter extends RecyclerView.Adapter<MyCateogrieRecyclerViewAdapter.ViewHolder> {
+public class MyCategorieRecyclerViewAdapter extends RecyclerView.Adapter<MyCategorieRecyclerViewAdapter.ViewHolder> {
 
     private final List<PlaceholderItem> mValues;
 
-    public MyCateogrieRecyclerViewAdapter(List<PlaceholderItem> items) {
+    public MyCategorieRecyclerViewAdapter(List<PlaceholderItem> items) {
         mValues = items;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        return new ViewHolder(FragmentItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        return new ViewHolder(FragmentCategoryItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
 
     }
 
@@ -48,7 +47,7 @@ public class MyCateogrieRecyclerViewAdapter extends RecyclerView.Adapter<MyCateo
         public final TextView mContentView;
         public PlaceholderItem mItem;
 
-        public ViewHolder(FragmentItemBinding binding) {
+        public ViewHolder(FragmentCategoryItemBinding binding) {
             super(binding.getRoot());
             mIdView = binding.itemNumber;
             mContentView = binding.content;

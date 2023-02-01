@@ -1,15 +1,20 @@
 package com.sag.sagpro;
 
+import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 
 import com.facebook.stetho.common.LogUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -24,6 +29,7 @@ import com.sag.sagpro.ui.login.LoginActivity;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    NavController navController = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.item_navigation_homeitem, R.id.item_navigation_messages, R.id.item_navigation_account)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
         navView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -48,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.item_navigation_homeitem:
                         navController.navigate(R.id.item_navigation_homeitem);
+//                        navController.addToBackStack
                     break;
                 case R.id.item_navigation_messages:
                     navController.navigate(R.id.item_navigation_messages);
@@ -68,6 +75,20 @@ public class MainActivity extends AppCompatActivity {
                 return  false;
             }
         });
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
+        return super.onCreateView(name, context, attrs);
+
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.set
+    }
+
+    public void navigationTo(int id) {
+        navController.navigate(id);
+
     }
 
 

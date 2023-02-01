@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,6 +39,7 @@ import com.sag.sagpro.R;
 import com.sag.sagpro.data.Result;
 import com.sag.sagpro.data.model.LoggedInUser;
 import com.sag.sagpro.databinding.FragmentHomeItemListBinding;
+import com.sag.sagpro.ui.categories.CategorieFragment;
 import com.sag.sagpro.ui.home.placeholder.PlaceholderContent;
 import com.sag.sagpro.ui.home.placeholder.PlaceholderItem;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
@@ -123,7 +126,32 @@ public class HomeItemFragment extends Fragment {
 
         binding.categoriesButton.setBackgroundResource(R.drawable.categories);
         binding.productButton.setBackgroundResource(R.drawable.products);
-        binding.categoriesButton.setClickable(true);
+        binding.categoriesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                navController.navigate(R.id.item_navigation_homeitem);
+                Activity activty = HomeItemFragment.this.getActivity();
+                if (activty instanceof MainActivity) {
+//                    ((MainActivity) activty).navigationTo(R.id.ca)
+                   //TODo
+//                    ((MainActivity) activty).navigationTo(R.id.item_navigation_categories);
+//                    HomeItemFragment.this.a
+//                    addToBackStack  https://blog.csdn.net/qq_44920726/article/details/126677674
+
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    // 2：获取FragmentTransaction
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                    // 3：将跳转的fragment 添加到栈，这里使用 replace
+                    fragmentTransaction.replace(R.id.container, CategorieFragment.newInstance(1));
+                    fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                    fragmentTransaction.addToBackStack("");
+                    // 4: 提交事务
+                    fragmentTransaction.commit();
+
+                }
+            }
+        });
 
     }
 

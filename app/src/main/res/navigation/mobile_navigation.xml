@@ -27,7 +27,7 @@
         android:id="@+id/item_navigation_homeitem"
         android:name="com.sag.sagpro.ui.home.HomeItemFragment"
         android:label="@string/tab_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home_item" />
 
 <!--    <fragment-->
 <!--        android:id="@+id/item_navigation_search"-->
@@ -53,9 +53,9 @@
         android:label="@string/tab_account"
         tools:layout="@layout/fragment_account" />
 
-<!--    <fragment-->
-<!--        android:id="@+id/item_navigation_homeitem"-->
-<!--        android:name="com.sag.sagpro.ui.home.HomeItemFragment"-->
-<!--        android:label="@string/tab_home"-->
-<!--        tools:layout="@layout/fragment_home_item" />-->
+    <fragment
+        android:id="@+id/item_navigation_categories"
+        android:name="com.sag.sagpro.ui.categories.CategorieFragment"
+        android:label="@string/category_title"
+        tools:layout="@layout/fragment_home_item" />
 </navigation>

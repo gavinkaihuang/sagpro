@@ -3,6 +3,8 @@ package com.sag.sagpro.ui.categories;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,7 +20,7 @@ import com.sag.sagpro.ui.categories.placeholder.PlaceholderContent;
 /**
  * A fragment representing a list of Items.
  */
-public class CateogrieFragment extends Fragment {
+public class CategorieFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -29,13 +31,13 @@ public class CateogrieFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public CateogrieFragment() {
+    public CategorieFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static CateogrieFragment newInstance(int columnCount) {
-        CateogrieFragment fragment = new CateogrieFragment();
+    public static CategorieFragment newInstance(int columnCount) {
+        CategorieFragment fragment = new CategorieFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -54,7 +56,7 @@ public class CateogrieFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_item_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_category_item_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -65,8 +67,15 @@ public class CateogrieFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyCateogrieRecyclerViewAdapter(PlaceholderContent.ITEMS));
+            recyclerView.setAdapter(new MyCategorieRecyclerViewAdapter(PlaceholderContent.ITEMS));
         }
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+//        this.get
     }
 }

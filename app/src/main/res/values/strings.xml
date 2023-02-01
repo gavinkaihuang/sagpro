@@ -23,4 +23,6 @@
 
     <string name="account_home_page" tools:ignore="MissingTranslation">Home page</string>
     <string name="account_my_order" tools:ignore="MissingTranslation">My Order</string>
+
+    <string name="category_title" tools:ignore="MissingTranslation">Categories</string>
 </resources>

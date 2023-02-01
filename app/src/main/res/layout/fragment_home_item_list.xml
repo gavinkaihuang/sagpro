@@ -9,22 +9,37 @@
     android:orientation="vertical"
     >
 
-    <EditText
+<!--    <EditText-->
+<!--        android:id="@+id/serchEditText"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:ems="10"-->
+<!--        android:text="Search"-->
+<!--        android:ima-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <com.sag.sagpro.widgets.EditTextSearch
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_centerInParent="true"
         android:id="@+id/serchEditText"
+        android:background="@drawable/search_edit_round"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:ems="10"
-        android:text="Search"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="30dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_margin="10dp"
+        android:singleLine="true"
+        android:text="Search"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:orientation="horizontal">
@@ -33,15 +48,15 @@
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:gravity="center"
-            android:src="@drawable/categories" />
+            android:layout_weight="1"/>
 
 
         <ImageButton
             android:id="@+id/productButton"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
             android:gravity="center"
-            android:src="@drawable/products" />
+            android:layout_weight="1" />
 
     </LinearLayout>
 
@@ -59,57 +74,6 @@
         android:layout_marginRight="20dp"
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/fragment_home_item" />
-
-<!--    <Button-->
-<!--        android:id="@+id/button2"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:gravity="center"-->
-<!--        android:text="Button1"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/list"-->
-<!--        app:layout_constraintRight_toLeftOf="@id/button3"-->
-
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/serchEditText" />-->
-
-<!--    &lt;!&ndash;        app:layout_constraintBottom_toTopOf="@+id/list"&ndash;&gt;-->
-<!--    &lt;!&ndash;        app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
-<!--    &lt;!&ndash;        app:layout_constraintTop_toBottomOf="@+id/serchEditText"&ndash;&gt;-->
-
-<!--    <Button-->
-<!--        android:id="@+id/button3"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:gravity="center"-->
-<!--        android:text="Button2"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/list"-->
-<!--        app:layout_constraintLeft_toRightOf="@id/button2"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/serchEditText" />-->
-<!--    &lt;!&ndash;        app:layout_constraintBottom_toTopOf="@+id/list"&ndash;&gt;-->
-<!--    &lt;!&ndash;        app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
-<!--    &lt;!&ndash;        app:layout_constraintStart_toEndOf="@+id/button2"&ndash;&gt;-->
-<!--    &lt;!&ndash;        app:layout_constraintTop_toBottomOf="@+id/serchEditText"&ndash;&gt;-->
-
-
-<!--    &lt;!&ndash;    <ImageView&ndash;&gt;-->
-<!--&lt;!&ndash;        android:id="@+id/imageView2"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_width="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:src="@drawable/categories"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:layout_constraintEnd_toStartOf="@+id/imageView3"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:layout_constraintTop_toBottomOf="@+id/serchEditText"&ndash;&gt;-->
-<!--&lt;!&ndash;        tools:src="@tools:sample/avatars" />&ndash;&gt;-->
-
-<!--&lt;!&ndash;    <ImageView&ndash;&gt;-->
-<!--&lt;!&ndash;        android:id="@+id/imageView3"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_width="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:src="@drawable/products"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
-<!--&lt;!&ndash;        tools:layout_editor_absoluteY="135dp"&ndash;&gt;-->
-<!--&lt;!&ndash;        tools:src="@tools:sample/avatars" />&ndash;&gt;-->
 
 
 </LinearLayout>

@@ -57,30 +57,12 @@ import java.util.concurrent.Executors;
 public class HomeItemFragment extends Fragment {
 
 
-//    private static Handler messageHandler = new Handler() {
-//        @Override
-//        public void handleMessage(Message msg) {
-//            LogUtil.e("------------------handleMessage=" + msg.what);
-////            if (msg != null && recyclerView != null) {
-////                recyclerView.notify();
-//            }
-//        }
-//    };
+    MyItemRecyclerViewAdapter myItemRecyclerViewAdapter = null;
 
-//    private static Handler messageHandler = new Handler() {
-//        @Override
-//        public void handleMessage(Message msg) {
-//            LogUtil.e("------------------handleMessage=" + msg.what);
-////            if (msg != null && recyclerView != null) {
-////                recyclerView.notify();
-//            }
-//        }
-//    };
-
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
-    private int mColumnCount = 1;
+//    // TODO: Customize parameter argument names
+//    private static final String ARG_COLUMN_COUNT = "column-count";
+//    // TODO: Customize parameters
+//    private int mColumnCount = 1;
 
 //    MessageHandler messageHandler = null;
     private PlaceholderContent placeholderContent = null;
@@ -95,23 +77,23 @@ public class HomeItemFragment extends Fragment {
     public HomeItemFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static HomeItemFragment newInstance(int columnCount) {
-        HomeItemFragment fragment = new HomeItemFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
-    }
+//    // TODO: Customize parameter initialization
+//    @SuppressWarnings("unused")
+//    public static HomeItemFragment newInstance(int columnCount) {
+//        HomeItemFragment fragment = new HomeItemFragment();
+//        Bundle args = new Bundle();
+//        args.putInt(ARG_COLUMN_COUNT, columnCount);
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
+//        if (getArguments() != null) {
+//            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+//        }
 
 
         LogUtil.i("------------------HomeItemFragment onCreate");
@@ -119,9 +101,17 @@ public class HomeItemFragment extends Fragment {
         AndroidNetworkingUtils.loadURL(ConstantData.CATEGORIES, "CATEGORIES", new JSONObject(), new LoadUrlHandler());
     }
 
-    MyItemRecyclerViewAdapter myItemRecyclerViewAdapter = null;
 
 
+
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        binding = FragmentHomeItemListBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -130,40 +120,11 @@ public class HomeItemFragment extends Fragment {
         myItemRecyclerViewAdapter = new MyItemRecyclerViewAdapter(placeholderContent.ITEMS);
         binding.list.setAdapter(myItemRecyclerViewAdapter);
         binding.list.addItemDecoration(UIUtils.getDividerItemDecoration(getContext()));
-    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentHomeItemListBinding.inflate(inflater, container, false);
-//        View rootView = inflater.inflate(R.layout.fragment_home_item_list, container, false);
-//        serchEditText = rootView.findViewById(R.id.serchEditText);
+        binding.categoriesButton.setBackgroundResource(R.drawable.categories);
+        binding.productButton.setBackgroundResource(R.drawable.products);
+        binding.categoriesButton.setClickable(true);
 
-//
-//        // Set the adapter
-//        recyclerView = binding.list;
-//        if (binding.list instanceof RecyclerView) {
-//            Context context = HomeItemFragment.this.getContext();
-////            RecyclerView recyclerView = (RecyclerView) recyclerView;
-//            if (mColumnCount <= 1) {
-//                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-//            } else {
-//                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-//            }
-//            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(placeholderContent.ITEMS));
-//        }
-
-//        int j = DisplayUtils.dp2px(this, 15);
-//        Rect firstAndLastRect = new Rect(0, 10, 10, 0);
-////        HorizontalSpacesDecoration spacesDecoration = new HorizontalSpacesDecoration(rect, firstAndLastRectt);
-//
-//        DividerItemDecoration decoration = new DividerItemDecoration(getContext(), LinearLayout.VERTICAL);
-//        decoration.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.recycler_item_color));
-
-//        mRecyclerView.addItemDecoration(spacesDecoration);
-
-
-        return binding.getRoot();
     }
 
 

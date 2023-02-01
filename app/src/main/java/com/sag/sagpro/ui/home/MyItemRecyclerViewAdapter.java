@@ -62,7 +62,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 //        holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).getCid());
         holder.mContentView.setText(mValues.get(position).getName());
-
+        holder.mNameView.setText(mValues.get(position).getName());
         String imageURL = mValues.get(position).getImg();
 //        holder.aNImageView.setImageUrl(imageURL);
         LogUtil.i("------------------onBindViewHolder " + imageURL);
@@ -111,6 +111,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         public  TextView mIdView;
         public  TextView mContentView;
         public ImageButton imageButton;
+        public TextView mNameView;
 //        public PlaceholderItem mItem;
 //        public ANImageView aNImageView = null;
 
@@ -120,6 +121,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             mIdView = binding.itemNumber;
             mContentView = binding.content;
             imageButton = binding.button;
+            mNameView = binding.nameTextView;
         }
 
         @Override

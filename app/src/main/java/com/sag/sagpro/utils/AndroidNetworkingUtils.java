@@ -11,7 +11,6 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.BitmapRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.facebook.stetho.common.LogUtil;
-import com.sag.sagpro.ConstantData;
 
 import org.json.JSONObject;
 
@@ -67,7 +66,7 @@ public class AndroidNetworkingUtils {
                         @Override
                         public void onError(ANError error) {
                             LogUtil.e("------------------" + error.toString());
-                            urlLoadCallback.failedClassBack(error);
+                            urlLoadCallback.failueCallBack(error);
                         }
                     });
 

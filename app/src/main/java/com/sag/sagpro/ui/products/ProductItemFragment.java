@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +24,7 @@ import com.sag.sagpro.MainActivity;
 import com.sag.sagpro.R;
 import com.sag.sagpro.databinding.FragmentHomeItemListBinding;
 import com.sag.sagpro.databinding.FragmentProductItemListBinding;
+import com.sag.sagpro.ui.InnerBaseFragment;
 import com.sag.sagpro.ui.categories.CategorieFragment;
 import com.sag.sagpro.ui.home.HomeItemFragment;
 import com.sag.sagpro.ui.home.MyItemRecyclerViewAdapter;
@@ -31,6 +33,7 @@ import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderContent;
 import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderItem;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
 import com.sag.sagpro.utils.ImageLoadCallback;
+import com.sag.sagpro.utils.RecyclerItemClickListener;
 import com.sag.sagpro.utils.UIUtils;
 import com.sag.sagpro.utils.URLLoadCallback;
 
@@ -41,7 +44,7 @@ import org.json.JSONObject;
 /**
  * A fragment representing a list of Items.
  */
-public class ProductItemFragment extends Fragment {
+public class ProductItemFragment extends InnerBaseFragment {
 
     public static String PARAMS_CID = "PARAMS_CID";
     private int cid = 0;
@@ -51,14 +54,9 @@ public class ProductItemFragment extends Fragment {
     private ProductPlaceholderContent placeholderContent = null;
     private FragmentProductItemListBinding binding = null;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public ProductItemFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static ProductItemFragment newInstance(int cid) {
         ProductItemFragment fragment = new ProductItemFragment();
@@ -96,21 +94,6 @@ public class ProductItemFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.fragment_product_item_list, container, false);
-//
-////        // Set the adapter
-//        if (view instanceof RecyclerView) {
-//            Context context = view.getContext();
-//            RecyclerView recyclerView = (RecyclerView) view;
-////            if (mColumnCount <= 1) {
-//                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-////            } else {
-////                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-////            }
-//            recyclerView.setAdapter(new MyProductItemRecyclerViewAdapter(ProductPlaceholderContent.ITEMS));
-//        }
-//        return view;
-
         binding = FragmentProductItemListBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -122,6 +105,24 @@ public class ProductItemFragment extends Fragment {
         myProductItemRecyclerViewAdapter = new MyProductItemRecyclerViewAdapter(placeholderContent.ITEMS);
         binding.list.setAdapter(myProductItemRecyclerViewAdapter);
         binding.list.addItemDecoration(UIUtils.getDividerItemDecoration(getContext()));
+
+        binding.list.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), binding.list, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+//                        ToastUtil.showMessage(context, "position = " + position);
+//                        LogUtil.i("----------item " + position + " clicked");
+                        ProductPlaceholderItem itemClicked = placeholderContent.getItem(position);
+                        Bundle bundle = new Bundle();
+                        bundle.putString(ProductDetailFragment.PARAMS_PRODUCT_ID, itemClicked.pid);
+                        Navigation.findNavController(view).navigate(R.id.item_navigation_product_detail, bundle);
+                    }
+
+                    @Override
+                    public void onItemLongClick(View view, int position) {
+//                        ToastUtil.showMessage(context, "long position = " + position);
+                        LogUtil.i("----------item " + position + " long clicked");
+                    }
+                }));
    }
 
 
@@ -160,9 +161,9 @@ public class ProductItemFragment extends Fragment {
         //update userinterface
         myProductItemRecyclerViewAdapter.setItems(placeholderContent.ITEMS);
         getActivity().runOnUiThread(() -> {
-            LogUtil.i("----------product adapter ask ui reflash");
+//            LogUtil.i("----------product adapter ask ui reflash");
             myProductItemRecyclerViewAdapter.notifyDataSetChanged();
-//            updatePageFooterHeight();
+            updatePageFooterHeight(binding.list);
         });
     }
 
@@ -171,7 +172,7 @@ public class ProductItemFragment extends Fragment {
         public void successCallBack(JSONObject result) {
             handleResult(result);
         }
-        public Exception failedClassBack(Exception exception) {
+        public Exception failueCallBack(Exception exception) {
             return exception;
         }
     }

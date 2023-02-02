@@ -20,6 +20,7 @@ import com.sag.sagpro.ConstantData;
 import com.sag.sagpro.MainActivity;
 import com.sag.sagpro.R;
 import com.sag.sagpro.databinding.FragmentHomeItemListBinding;
+import com.sag.sagpro.ui.InnerBaseFragment;
 import com.sag.sagpro.ui.categories.CategorieFragment;
 import com.sag.sagpro.ui.home.placeholder.HomeItemPlaceholderContent;
 import com.sag.sagpro.ui.home.placeholder.HomeItemPlaceholderItem;
@@ -37,7 +38,7 @@ import org.json.JSONObject;
 /**
  * A fragment representing a list of Items.
  */
-public class HomeItemFragment extends Fragment {
+public class HomeItemFragment extends InnerBaseFragment {
 
 
     MyItemRecyclerViewAdapter myItemRecyclerViewAdapter = null;
@@ -193,35 +194,16 @@ public class HomeItemFragment extends Fragment {
         myItemRecyclerViewAdapter.setItems(placeholderContent.ITEMS);
         getActivity().runOnUiThread(() -> {
             myItemRecyclerViewAdapter.notifyDataSetChanged();
-            updatePageFooterHeight();
+            updatePageFooterHeight(binding.list);
         });
     }
 
-    /**
-     * make last list item full disabled
-     */
-    private void updatePageFooterHeight() {
-        try {
-            Activity activty = this.getActivity();
-            if (activty instanceof MainActivity) {
-                int footHeight = ((MainActivity) activty).getFooterHeight();
-                ViewGroup.LayoutParams lp = binding.list.getLayoutParams();
-                int left = ScreenUtils.px2dip(getContext(), binding.list.getPaddingLeft());
-                int right = ScreenUtils.px2dip(getContext(), binding.list.getPaddingRight());
-                int top = ScreenUtils.px2dip(getContext(), binding.list.getPaddingTop());
-                int bottom = ScreenUtils.px2dip(getContext(), binding.list.getPaddingBottom());
-                binding.list.setPadding(left, right, top,  footHeight);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     class LoadUrlHandler implements URLLoadCallback {
         public void successCallBack(JSONObject result) {
             handleResult(result);
         }
-        public Exception failedClassBack(Exception exception) {
+        public Exception failueCallBack(Exception exception) {
             return exception;
         }
     }

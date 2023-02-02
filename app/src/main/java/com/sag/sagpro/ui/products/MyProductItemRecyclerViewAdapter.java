@@ -28,22 +28,21 @@ public class MyProductItemRecyclerViewAdapter extends RecyclerView.Adapter<MyPro
         mValues = items;
     }
 
+    private ViewHolder viewHolder = null;
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        return new ViewHolder(FragmentProductItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
-
+        viewHolder = new ViewHolder(FragmentProductItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-//        holder.mItem = mValues.get(position)
-//        holder.imageView.s;
         holder.imageView.setDefaultImageResId(R.drawable.img_default);
         holder.imageView.setErrorImageResId(R.drawable.img_error);
         holder.imageView.setImageUrl(mValues.get(position).getImg());
         holder.nameTextView.setText(mValues.get(position).getName());
-//        holder.i.setText( holder.mItem.img);
     }
 
     @Override
@@ -54,7 +53,7 @@ public class MyProductItemRecyclerViewAdapter extends RecyclerView.Adapter<MyPro
     public class ViewHolder extends RecyclerView.ViewHolder {
         public View rootView = null;
         public ANImageView imageView;
-        public  TextView nameTextView;
+        public TextView nameTextView;
         public TextView descriptionTextView;
 
         public ViewHolder(FragmentProductItemBinding binding) {

@@ -27,6 +27,8 @@
     <string name="category_title" tools:ignore="MissingTranslation">Categories</string>
 
     <string name="product_list_title" tools:ignore="MissingTranslation">Products</string>
+    <string name="product_detail_title" tools:ignore="MissingTranslation">Product Detail</string>
+    <string name="product_add_to_cart" tools:ignore="MissingTranslation">Add to Cart</string>
 
     <!-- program error -->
     <string name="error_no_network" tools:ignore="MissingTranslation">No network connected!</string>

@@ -117,7 +117,7 @@ public class CategorieFragment extends Fragment {
         public void successCallBack(JSONObject result) {
             handleResult(result);
         }
-        public Exception failedClassBack(Exception exception) {
+        public Exception failueCallBack(Exception exception) {
             return exception;
         }
     }

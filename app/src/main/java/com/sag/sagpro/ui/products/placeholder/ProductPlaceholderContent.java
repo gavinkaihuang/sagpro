@@ -29,6 +29,12 @@ public class ProductPlaceholderContent {
         ITEM_MAP.put(item.getPid(), item);
     }
 
+    public ProductPlaceholderItem getItem(int position) {
+        if (ITEMS != null && (ITEMS.size() >= position + 1))
+            return ITEMS.get(position);
+        return null;
+    }
+
 //    private static PlaceholderItem createPlaceholderItem(int position) {
 //        return new PlaceholderItem(String.valueOf(position), "Item " + position, makeDetails(position));
 //    }

@@ -64,4 +64,10 @@
         android:name="com.sag.sagpro.ui.products.ProductItemFragment"
         android:label="@string/product_list_title"
         tools:layout="@layout/fragment_product_item_list" />
+
+    <fragment
+        android:id="@+id/item_navigation_product_detail"
+        android:name="com.sag.sagpro.ui.products.ProductDetailFragment"
+        android:label="@string/product_detail_title"
+        tools:layout="@layout/fragment_product_detail" />
 </navigation>

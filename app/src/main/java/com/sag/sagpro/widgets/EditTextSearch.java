@@ -43,9 +43,9 @@ public class EditTextSearch extends AppCompatEditText {
      * 步骤2：初始化 图标资源
      */
     private void init() {
-        clearDrawable = getResources().getDrawable(R.drawable.tab_messages);
-        searchDrawable = getResources().getDrawable(R.drawable.tab_search);
-        voiceDrawable = getResources().getDrawable(R.drawable.tab_messages);
+        clearDrawable = getResources().getDrawable(R.drawable.iclear);
+        searchDrawable = getResources().getDrawable(R.drawable.isearch);
+        voiceDrawable = getResources().getDrawable(R.drawable.ivoice);
         setCompoundDrawablesWithIntrinsicBounds(searchDrawable, null,
                 voiceDrawable, null);
         // setCompoundDrawablesWithIntrinsicBounds(Drawable left, Drawable top, Drawable right, Drawable bottom)介绍

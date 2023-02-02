@@ -1,3 +1,5 @@
 1, product details interface
 other是什么东东？
 {"code":"200","data":{"pid":"1","cid":"1","fid":"1","name":"hi grass 1 update2","img":"http:\/\/sag-stage.woyaoai.cn\/sites\/default\/files\/fly.jpg","price":"1000","content":"this is content 1.2","other":["4","11","10"]}}
+
+2， 添加到购物车时数量

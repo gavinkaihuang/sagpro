@@ -52,7 +52,7 @@ public class AndroidNetworkingUtils {
 //            JSONObject jsonObject = new JSONObject();
             LogUtil.i("------URL:" + url);
             LogUtil.i("------postData:" + paramsObj.toString());
-            AndroidNetworking.post(ConstantData.CATEGORIES)
+            AndroidNetworking.post(url)
                     .addJSONObjectBody(paramsObj)
                     .setTag(tag)
                     .setPriority(Priority.MEDIUM)

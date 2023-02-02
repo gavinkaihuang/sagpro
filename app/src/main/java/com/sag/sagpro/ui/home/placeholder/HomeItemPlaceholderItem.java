@@ -1,6 +1,6 @@
 package com.sag.sagpro.ui.home.placeholder;
 
-public class PlaceholderItem {
+public class HomeItemPlaceholderItem {
     public String getCid() {
         return cid;
     }
@@ -38,7 +38,7 @@ public class PlaceholderItem {
     public String description;
     public String img;
 
-    public PlaceholderItem() {
+    public HomeItemPlaceholderItem() {
     }
 
 

@@ -11,19 +11,19 @@ import java.util.Map;
  * <p>
  * TODO: Replace all uses of this class before publishing your app.
  */
-public class PlaceholderContent {
+public class HomeItemPlaceholderContent {
 
     /**
      * An array of sample (placeholder) items.
      */
-    public  List<PlaceholderItem> ITEMS = new ArrayList<PlaceholderItem>();
+    public  List<HomeItemPlaceholderItem> ITEMS = new ArrayList<HomeItemPlaceholderItem>();
 
     /**
      * A map of sample (placeholder) items, by ID.
      */
-    public  Map<String, PlaceholderItem> ITEM_MAP = new HashMap<String, PlaceholderItem>();
+    public  Map<String, HomeItemPlaceholderItem> ITEM_MAP = new HashMap<String, HomeItemPlaceholderItem>();
 
-    private static final int COUNT = 25;
+//    private static final int COUNT = 25;
 
 //    static {
 //        // Add some sample items.
@@ -32,7 +32,7 @@ public class PlaceholderContent {
 //        }
 //    }
 
-    public void addItem(PlaceholderItem item) {
+    public void addItem(HomeItemPlaceholderItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.getCid(), item);
     }

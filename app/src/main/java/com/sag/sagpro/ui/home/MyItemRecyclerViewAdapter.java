@@ -1,8 +1,6 @@
 package com.sag.sagpro.ui.home;
 
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -12,30 +10,26 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.androidnetworking.widget.ANImageView;
 import com.facebook.stetho.common.LogUtil;
-import com.sag.sagpro.R;
 import com.sag.sagpro.databinding.FragmentHomeItemBinding;
-import com.sag.sagpro.ui.home.placeholder.PlaceholderItem;
+import com.sag.sagpro.ui.home.placeholder.HomeItemPlaceholderItem;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
 import com.sag.sagpro.utils.ImageLoadCallback;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
+ * {@link RecyclerView.Adapter} that can display a {@link HomeItemPlaceholderItem}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>  {
 
 //public class MyItemRecyclerViewAdapter extends BaseBindingAdapter {
-    private List<PlaceholderItem> mValues;
+    private List<HomeItemPlaceholderItem> mValues;
 
-    public MyItemRecyclerViewAdapter(List<PlaceholderItem> items) {
+    public MyItemRecyclerViewAdapter(List<HomeItemPlaceholderItem> items) {
         mValues = items;
     }
 
@@ -95,7 +89,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
     }
 
-    public void setItems(List<PlaceholderItem> items) {
+    public void setItems(List<HomeItemPlaceholderItem> items) {
         this.mValues = items;
     }
 

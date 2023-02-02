@@ -16,4 +16,6 @@ public class ConstantData {
     public static String SIGN_IN = URL + "signin";
 
     public static String CATEGORIES = URL + "categories";
+
+    public static String PRODUCTS_LIST = URL + "product-lists";
 }

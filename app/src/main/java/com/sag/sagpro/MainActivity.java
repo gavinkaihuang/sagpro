@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 return  false;
             }
         });
-        
+
         if (!AndroidNetworkingUtils.checkNetworkAvailable(this)) {
             Toast.makeText(this, getResources().getString(R.string.error_no_network), Toast.LENGTH_SHORT).show();
         }

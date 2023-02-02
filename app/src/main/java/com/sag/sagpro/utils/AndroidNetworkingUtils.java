@@ -1,6 +1,9 @@
 package com.sag.sagpro.utils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -73,5 +76,36 @@ public class AndroidNetworkingUtils {
             e.printStackTrace();
         }
     }
+
+
+    /**
+     * Check network is working
+     * @param context
+     * @return
+     */
+    public static boolean checkNetworkAvailable(Context context) {
+//        Context context = activity.getApplicationContext();
+        //获取手机所有链接管理对象（包括对Wi-Fi，net等连接的管理）
+        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (manager == null) {
+            return false;
+        } else {
+            //获取NetworkInfo对象
+            NetworkInfo[] info = manager.getAllNetworkInfo();
+            if (info != null && info.length > 0) {
+                for (int i = 0; i < info.length; i++) {
+//                    System.out.println(i + "状态" + info[i].getState());
+//                    System.out.println(i + "类型" + info[i].getTypeName());
+
+                    // 判断当前网络状态是否为连接状态
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 
 }

@@ -1,6 +1,7 @@
 package com.sag.sagpro.ui.categories;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,18 +15,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.facebook.stetho.common.LogUtil;
+import com.sag.sagpro.ConstantData;
 import com.sag.sagpro.R;
-import com.sag.sagpro.ui.categories.placeholder.PlaceholderContent;
+import com.sag.sagpro.ui.home.HomeItemFragment;
+import com.sag.sagpro.ui.home.placeholder.PlaceholderContent;
+import com.sag.sagpro.ui.home.placeholder.PlaceholderItem;
+import com.sag.sagpro.utils.AndroidNetworkingUtils;
+import com.sag.sagpro.utils.ImageLoadCallback;
+import com.sag.sagpro.utils.URLLoadCallback;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * A fragment representing a list of Items.
  */
 public class CategorieFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
-    private int mColumnCount = 1;
+
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -38,9 +47,9 @@ public class CategorieFragment extends Fragment {
     @SuppressWarnings("unused")
     public static CategorieFragment newInstance(int columnCount) {
         CategorieFragment fragment = new CategorieFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
+//        Bundle args = new Bundle();
+//        args.putInt(ARG_COLUMN_COUNT, columnCount);
+//        fragment.setArguments(args);
         return fragment;
     }
 
@@ -48,9 +57,7 @@ public class CategorieFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
+        AndroidNetworkingUtils.loadURL(ConstantData.CATEGORIES, "CATEGORIES", new JSONObject(), new LoadUrlHandler());
     }
 
     @Override
@@ -58,17 +65,17 @@ public class CategorieFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category_item_list, container, false);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyCategorieRecyclerViewAdapter(PlaceholderContent.ITEMS));
-        }
+//        // Set the adapter
+//        if (view instanceof RecyclerView) {
+//            Context context = view.getContext();
+//            RecyclerView recyclerView = (RecyclerView) view;
+//            if (mColumnCount <= 1) {
+//                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+//            } else {
+//                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+//            }
+//            recyclerView.setAdapter(new MyCategorieRecyclerViewAdapter(PlaceholderContent.ITEMS));
+//        }
         return view;
     }
 
@@ -76,6 +83,61 @@ public class CategorieFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        this.get
+    }
+
+    /**
+     * handle list data from server
+     * @param result
+     */
+    private void handleResult(JSONObject result) {
+//        try {
+//            String code = result.getString(ConstantData.CODE);
+//            if (code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
+//                JSONArray jsonArray = result.getJSONArray(ConstantData.DATA);
+//                for (int i = 0; i < jsonArray.length(); i++) {
+//                    JSONObject jdata = jsonArray.getJSONObject(i);
+//                    PlaceholderItem placeholderItem = new PlaceholderItem();
+//                    placeholderItem.setCid(jdata.getString("cid"));
+//                    placeholderItem.setName(jdata.getString("name"));
+//                    placeholderItem.setDescription(jdata.getString("description"));
+//                    placeholderItem.setImg(jdata.getString("img"));
+//
+//                    if (placeholderContent == null)
+//                        placeholderContent = new PlaceholderContent();
+//                    placeholderContent.addItem(placeholderItem);
+//                }
+//            } else {
+//                String message = result.getString(ConstantData.MSG);
+//                LogUtil.e("------------------" + message);
+//            }
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//        //update userinterface
+//        myItemRecyclerViewAdapter.setItems(placeholderContent.ITEMS);
+//        getActivity().runOnUiThread(() -> {
+//            myItemRecyclerViewAdapter.notifyDataSetChanged();
+//            updatePageFooterHeight();
+//        });
+    }
+
+
+    class LoadUrlHandler implements URLLoadCallback {
+        public void successCallBack(JSONObject result) {
+            handleResult(result);
+        }
+        public Exception failedClassBack(Exception exception) {
+            return exception;
+        }
+    }
+
+    class LoadImageHandler implements ImageLoadCallback {
+        public Bitmap loadImageSucceed(Bitmap bitmap) {
+            return bitmap;
+        }
+        public Exception loadImageFailed(Exception exception) {
+            return exception;
+        }
     }
 }

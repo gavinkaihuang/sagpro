@@ -25,4 +25,8 @@
     <string name="account_my_order" tools:ignore="MissingTranslation">My Order</string>
 
     <string name="category_title" tools:ignore="MissingTranslation">Categories</string>
+
+
+    <!-- program error -->
+    <string name="error_no_network" tools:ignore="MissingTranslation">No network connected!</string>
 </resources>

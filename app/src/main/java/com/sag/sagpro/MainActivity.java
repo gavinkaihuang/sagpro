@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.facebook.stetho.common.LogUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -25,6 +26,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.sag.sagpro.data.model.LoggedInUserHelper;
 import com.sag.sagpro.databinding.ActivityMainBinding;
 import com.sag.sagpro.ui.login.LoginActivity;
+import com.sag.sagpro.utils.AndroidNetworkingUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -75,6 +77,10 @@ public class MainActivity extends AppCompatActivity {
                 return  false;
             }
         });
+        
+        if (!AndroidNetworkingUtils.checkNetworkAvailable(this)) {
+            Toast.makeText(this, getResources().getString(R.string.error_no_network), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Nullable
@@ -84,7 +90,14 @@ public class MainActivity extends AppCompatActivity {
 
 //        ActionBar actionBar = getSupportActionBar();
 //        actionBar.set
+
+//        if (!AndroidNetworkingUtils.checkNetworkAvailable(context)) {
+//            Toast.makeText(context, "无网络！", Toast.LENGTH_SHORT).show();
+//        }
+
     }
+
+
 
     public void navigationTo(int id) {
         navController.navigate(id);

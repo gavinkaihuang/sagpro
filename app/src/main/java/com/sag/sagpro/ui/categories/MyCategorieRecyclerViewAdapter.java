@@ -15,7 +15,7 @@ import java.util.List;
  * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyCategorieRecyclerViewAdapter extends RecyclerView.Adapter<MyCategorieRecyclerViewAdapter.ViewHolder> {
+public class MyCategorieRecyclerViewAdapter extends RecyclerView.Adapter<MyCategorieRecyclerViewAdapter.CategoryViewHolder> {
 
     private final List<PlaceholderItem> mValues;
 
@@ -24,14 +24,14 @@ public class MyCategorieRecyclerViewAdapter extends RecyclerView.Adapter<MyCateg
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CategoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        return new ViewHolder(FragmentCategoryItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        return new CategoryViewHolder(FragmentCategoryItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
 
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final CategoryViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).id);
         holder.mContentView.setText(mValues.get(position).content);
@@ -42,12 +42,12 @@ public class MyCategorieRecyclerViewAdapter extends RecyclerView.Adapter<MyCateg
         return mValues.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class CategoryViewHolder extends RecyclerView.ViewHolder {
         public final TextView mIdView;
         public final TextView mContentView;
         public PlaceholderItem mItem;
 
-        public ViewHolder(FragmentCategoryItemBinding binding) {
+        public CategoryViewHolder(FragmentCategoryItemBinding binding) {
             super(binding.getRoot());
             mIdView = binding.itemNumber;
             mContentView = binding.content;

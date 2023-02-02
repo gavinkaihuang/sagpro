@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.facebook.stetho.common.LogUtil;
 import com.sag.sagpro.ConstantData;
 import com.sag.sagpro.MainActivity;
@@ -30,10 +31,15 @@ import com.sag.sagpro.utils.ImageLoadCallback;
 import com.sag.sagpro.utils.ScreenUtils;
 import com.sag.sagpro.utils.UIUtils;
 import com.sag.sagpro.utils.URLLoadCallback;
+import com.youth.banner.adapter.BannerImageAdapter;
+import com.youth.banner.holder.BannerImageHolder;
+import com.youth.banner.indicator.CircleIndicator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * A fragment representing a list of Items.
@@ -42,17 +48,8 @@ public class HomeItemFragment extends InnerBaseFragment {
 
 
     MyItemRecyclerViewAdapter myItemRecyclerViewAdapter = null;
-
-//    // TODO: Customize parameter argument names
-//    private static final String ARG_COLUMN_COUNT = "column-count";
-//    // TODO: Customize parameters
-//    private int mColumnCount = 1;
-
-//    MessageHandler messageHandler = null;
     private HomeItemPlaceholderContent placeholderContent = null;
     FragmentHomeItemListBinding binding = null;
-//    RecyclerView recyclerView = null;
-//    EditText serchEditText = null;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -61,33 +58,15 @@ public class HomeItemFragment extends InnerBaseFragment {
     public HomeItemFragment() {
     }
 
-//    // TODO: Customize parameter initialization
-//    @SuppressWarnings("unused")
-//    public static HomeItemFragment newInstance(int columnCount) {
-//        HomeItemFragment fragment = new HomeItemFragment();
-//        Bundle args = new Bundle();
-//        args.putInt(ARG_COLUMN_COUNT, columnCount);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        if (getArguments() != null) {
-//            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-//        }
-
-
         LogUtil.i("------------------HomeItemFragment onCreate");
         placeholderContent = new HomeItemPlaceholderContent();
         AndroidNetworkingUtils.loadURL(ConstantData.CATEGORIES, "CATEGORIES", new JSONObject(), new LoadUrlHandler());
     }
-
-
-
-
 
 
     @Override
@@ -109,27 +88,6 @@ public class HomeItemFragment extends InnerBaseFragment {
         binding.categoriesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                navController.navigate(R.id.item_navigation_homeitem);
-                Activity activty = HomeItemFragment.this.getActivity();
-                if (activty instanceof MainActivity) {
-//                    ((MainActivity) activty).navigationTo(R.id.ca)
-                   //TODo
-//                    ((MainActivity) activty).navigationTo(R.id.item_navigation_categories);
-//                    HomeItemFragment.this.a
-//                    addToBackStack  https://blog.csdn.net/qq_44920726/article/details/126677674
-
-                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                    // 2：获取FragmentTransaction
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                    // 3：将跳转的fragment 添加到栈，这里使用 replace
-                    fragmentTransaction.replace(R.id.container, CategorieFragment.newInstance(1));
-                    fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                    fragmentTransaction.addToBackStack("");
-                    // 4: 提交事务
-                    fragmentTransaction.commit();
-
-                }
             }
         });
 
@@ -140,29 +98,33 @@ public class HomeItemFragment extends InnerBaseFragment {
                 Bundle bundle = new Bundle();
                 bundle.putInt(ProductItemFragment.PARAMS_CID, 1);
                 Navigation.findNavController(v).navigate(R.id.item_navigation_products, bundle);
-
-////                navController.navigate(R.id.item_navigation_homeitem);
-//                Activity activty = HomeItemFragment.this.getActivity();
-//                if (activty instanceof MainActivity) {
-////                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-////                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-////                    fragmentTransaction.replace(R.id.container, ProductItemFragment.newInstance(1));
-////                    fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-////                    fragmentTransaction.addToBackStack(null);
-////                    fragmentTransaction.commit();
-//
-//                    Bundle bundle = new Bundle();
-//                    bundle.putInt(ProductItemFragment.PARAMS_CID, 1);
-//                    Navigation.findNavController(v).navigate(R.id.item_navigation_products, bundle);
-//                }
             }
         });
+
+//        binding.viewBanner.
+
+        ArrayList<String> arrayList = new ArrayList<String>();
+        arrayList.add("https://p2.itc.cn/images01/20210510/096eeb9cd3c84bd8ba09b5713679b4f9.jpeg");
+        arrayList.add("https://p2.itc.cn/images01/20210510/096eeb9cd3c84bd8ba09b5713679b4f9.jpeg");
+        arrayList.add("http://i0.hdslb.com/bfs/article/97549c0fd58b940c1306faac923a8685551a6a2a.jpg");
+        binding.viewBanner.setAdapter(new BannerImageAdapter<String>(arrayList) {
+            @Override
+            public void onBindView(BannerImageHolder holder, String data, int position, int size) {
+                Glide.with(holder.imageView)
+                        .load(data)
+                        .into(holder.imageView);
+            }
+        });
+        //轮播图下面的原点
+        binding.viewBanner.setIndicator(new CircleIndicator(HomeItemFragment.this.getContext()));
+        binding.viewBanner.setIndicatorRadius(50);
 
     }
 
 
     /**
      * handle list data from server
+     *
      * @param result
      */
     private void handleResult(JSONObject result) {
@@ -203,6 +165,7 @@ public class HomeItemFragment extends InnerBaseFragment {
         public void successCallBack(JSONObject result) {
             handleResult(result);
         }
+
         public Exception failueCallBack(Exception exception) {
             return exception;
         }
@@ -212,6 +175,7 @@ public class HomeItemFragment extends InnerBaseFragment {
         public Bitmap loadImageSucceed(Bitmap bitmap) {
             return bitmap;
         }
+
         public Exception loadImageFailed(Exception exception) {
             return exception;
         }

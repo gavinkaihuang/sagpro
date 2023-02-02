@@ -17,12 +17,12 @@ import com.sag.sagpro.databinding.FragmentHomeItemBinding;
 import com.sag.sagpro.ui.home.placeholder.HomeItemPlaceholderItem;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
 import com.sag.sagpro.utils.ImageLoadCallback;
+import com.youth.banner.Banner;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link HomeItemPlaceholderItem}.
- * TODO: Replace the implementation with code for your data type.
+ *
  */
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>  {
 
@@ -40,14 +40,6 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 //        return new ViewHolder(FragmentHomeItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
         ViewHolder viewHolder = new ViewHolder(FragmentHomeItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
         return viewHolder;
-
-//        return new UserViewHolder(binding.getRoot());
-//        DataBinderMapperImpl.inflate(LayoutInflater.from(parent.getContext()), R.layout.fragment_home_item, parent, false);
-//        DataBinderMapperImpl
-
-//        FragmentHomeItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.fragment_home_item, parent, false);
-//        return new ViewHolder(binding);
-
 
     }
 
@@ -106,6 +98,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         public  TextView mContentView;
         public ImageButton imageButton;
         public TextView mNameView;
+//        public Banner viewBanner;
 //        public PlaceholderItem mItem;
 //        public ANImageView aNImageView = null;
 
@@ -116,6 +109,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             mContentView = binding.content;
             imageButton = binding.button;
             mNameView = binding.nameTextView;
+//            viewBanner = binding.v
         }
 
         @Override

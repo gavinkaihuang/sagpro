@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.products.ProductDetailFragment">
 
-    <Button
+    <ImageButton
         android:id="@+id/atoCartButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +15,8 @@
         android:text="@string/product_add_to_cart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/xml_common_btn_green"/>
 
     <ScrollView
         android:id="@+id/vertical_scroll_view"

@@ -3,9 +3,23 @@
     <style name="Theme.Sagpro" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/bule</item>
+        <item name="colorPrimary">@color/white</item>
+<!--        <item name="">@color/white</item>-->
+        <!-- 状态栏颜色 -->
         <item name="colorPrimaryDark">@color/purple_700</item>
+        <!--控制各个控件被选中时的颜色-->
         <item name="colorAccent">@color/teal_200</item>
+
+<!--        <item name="android:homeAsUpIndicator">@color/colorAccent</item>-->
+        <item name="actionBarStyle">@style/BlackTitle</item>
+    </style>
+
+    <style name="BlackTitle" parent="@style/Widget.AppCompat.ActionBar.Solid">
+        <item name="titleTextStyle">@style/BlackTitleStyle</item>
+        <item name="elevation">1dp</item>
+    </style>
+    <style name="BlackTitleStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="GreenText" parent="@android:style/TextAppearance">

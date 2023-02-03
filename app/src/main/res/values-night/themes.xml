@@ -11,7 +11,7 @@
         <item name="colorAccent">@color/teal_200</item>
 
 <!--        <item name="android:homeAsUpIndicator">@color/colorAccent</item>-->
-        <item name="actionBarStyle">@style/BlackTitle</item>
+<!--        <item name="actionBarStyle">@style/BlackTitle</item>-->
     </style>
 
     <style name="BlackTitle" parent="@style/Widget.AppCompat.ActionBar.Solid">

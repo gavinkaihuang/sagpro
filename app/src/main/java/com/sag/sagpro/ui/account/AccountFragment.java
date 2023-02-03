@@ -29,7 +29,13 @@ public class AccountFragment extends Fragment {
         LoggedInUser loggedInUser = LoggedInUserHelper.getLoggedInUser(getContext());
         final TextView userNameTextView = binding.userNameTextView;
         userNameTextView.setText(loggedInUser.getUserName());
-//        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        binding.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoggedInUserHelper.clearUserToLocal(getActivity());
+            }
+        });
         return root;
     }
 

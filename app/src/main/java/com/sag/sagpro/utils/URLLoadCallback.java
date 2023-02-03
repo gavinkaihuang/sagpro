@@ -4,6 +4,6 @@ import org.json.JSONObject;
 
 public interface URLLoadCallback {
 
-    public void successCallBack(JSONObject result);
-    public Exception failueCallBack(Exception exception);
+    public void successURLLoadedCallBack(JSONObject result);
+    public Exception failueURLLoadedCallBack(Exception exception);
 }

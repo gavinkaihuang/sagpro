@@ -1,18 +1,11 @@
 package com.sag.sagpro.ui.products;
 
-import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,15 +13,9 @@ import android.view.ViewGroup;
 
 import com.facebook.stetho.common.LogUtil;
 import com.sag.sagpro.ConstantData;
-import com.sag.sagpro.MainActivity;
 import com.sag.sagpro.R;
-import com.sag.sagpro.databinding.FragmentHomeItemListBinding;
 import com.sag.sagpro.databinding.FragmentProductItemListBinding;
 import com.sag.sagpro.ui.InnerBaseFragment;
-import com.sag.sagpro.ui.categories.CategorieFragment;
-import com.sag.sagpro.ui.home.HomeItemFragment;
-import com.sag.sagpro.ui.home.MyItemRecyclerViewAdapter;
-import com.sag.sagpro.ui.home.placeholder.HomeItemPlaceholderContent;
 import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderContent;
 import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderItem;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
@@ -44,7 +31,7 @@ import org.json.JSONObject;
 /**
  * A fragment representing a list of Items.
  */
-public class ProductItemFragment extends InnerBaseFragment {
+public class ProductListFragment extends InnerBaseFragment {
 
     public static String PARAMS_CID = "PARAMS_CID";
     private int cid = 0;
@@ -54,12 +41,12 @@ public class ProductItemFragment extends InnerBaseFragment {
     private ProductPlaceholderContent placeholderContent = null;
     private FragmentProductItemListBinding binding = null;
 
-    public ProductItemFragment() {
+    public ProductListFragment() {
     }
 
     @SuppressWarnings("unused")
-    public static ProductItemFragment newInstance(int cid) {
-        ProductItemFragment fragment = new ProductItemFragment();
+    public static ProductListFragment newInstance(int cid) {
+        ProductListFragment fragment = new ProductListFragment();
         Bundle args = new Bundle();
         args.putInt(PARAMS_CID, cid);
         fragment.setArguments(args);
@@ -169,10 +156,10 @@ public class ProductItemFragment extends InnerBaseFragment {
 
 
     class LoadUrlHandler implements URLLoadCallback {
-        public void successCallBack(JSONObject result) {
+        public void successURLLoadedCallBack(JSONObject result) {
             handleResult(result);
         }
-        public Exception failueCallBack(Exception exception) {
+        public Exception failueURLLoadedCallBack(Exception exception) {
             return exception;
         }
     }

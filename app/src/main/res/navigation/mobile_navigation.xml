@@ -37,9 +37,9 @@
 
     <fragment
         android:id="@+id/item_navigation_messages"
-        android:name="com.sag.sagpro.ui.messages.MessagesFragment"
+        android:name="com.sag.sagpro.ui.messages.MessageListFragment"
         android:label="@string/tab_messages"
-        tools:layout="@layout/fragment_messages" />
+        tools:layout="@layout/fragment_message_item_list" />
 
 <!--    <fragment-->
 <!--        android:id="@+id/item_navigation_cart"-->
@@ -61,7 +61,7 @@
 
     <fragment
         android:id="@+id/item_navigation_products"
-        android:name="com.sag.sagpro.ui.products.ProductItemFragment"
+        android:name="com.sag.sagpro.ui.products.ProductListFragment"
         android:label="@string/product_list_title"
         tools:layout="@layout/fragment_product_item_list" />
 

@@ -20,4 +20,8 @@ public class ConstantData {
     public static String PRODUCTS_LIST = URL + "product-lists";
 
     public static String PRODUCTS_DETAIL = URL + "product-detail";
+
+    public static String MESSAGES = URL + "messages";
+
+
 }

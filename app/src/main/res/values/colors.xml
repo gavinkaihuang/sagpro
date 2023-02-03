@@ -7,12 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray_color">#565656</color>
 
     <color name="bule">#269ae4</color>
     <color name="button_red">#FE332F</color>
 
     <color name="button_color">#FE332F</color>
     <color name="button_select_color">#FF0000</color>
+
+
+
 
 
 <!--    <color name="left_menu_line_sep_header">#232424</color>-->

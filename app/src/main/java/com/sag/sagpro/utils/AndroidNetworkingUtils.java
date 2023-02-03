@@ -61,12 +61,12 @@ public class AndroidNetworkingUtils {
                         @Override
                         public void onResponse(JSONObject response) {
                             LogUtil.i("------------------" + response.toString());
-                            urlLoadCallback.successCallBack(response);
+                            urlLoadCallback.successURLLoadedCallBack(response);
                         }
                         @Override
                         public void onError(ANError error) {
                             LogUtil.e("------------------" + error.toString());
-                            urlLoadCallback.failueCallBack(error);
+                            urlLoadCallback.failueURLLoadedCallBack(error);
                         }
                     });
 

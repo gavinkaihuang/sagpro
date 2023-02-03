@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -53,24 +54,27 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                boolean isUserLoggedIn =  LoggedInUserHelper.isUserLoginedIn(MainActivity.this);
                 switch (item.getItemId()) {
                     case R.id.item_navigation_homeitem:
                         navController.navigate(R.id.item_navigation_homeitem);
 //                        navController.addToBackStack
                     break;
                 case R.id.item_navigation_messages:
-                    navController.navigate(R.id.item_navigation_messages);
+
+                    if (isUserLoggedIn) {
+                        navController.navigate(R.id.item_navigation_messages);
+                    } else {
+                        //ask user to login
+                        redirectToLogin();
+                    }
                     break;
                 case R.id.item_navigation_account:
-
-                    boolean isUserLoggedIn =  LoggedInUserHelper.isUserLoginedIn(MainActivity.this);
                     if (isUserLoggedIn) {
                         navController.navigate(R.id.item_navigation_account);
                     } else {
                         //ask user to login
-                        Intent intent = new Intent();
-                        intent.setClass(MainActivity.this, LoginActivity.class);
-                        startActivity(intent);
+                        redirectToLogin();
                     }
                     break;
                  };
@@ -81,21 +85,77 @@ public class MainActivity extends AppCompatActivity {
         if (!AndroidNetworkingUtils.checkNetworkAvailable(this)) {
             Toast.makeText(this, getResources().getString(R.string.error_no_network), Toast.LENGTH_SHORT).show();
         }
-    }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
-        return super.onCreateView(name, context, attrs);
-
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.set
-
-//        if (!AndroidNetworkingUtils.checkNetworkAvailable(context)) {
-//            Toast.makeText(context, "无网络！", Toast.LENGTH_SHORT).show();
+//        try {
+//            getSupportActionBar().setDisplayShowHomeEnabled(true);
+//            getSupportActionBar().setDisplayUseLogoEnabled(true);
+////            getSupportActionBar().setLogo(R.drawable.tab_cart);
+////            getSupportActionBar().setIcon(R.drawable.tab_cart);
+////            getSupportActionBar().setCustomView();
+//        } catch (Exception e) {
+//            e.printStackTrace();
 //        }
-
     }
+
+    MenuItem moreItem;
+
+    /**
+     * Action Bar setter start
+     */
+
+    /**
+     *
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        moreItem = menu.add(Menu.NONE, Menu.FIRST, Menu.FIRST, null);
+        moreItem.setIcon(R.drawable.xml_cart);
+        moreItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+//        moreItem.setOn
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+
+        boolean isUserLoggedIn =  LoggedInUserHelper.isUserLoginedIn(MainActivity.this);
+        if (isUserLoggedIn) {
+            //redirect to cart
+//            Toast.makeText(MainActivity.this, R.string.account_home_page).show();
+        } else {
+            //ask user to login
+            redirectToLogin();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Action Bar setter end
+     */
+
+
+    //    public void onComposeAction(MenuItem mi) {
+//        // handle click here
+//    }
+
+//    @Nullable
+//    @Override
+//    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
+//        return super.onCreateView(name, context, attrs);
+//
+////        ActionBar actionBar = getSupportActionBar();
+////        actionBar.set
+//
+////        if (!AndroidNetworkingUtils.checkNetworkAvailable(context)) {
+////            Toast.makeText(context, "无网络！", Toast.LENGTH_SHORT).show();
+////        }
+//
+//
+//
+//    }
 
 
 
@@ -109,6 +169,12 @@ public class MainActivity extends AppCompatActivity {
         if (binding.navView != null)
             return binding.navView.getHeight();
         return 0;
+    }
+
+    public void redirectToLogin() {
+        Intent intent = new Intent();
+        intent.setClass(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 }
 

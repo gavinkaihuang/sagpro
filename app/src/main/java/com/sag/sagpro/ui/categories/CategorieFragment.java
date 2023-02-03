@@ -114,10 +114,10 @@ public class CategorieFragment extends Fragment {
 
 
     class LoadUrlHandler implements URLLoadCallback {
-        public void successCallBack(JSONObject result) {
+        public void successURLLoadedCallBack(JSONObject result) {
             handleResult(result);
         }
-        public Exception failueCallBack(Exception exception) {
+        public Exception failueURLLoadedCallBack(Exception exception) {
             return exception;
         }
     }

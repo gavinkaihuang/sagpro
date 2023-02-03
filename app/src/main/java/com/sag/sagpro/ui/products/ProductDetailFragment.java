@@ -104,7 +104,7 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
     @Override
     /**
      * Load data from server, than handle it
-     */ public void successCallBack(JSONObject result) {
+     */ public void successURLLoadedCallBack(JSONObject result) {
         try {
             String code = result.getString(ConstantData.CODE);
             if (code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
@@ -143,7 +143,7 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
     }
 
     @Override
-    public Exception failueCallBack(Exception exception) {
+    public Exception failueURLLoadedCallBack(Exception exception) {
         return null;
     }
 }

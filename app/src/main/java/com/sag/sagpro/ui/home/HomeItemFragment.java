@@ -1,14 +1,10 @@
 package com.sag.sagpro.ui.home;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -18,17 +14,14 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.facebook.stetho.common.LogUtil;
 import com.sag.sagpro.ConstantData;
-import com.sag.sagpro.MainActivity;
 import com.sag.sagpro.R;
 import com.sag.sagpro.databinding.FragmentHomeItemListBinding;
 import com.sag.sagpro.ui.InnerBaseFragment;
-import com.sag.sagpro.ui.categories.CategorieFragment;
 import com.sag.sagpro.ui.home.placeholder.HomeItemPlaceholderContent;
 import com.sag.sagpro.ui.home.placeholder.HomeItemPlaceholderItem;
-import com.sag.sagpro.ui.products.ProductItemFragment;
+import com.sag.sagpro.ui.products.ProductListFragment;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
 import com.sag.sagpro.utils.ImageLoadCallback;
-import com.sag.sagpro.utils.ScreenUtils;
 import com.sag.sagpro.utils.UIUtils;
 import com.sag.sagpro.utils.URLLoadCallback;
 import com.youth.banner.adapter.BannerImageAdapter;
@@ -96,7 +89,7 @@ public class HomeItemFragment extends InnerBaseFragment {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putInt(ProductItemFragment.PARAMS_CID, 1);
+                bundle.putInt(ProductListFragment.PARAMS_CID, 1);
                 Navigation.findNavController(v).navigate(R.id.item_navigation_products, bundle);
             }
         });
@@ -162,11 +155,11 @@ public class HomeItemFragment extends InnerBaseFragment {
 
 
     class LoadUrlHandler implements URLLoadCallback {
-        public void successCallBack(JSONObject result) {
+        public void successURLLoadedCallBack(JSONObject result) {
             handleResult(result);
         }
 
-        public Exception failueCallBack(Exception exception) {
+        public Exception failueURLLoadedCallBack(Exception exception) {
             return exception;
         }
     }

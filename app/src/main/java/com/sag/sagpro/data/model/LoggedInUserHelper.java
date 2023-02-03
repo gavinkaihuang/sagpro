@@ -43,4 +43,18 @@ public class LoggedInUserHelper {
         String value = localDataSaver.getString(key);
         return value;
     }
+
+    public static void clearUserToLocal(Context context) {
+        LocalDataSaver localDataSaver = new LocalDataSaver(context, ConstantData.SHARE_DATA);
+        localDataSaver.putString("userid", "");
+        localDataSaver.putString("username", "");
+        localDataSaver.putString("password", "");
+        localDataSaver.putString("token", "");
+        localDataSaver.putString("expiredate", "");
+    }
+
+    public static String getToken(Context context) {
+        LocalDataSaver localDataSaver = new LocalDataSaver(context, ConstantData.SHARE_DATA);
+        return localDataSaver.getString("token");
+    }
 }

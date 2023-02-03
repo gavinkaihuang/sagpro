@@ -32,4 +32,7 @@
 
     <!-- program error -->
     <string name="error_no_network" tools:ignore="MissingTranslation">No network connected!</string>
+
+    <!-- prompt -->
+    <string name="prompt_sign_in" tools:ignore="MissingTranslation">Log in or sign up, start your wonderful journey</string>
 </resources>

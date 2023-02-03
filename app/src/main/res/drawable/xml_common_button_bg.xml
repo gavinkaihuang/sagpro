@@ -1,0 +1,43 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+<!--
+    <item android:top="8dp"  android:right="0dp" android:left="0dp" android:bottom="40dp">
+
+        <shape>
+            <solid android:color="@color/left_menu_line_sep_header" />
+        </shape>
+    </item>
+-->
+    <item android:right="0dp" android:left="0dp" >
+
+        <shape>
+            <solid android:color="@color/button_color" />
+    <!--    <solid android:color="#FFFFFF" />-->
+            <size android:height="40dp" />
+            <corners
+                android:bottomLeftRadius="10dp"
+                android:bottomRightRadius="10dp"
+                android:topLeftRadius="10dp"
+                android:topRightRadius="10dp" />
+   </shape>
+</item>
+
+
+<!--<item android:top="0dp" android:right="0dp" android:left="0dp" android:bottom="59dp">-->
+
+<!--   <shape>-->
+
+<!--       <solid android:color="@color/left_menu_line_sep_header" />-->
+<!--   </shape>-->
+<!--</item>-->
+
+<!--<item android:top="1dp"  android:right="0dp" android:left="0dp" android:bottom="58dp">-->
+
+<!--   <shape>-->
+<!--       <solid android:color="@color/left_menu_line_sep_footer" />-->
+
+<!--   </shape>-->
+<!--</item>-->
+
+ </layer-list>

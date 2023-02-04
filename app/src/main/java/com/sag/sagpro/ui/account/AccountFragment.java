@@ -36,6 +36,7 @@ public class AccountFragment extends Fragment {
                 LoggedInUserHelper.clearUserToLocal(getActivity());
             }
         });
+
         return root;
     }
 

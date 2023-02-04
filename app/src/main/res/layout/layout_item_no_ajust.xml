@@ -2,6 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="40dp"
-    android:background="@color/button_red">
+    android:orientation="horizontal">
+
+    <Button
+        android:layout_width="@dimen/common_height"
+        android:layout_height="@dimen/common_height"
+        android:background="@drawable/xml_border_left_corner"/>
+
+    <Button
+        android:layout_width="@dimen/common_height"
+        android:layout_height="@dimen/common_height"
+        android:background="@drawable/xml_border_no_corner"/>
+
+    <Button
+        android:layout_width="@dimen/common_height"
+        android:layout_height="@dimen/common_height"
+        android:background="@drawable/xml_border_right_corner"/>
 
 </LinearLayout>

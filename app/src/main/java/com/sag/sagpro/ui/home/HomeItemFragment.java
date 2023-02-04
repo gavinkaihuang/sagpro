@@ -97,17 +97,9 @@ public class HomeItemFragment extends InnerBaseFragment {
             }
         });
 
-//        binding.viewBanner.
-
-
-
     }
 
     private void updateLoopImages() {
-//        ArrayList<String> arrayList = new ArrayList<String>();
-//        arrayList.add("https://p2.itc.cn/images01/20210510/096eeb9cd3c84bd8ba09b5713679b4f9.jpeg");
-//        arrayList.add("https://p2.itc.cn/images01/20210510/096eeb9cd3c84bd8ba09b5713679b4f9.jpeg");
-//        arrayList.add("http://i0.hdslb.com/bfs/article/97549c0fd58b940c1306faac923a8685551a6a2a.jpg");
         binding.viewBanner.setAdapter(new BannerImageAdapter<String>(placeholderContent.LOOP_IMAGES) {
             @Override
             public void onBindView(BannerImageHolder holder, String data, int position, int size) {

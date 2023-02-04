@@ -45,7 +45,7 @@
         android:paddingRight="20dp"
         android:text="@string/account_home_page"
         android:textAppearance="@style/TextStyle_18_4"
-        android:background="@drawable/xml_common_button"
+        android:background="@drawable/demo_textview_back_left"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView" />
 

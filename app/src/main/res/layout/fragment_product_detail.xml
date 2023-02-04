@@ -29,7 +29,7 @@
         <TextView
             android:id="@+id/priceTextView"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/common_height"
             android:layout_marginTop="10dp"
             android:gravity="center_vertical"
             android:text="Price"
@@ -39,8 +39,8 @@
 
         <com.sag.sagpro.ui.ui.ItemNoAdjustView
             android:id="@+id/itemNoAdjustView"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/common_height"
             android:layout_marginStart="10dp"
             app:layout_constraintStart_toEndOf="@+id/priceTextView"
             app:layout_constraintTop_toTopOf="@+id/priceTextView" />
@@ -48,7 +48,7 @@
         <Button
             android:id="@+id/addToCartButton"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/button_height"
             android:layout_gravity="start"
             android:layout_marginStart="10dp"
             android:background="@drawable/xml_common_button"
@@ -57,7 +57,7 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:text="@string/product_add_to_cart"
-            android:textAppearance="@style/TextStyle_18_4"
+            android:textAppearance="@style/TextStyle_15_4"
             app:layout_constraintStart_toEndOf="@+id/itemNoAdjustView"
             app:layout_constraintTop_toTopOf="@+id/priceTextView" />
 

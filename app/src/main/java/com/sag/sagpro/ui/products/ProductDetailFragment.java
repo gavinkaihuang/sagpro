@@ -161,12 +161,6 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
             e.printStackTrace();
         }
 
-
-//        getActivity().runOnUiThread(() -> {
-////            LogUtil.i("----------product adapter ask ui reflash");
-//            myProductItemRecyclerViewAdapter.notifyDataSetChanged();
-//            updatePageFooterHeight(binding.list);
-//        });
     }
 
     @Override

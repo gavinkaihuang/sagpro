@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.facebook.stetho.common.LogUtil;
@@ -25,10 +26,12 @@ import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderContent;
 import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderItem;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
 import com.sag.sagpro.utils.LoggedInUserHelper;
+import com.sag.sagpro.utils.ToastUtils;
 import com.sag.sagpro.utils.URLLoadCallback;
 import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.holder.BannerImageHolder;
 import com.youth.banner.indicator.CircleIndicator;
+import com.youth.banner.util.LogUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,7 +62,14 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
         productDetailViewModel = new ViewModelProvider(this).get(ProductDetailViewModel.class);
         binding = FragmentProductDetailBinding.inflate(inflater, container, false);
 
-        onBindingViews();
+//        onBindingViews();
+        binding.addToCartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addToCartToServer();
+            }
+        });
+
         loadDataFromServer();
         return binding.getRoot();
     }
@@ -99,7 +109,9 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
         }
     }
 
-
+    /**
+     * 更新请求返回数据到用户界面
+     */
     private void onBindingViews() {
         getActivity().runOnUiThread(() -> {
 
@@ -121,15 +133,12 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
 
             updatePageFooterHeight(binding.getRoot());
         });
-
-        binding.addToCartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addToCartToServer();
-            }
-        });
     }
 
+    /**
+     *  解析产品详情
+     * @param result
+     */
     private void handleDetailResult(JSONObject result) {
         try {
             JSONObject jsonObject = result.getJSONObject(ConstantData.DATA);
@@ -152,15 +161,25 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
         }
     }
 
+    /**
+     * 解析添加到购物车
+     * @param result
+     */
     private void handleAddToCartResult(JSONObject result) {
         try {
+            String msg = result.getString("msg");
             JSONObject jsonObject = result.getJSONObject(ConstantData.DATA);
             String productID = jsonObject.getString("productid");
             String price = jsonObject.getString("price");
             String number = jsonObject.getString("number");
             String uid = jsonObject.getString("uid");
             String created = jsonObject.getString("created");
-        } catch (JSONException e) {
+            LogUtils.i("------1 show result: " + msg);
+            getActivity().runOnUiThread(() -> {
+                LogUtils.i("------show result: " + msg);
+                ToastUtils.showToast(getActivity(), msg);
+            });
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -169,7 +188,8 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
     @Override
     /**
      * Load data from server, than handle it
-     */ public void successURLLoadedCallBack(JSONObject result) {
+     */
+    public void successURLLoadedCallBack(JSONObject result) {
         try {
             String code = result.getString(ConstantData.CODE);
             if (code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {

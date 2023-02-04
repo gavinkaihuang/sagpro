@@ -55,13 +55,6 @@ public class HomeItemFragment extends InnerBaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        LogUtil.i("------------------HomeItemFragment onCreate");
-        placeholderContent = new HomeItemPlaceholderContent();
-        JSONObject jsonObject = new JSONObject();
-        AndroidNetworkingUtils.loadURL(ConstantData.CATEGORIES, "CATEGORIES", new JSONObject(), new LoadUrlHandler());
-
-        AndroidNetworkingUtils.loadURL(ConstantData.HOME_IMGS, "HOME_IMGS", jsonObject, new LoadUrlHandler());
     }
 
 
@@ -70,9 +63,16 @@ public class HomeItemFragment extends InnerBaseFragment {
                              Bundle savedInstanceState) {
         binding = FragmentHomeItemListBinding.inflate(inflater, container, false);
 
+
+
+        placeholderContent = new HomeItemPlaceholderContent();
         myItemRecyclerViewAdapter = new MyItemRecyclerViewAdapter(placeholderContent.ITEMS);
         binding.list.setAdapter(myItemRecyclerViewAdapter);
         binding.list.addItemDecoration(UIUtils.getDividerItemDecoration(getContext()));
+
+        JSONObject jsonObject = new JSONObject();
+        AndroidNetworkingUtils.loadURL(ConstantData.CATEGORIES, "CATEGORIES", new JSONObject(), new LoadUrlHandler());
+        AndroidNetworkingUtils.loadURL(ConstantData.HOME_IMGS, "HOME_IMGS", jsonObject, new LoadUrlHandler());
 
         return binding.getRoot();
     }

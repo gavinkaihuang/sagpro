@@ -178,13 +178,13 @@ public class LoginActivity extends AppCompatActivity {
 //        });
     }
 
-    private void updateUiWithUser(LoggedInUser model) {
+    public void updateUiWithUser(LoggedInUser model) {
         String welcome = getString(R.string.welcome) + " " + model.getUserName();
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 
-    private void showLoginFailed(String errorMessage) {
+    public void showLoginFailed(String errorMessage) {
         Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
     }
 }

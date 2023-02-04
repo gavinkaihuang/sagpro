@@ -16,6 +16,8 @@ public class ConstantData {
     /** request services **/
     public static String SIGN_IN = URL + "signin";
 
+    public static String SIGN_UP = URL + "signup";
+
     public static String HOME_IMGS = URL + "homeimgs";
 
     public static String CATEGORIES = URL + "categories";

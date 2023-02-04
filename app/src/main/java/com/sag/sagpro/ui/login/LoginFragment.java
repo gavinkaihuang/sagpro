@@ -67,6 +67,8 @@ public class LoginFragment extends InnerBaseFragment implements URLLoadCallback 
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        getActivity().setTitle(getResources().getString(R.string.title_activity_login));
     }
 
     @Override
@@ -83,7 +85,7 @@ public class LoginFragment extends InnerBaseFragment implements URLLoadCallback 
 
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String userName = binding.usernameEditText.getText().toString();
+                String userName = binding.emailEditText.getText().toString();
                 String password = binding.passwordEditText.getText().toString();
                 loadDataFromServer(userName, password);
             }
@@ -114,10 +116,10 @@ public class LoginFragment extends InnerBaseFragment implements URLLoadCallback 
         try {
             JSONObject jsonObject = result.getJSONObject(ConstantData.DATA);
 
-            String userName = binding.usernameEditText.getText().toString();
+            String email = binding.emailEditText.getText().toString();
             String password = binding.passwordEditText.getText().toString();
 
-            loggedInUser = new LoggedInUser(null, userName);
+            loggedInUser = new LoggedInUser(null, email);
             loggedInUser.setPassword(password);
             loggedInUser.setToken(jsonObject.getString("token"));
             loggedInUser.setExpireDate(jsonObject.getString("expiredate"));
@@ -143,7 +145,7 @@ public class LoginFragment extends InnerBaseFragment implements URLLoadCallback 
         }
 
         getActivity().runOnUiThread(() -> {
-            updateUiWithUser(loggedInUser);
+            ((LoginActivity) getActivity()).updateUiWithUser(loggedInUser);
             getActivity().setResult(Activity.RESULT_OK);
             getActivity().finish();
         });
@@ -154,13 +156,5 @@ public class LoginFragment extends InnerBaseFragment implements URLLoadCallback 
         return null;
     }
 
-    private void updateUiWithUser(LoggedInUser model) {
-        String welcome = getString(R.string.welcome) + " " + model.getUserName();
-        // TODO : initiate successful logged in experience
-        Toast.makeText(getActivity().getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-    }
 
-    private void showLoginFailed(String errorMessage) {
-        Toast.makeText(getActivity().getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
-    }
 }

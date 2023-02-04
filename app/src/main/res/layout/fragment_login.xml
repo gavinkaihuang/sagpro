@@ -5,10 +5,6 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".ui.login.LoginActivity">
 
     <TextView
@@ -17,70 +13,113 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/prompt_sign_in"
-        android:textAppearance="@style/TextStyle_18_2"
+        android:textAppearance="@style/TextStyle_Prompt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/usernameTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/prompt_email"
-        app:layout_constraintBottom_toBottomOf="@+id/usernameEditText"
-        app:layout_constraintTop_toTopOf="@+id/usernameEditText"
-        tools:layout_editor_absoluteX="7dp" />
-
     <EditText
-        android:id="@+id/usernameEditText"
+        android:id="@+id/emailEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:paddingLeft="@dimen/edittext_icon_left"
+        android:paddingTop="@dimen/edittext_icon_topper"
+        android:paddingBottom="@dimen/edittext_icon_footer"
         android:hint="@string/prompt_email"
+        android:text="@string/default_user_name"
+        android:imeActionLabel="@string/action_sign_in_short"
+        android:imeOptions="actionDone"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
-        android:text="@string/default_user_name"
+        android:background="@drawable/xml_border_with_corner"
+        android:drawableLeft="@drawable/iocn_email"
+        android:textAppearance="@style/TextStyle_Input_Content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/password"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/promptTV" />
-
-    <TextView
-        android:id="@+id/passwordTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/prompt_password"
-        app:layout_constraintBottom_toBottomOf="@+id/password"
-        app:layout_constraintStart_toStartOf="@+id/usernameTV"
-        app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />
 
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="@dimen/edittext_icon_left"
+        android:paddingTop="@dimen/edittext_icon_topper"
+        android:paddingBottom="@dimen/edittext_icon_footer"
         android:hint="@string/prompt_password"
+
         android:imeActionLabel="@string/action_sign_in_short"
+        android:text="@string/default_password"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
-        android:text="@string/default_password"
+        android:background="@drawable/xml_border_with_corner"
+        android:drawableLeft="@drawable/icon_password"
+        android:textAppearance="@style/TextStyle_Input_Content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/passwordTV"
-        app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/usernameTV"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        android:text="@string/prompt_email"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/usernameEditText"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/usernameEditText"-->
+<!--        tools:layout_editor_absoluteX="7dp" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/usernameEditText"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:hint="@string/prompt_email"-->
+<!--        android:inputType="textEmailAddress"-->
+<!--        android:selectAllOnFocus="true"-->
+<!--        android:text="@string/default_user_name"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/passwordEditText"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/promptTV" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/passwordTV"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/prompt_password"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/passwordEditText"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/usernameTV"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/passwordEditText"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:hint="@string/prompt_password"-->
+<!--        android:imeActionLabel="@string/action_sign_in_short"-->
+<!--        android:imeOptions="actionDone"-->
+<!--        android:inputType="textPassword"-->
+<!--        android:selectAllOnFocus="true"-->
+<!--        android:text="@string/default_password"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/passwordTV"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />-->
 
     <Button
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/button_large_height"
         android:layout_gravity="start"
-        android:layout_marginTop="@dimen/common_height"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/xml_common_button"
         android:enabled="true"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
         android:text="@string/action_sign_in"
         android:textAppearance="@style/TextStyle_18_4"
-        android:background="@drawable/xml_common_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -106,9 +145,9 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="30dp"
         android:text="@string/login_regist_prompt"
-        app:layout_constraintStart_toStartOf="@+id/passwordTV"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 
     <TextView

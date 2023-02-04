@@ -1,9 +1,10 @@
-package com.sag.sagpro.data.model;
+package com.sag.sagpro.utils;
 
 import android.content.Context;
 
 import com.sag.sagpro.ConstantData;
 import com.sag.sagpro.data.LocalDataSaver;
+import com.sag.sagpro.data.model.LoggedInUser;
 
 public class LoggedInUserHelper {
     public static void saveUserToLocal(Context context, LoggedInUser loggedInUser) {

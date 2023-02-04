@@ -69,16 +69,17 @@ public class HomeItemFragment extends InnerBaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentHomeItemListBinding.inflate(inflater, container, false);
+
+        myItemRecyclerViewAdapter = new MyItemRecyclerViewAdapter(placeholderContent.ITEMS);
+        binding.list.setAdapter(myItemRecyclerViewAdapter);
+        binding.list.addItemDecoration(UIUtils.getDividerItemDecoration(getContext()));
+
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        myItemRecyclerViewAdapter = new MyItemRecyclerViewAdapter(placeholderContent.ITEMS);
-        binding.list.setAdapter(myItemRecyclerViewAdapter);
-        binding.list.addItemDecoration(UIUtils.getDividerItemDecoration(getContext()));
 
         binding.categoriesButton.setBackgroundResource(R.drawable.categories);
         binding.categoriesButton.setOnClickListener(new View.OnClickListener() {

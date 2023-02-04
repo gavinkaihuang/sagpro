@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape>
-            <solid android:color="@color/light_gray_color" />
+            <solid android:color="@color/white" />
 <!--            <corners-->
 <!--                android:bottomLeftRadius="15px"-->
 <!--                android:topLeftRadius="15px" />-->
@@ -11,7 +11,7 @@
     <item
         android:bottom="1px"
         android:left="1px"
-        android:right="-2px"
+        android:right="1px"
         android:top="1px">
         <shape>
 <!--            <corners-->
@@ -19,7 +19,7 @@
 <!--                android:topLeftRadius="15px" />-->
             <stroke
                 android:width="1px"
-                android:color="#000000" />
+                android:color="@color/gray_color" />
         </shape>
     </item>
 </layer-list>

@@ -26,5 +26,7 @@ public class ConstantData {
 
     public static String MESSAGES = URL + "messages";
 
+    public static String ADD_TO_CART = URL + "addcart";
+
 
 }

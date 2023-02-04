@@ -2,9 +2,8 @@ package com.sag.sagpro.data;
 
 import android.content.Context;
 
-import com.sag.sagpro.ConstantData;
 import com.sag.sagpro.data.model.LoggedInUser;
-import com.sag.sagpro.data.model.LoggedInUserHelper;
+import com.sag.sagpro.utils.LoggedInUserHelper;
 
 /**
  * Class that requests authentication and user information from the remote data source and

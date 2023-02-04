@@ -24,6 +24,7 @@ import com.sag.sagpro.ui.products.placeholder.ProductDetailPlaceholder;
 import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderContent;
 import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderItem;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
+import com.sag.sagpro.utils.LoggedInUserHelper;
 import com.sag.sagpro.utils.URLLoadCallback;
 import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.holder.BannerImageHolder;
@@ -55,28 +56,36 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
             productID = getArguments().getString(PARAMS_PRODUCT_ID);
         }
 
-//        ViewModelProvider.Factory.class
         productDetailViewModel = new ViewModelProvider(this).get(ProductDetailViewModel.class);
-//        ViewModelProvider.of(this).get(ProductDetailViewModel.class);
-//        new ViewModelProvider().get(ProductDetailViewModelilViewModel.class);
-//        binding = FragmentProductItemListBinding.inflate(inflater, container, false);
-//        return binding.getRoot();
         binding = FragmentProductDetailBinding.inflate(inflater, container, false);
 
         onBindingViews();
         loadDataFromServer();
         return binding.getRoot();
-
-//        return inflater.inflate(R.layout.fragment_product_detail, container, false);
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ProductDetailViewModel.class);
-        // TODO: Use the ViewModel
-    }
+//    @Override
+//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+//        super.onActivityCreated(savedInstanceState);
+//        mViewModel = new ViewModelProvider(this).get(ProductDetailViewModel.class);
+//        // TODO: Use the ViewModel
+//    }
 
+    private void addToCartToServer() {
+        //{"productid":"1001","price": 100.00,"number":"10","token":"$Pe!nmRFNhbfUdg9VD5CJWjZMls%uSoO"}
+
+//        String number = binding.itemNoAdjustView.getValue();
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("productid", productID);
+            jsonObject.put("price", "100.0");
+            jsonObject.put("number", binding.itemNoAdjustView.getValue());
+            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
+            AndroidNetworkingUtils.loadURL(ConstantData.ADD_TO_CART, "ADD_TO_CART", jsonObject, this);
+        } catch (JSONException e) {
+            LogUtil.e("-----------" + e.getMessage());
+        }
+    }
 
     private void loadDataFromServer() {
         if (productID == null) return;
@@ -94,17 +103,8 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
     private void onBindingViews() {
         getActivity().runOnUiThread(() -> {
 
-            //TODO
             binding.priceTextView.setText("$" + productDetailViewModel.getPrice());
-//            binding.nameTextView.setText(productDetailViewModel.getName());
             binding.contentTextView.setText(productDetailViewModel.getContent());
-//            binding.priceTextView.setText(productDetailViewModel.getPrice());
-//
-//            binding.imageView.setDefaultImageResId(R.drawable.img_default);
-//            binding.imageView.setErrorImageResId(R.drawable.img_error);
-//            binding.imageView.setImageUrl(productDetailViewModel.getImg());
-//
-//            updatePageFooterHeight(binding.atoCartButton);
 
             ArrayList<String> arrayList = productDetailViewModel.getImgList();
             binding.viewBanner.setAdapter(new BannerImageAdapter<String>(arrayList) {
@@ -122,8 +122,47 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
             updatePageFooterHeight(binding.getRoot());
         });
 
+        binding.addToCartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addToCartToServer();
+            }
+        });
+    }
 
-//        binding.nameTextView.setText(productDetailViewModel.getName());
+    private void handleDetailResult(JSONObject result) {
+        try {
+            JSONObject jsonObject = result.getJSONObject(ConstantData.DATA);
+            productDetailViewModel.setName(jsonObject.getString("name"));
+            productDetailViewModel.setPid(jsonObject.getString("pid"));
+            productDetailViewModel.setCid(jsonObject.getString("cid"));
+            productDetailViewModel.setFid(jsonObject.getString("fid"));
+            productDetailViewModel.setContent(jsonObject.getString("content"));
+            productDetailViewModel.setPrice(jsonObject.getString("price"));
+
+            ArrayList<String> imageList = new ArrayList<String>();
+            JSONArray imageArray = jsonObject.getJSONArray("imgs");
+            for (int i = 0; i < imageArray.length(); i++) {
+                imageList.add(imageArray.getString(i));
+            }
+            productDetailViewModel.setImgList(imageList);
+            onBindingViews();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void handleAddToCartResult(JSONObject result) {
+        try {
+            JSONObject jsonObject = result.getJSONObject(ConstantData.DATA);
+            String productID = jsonObject.getString("productid");
+            String price = jsonObject.getString("price");
+            String number = jsonObject.getString("number");
+            String uid = jsonObject.getString("uid");
+            String created = jsonObject.getString("created");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -134,26 +173,13 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
         try {
             String code = result.getString(ConstantData.CODE);
             if (code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
-                JSONObject jsonObject = result.getJSONObject(ConstantData.DATA);
-                productDetailViewModel.setName(jsonObject.getString("name"));
-                productDetailViewModel.setPid(jsonObject.getString("pid"));
-                productDetailViewModel.setCid(jsonObject.getString("cid"));
-                productDetailViewModel.setFid(jsonObject.getString("fid"));
-                productDetailViewModel.setContent(generateTempContent(jsonObject.getString("content")));
-                productDetailViewModel.setPrice(jsonObject.getString("price"));
-
-                ArrayList<String> imageList = new ArrayList<String>();
-                JSONArray imageArray = jsonObject.getJSONArray("imgs");
-                for (int i = 0; i < imageArray.length(); i++) {
-                    imageList.add(imageArray.getString(i));
+                String service = result.getString(ConstantData.SERVICE);
+                if ("addCart".equalsIgnoreCase(service)) {
+                    handleAddToCartResult(result);
+                } else if ("productDetail".equalsIgnoreCase(service)){
+                    handleDetailResult(result);
                 }
-//                //TODO change image to list
-//                String image = jsonObject.getString("img");
-//                ArrayList<String> imageList = new ArrayList<String>();
-//                imageList.add(image);
-                productDetailViewModel.setImgList(imageList);
-                onBindingViews();
-            } else {
+           } else {
                 String message = result.getString(ConstantData.MSG);
                 LogUtil.e("------------------" + message);
             }
@@ -168,11 +194,4 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
         return null;
     }
 
-    private String generateTempContent(String content) {
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < 100; i++) {
-            sb.append(content + "\n");
-        }
-        return sb.toString();
-    }
 }

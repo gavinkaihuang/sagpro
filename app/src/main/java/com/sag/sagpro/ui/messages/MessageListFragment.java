@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 
 import com.facebook.stetho.common.LogUtil;
 import com.sag.sagpro.ConstantData;
-import com.sag.sagpro.data.model.LoggedInUserHelper;
+import com.sag.sagpro.utils.LoggedInUserHelper;
 import com.sag.sagpro.databinding.FragmentMessageItemListBinding;
 import com.sag.sagpro.ui.InnerBaseFragment;
 import com.sag.sagpro.ui.messages.placeholder.MessagePlaceholderContent;

@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.sag.sagpro.data.model.LoggedInUser;
-import com.sag.sagpro.data.model.LoggedInUserHelper;
+import com.sag.sagpro.utils.LoggedInUserHelper;
 import com.sag.sagpro.databinding.FragmentAccountBinding;
 
 public class AccountFragment extends Fragment {

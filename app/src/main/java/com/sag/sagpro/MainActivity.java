@@ -1,22 +1,14 @@
 package com.sag.sagpro;
 
-import android.app.ActionBar;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.facebook.stetho.common.LogUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -24,7 +16,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationBarView;
-import com.sag.sagpro.data.model.LoggedInUserHelper;
+import com.sag.sagpro.utils.LoggedInUserHelper;
 import com.sag.sagpro.databinding.ActivityMainBinding;
 import com.sag.sagpro.ui.login.LoginActivity;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;

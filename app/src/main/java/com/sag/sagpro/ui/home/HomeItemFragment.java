@@ -68,7 +68,7 @@ public class HomeItemFragment extends InnerBaseFragment {
         placeholderContent = new HomeItemPlaceholderContent();
         myItemRecyclerViewAdapter = new MyItemRecyclerViewAdapter(placeholderContent.ITEMS);
         binding.list.setAdapter(myItemRecyclerViewAdapter);
-        binding.list.addItemDecoration(UIUtils.getDividerItemDecoration(getContext()));
+        binding.list.addItemDecoration(UIUtils.getDividerItemBoxDecoration(getContext()));
 
         JSONObject jsonObject = new JSONObject();
         AndroidNetworkingUtils.loadURL(ConstantData.CATEGORIES, "CATEGORIES", new JSONObject(), new LoadUrlHandler());

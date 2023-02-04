@@ -91,7 +91,8 @@ public class ProductListFragment extends InnerBaseFragment {
 
         myProductItemRecyclerViewAdapter = new MyProductItemRecyclerViewAdapter(placeholderContent.ITEMS);
         binding.list.setAdapter(myProductItemRecyclerViewAdapter);
-        binding.list.addItemDecoration(UIUtils.getDividerItemDecoration(getContext()));
+        binding.list.addItemDecoration(UIUtils.getDividerItemLineDecoration(getContext()));
+//        binding.list.add
 
         binding.list.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), binding.list, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
@@ -132,6 +133,8 @@ public class ProductListFragment extends InnerBaseFragment {
                     placeholderItem.setName(jdata.getString("name"));
                     placeholderItem.setFid(jdata.getString("fid"));
                     placeholderItem.setImg(jdata.getString("img"));
+                    placeholderItem.setPrice(jdata.getString("price"));
+                    placeholderItem.setRemark(jdata.getString("remark"));
 //
                     if (placeholderContent == null)
                         placeholderContent = new ProductPlaceholderContent();

@@ -19,6 +19,8 @@
         <!-- You need to set the actionBarTheme attribute (not actionBarStyle) with colorControlNormal. -->
         <!-- 通过 actionBarTheme 修改标题栏样式 -->
         <item name="actionBarTheme">@style/MyActionBarTheme</item>
+
+        <item name="android:listDivider">@drawable/xml_divider</item>
     </style>
 
     <style name="MyActionBarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -299,11 +301,24 @@
         <item name="android:textColor">@color/button_red</item>
     </style>
 
+    <style name="TextStyle_Name">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">#666666</item>
+    </style>
+
+    <style name="TextStyle_Content">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">#666666</item>
+    </style>
+
 
     <style name="BlackTitle" parent="@style/Widget.AppCompat.ActionBar.Solid">
         <item name="titleTextStyle">@style/BlackTitleStyle</item>
         <item name="elevation">1sp</item>
     </style>
+
     <style name="BlackTitleStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textColor">@color/black</item>
     </style>

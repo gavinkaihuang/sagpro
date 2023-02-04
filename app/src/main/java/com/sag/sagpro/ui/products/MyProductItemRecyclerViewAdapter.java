@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.androidnetworking.widget.ANImageView;
@@ -43,6 +44,9 @@ public class MyProductItemRecyclerViewAdapter extends RecyclerView.Adapter<MyPro
         holder.imageView.setErrorImageResId(R.drawable.img_error);
         holder.imageView.setImageUrl(mValues.get(position).getImg());
         holder.nameTextView.setText(mValues.get(position).getName());
+        holder.descriptionTextView.setText(mValues.get(position).getRemark());
+        holder.priceTextView.setText("$" + mValues.get(position).getPrice());
+//        holder.priceTextView.setText(mValues.get(position).getRemark());
     }
 
     @Override
@@ -55,6 +59,8 @@ public class MyProductItemRecyclerViewAdapter extends RecyclerView.Adapter<MyPro
         public ANImageView imageView;
         public TextView nameTextView;
         public TextView descriptionTextView;
+        public TextView priceTextView;
+        public ImageView addToCartButton;
 
         public ViewHolder(FragmentProductItemBinding binding) {
             super(binding.getRoot());
@@ -62,6 +68,8 @@ public class MyProductItemRecyclerViewAdapter extends RecyclerView.Adapter<MyPro
             imageView = binding.imageView;
             nameTextView = binding.nameTextView;
             descriptionTextView = binding.descriptionTextView;
+            priceTextView = binding.priceTextView;
+            addToCartButton = binding.addToCartButton;
         }
 
         @Override

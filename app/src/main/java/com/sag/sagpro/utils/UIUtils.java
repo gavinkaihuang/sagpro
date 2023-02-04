@@ -15,9 +15,15 @@ public class UIUtils {
      * @param context
      * @return
      */
-    public static DividerItemDecoration getDividerItemDecoration(Context context) {
+    public static DividerItemDecoration getDividerItemLineDecoration(Context context) {
         DividerItemDecoration decoration = new DividerItemDecoration(context, LinearLayout.VERTICAL);
-        decoration.setDrawable(ContextCompat.getDrawable(context, R.drawable.recycler_item_color));
+        decoration.setDrawable(ContextCompat.getDrawable(context, R.drawable.recycler_item_divider_line));
+        return decoration;
+    }
+
+    public static DividerItemDecoration getDividerItemBoxDecoration(Context context) {
+        DividerItemDecoration decoration = new DividerItemDecoration(context, LinearLayout.VERTICAL);
+        decoration.setDrawable(ContextCompat.getDrawable(context, R.drawable.recycler_item_divider_box));
         return decoration;
     }
 }

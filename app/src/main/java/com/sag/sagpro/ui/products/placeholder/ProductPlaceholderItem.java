@@ -47,6 +47,24 @@ public class ProductPlaceholderItem {
     public String fid;
     public String name;
     public String img;
+    public String price;
+    public String remark;
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     public ProductPlaceholderItem() {
     }

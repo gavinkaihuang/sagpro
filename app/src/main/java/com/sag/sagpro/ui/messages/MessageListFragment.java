@@ -77,7 +77,7 @@ public class MessageListFragment extends InnerBaseFragment implements URLLoadCal
 
         myMessageRecyclerViewAdapter = new MyMessageItemRecyclerViewAdapter(placeholderContent.ITEMS);
         binding.list.setAdapter(myMessageRecyclerViewAdapter);
-        binding.list.addItemDecoration(UIUtils.getDividerItemDecoration(getContext()));
+        binding.list.addItemDecoration(UIUtils.getDividerItemLineDecoration(getContext()));
 
         binding.list.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), binding.list, new RecyclerItemClickListener.OnItemClickListener() {
             @Override

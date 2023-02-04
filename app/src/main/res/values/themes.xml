@@ -1,49 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-<!--    <style name="Theme.Sagpro" parent="Theme.MaterialComponents.DayNight.DarkActionBar">-->
-<!--        &lt;!&ndash; Primary brand color. &ndash;&gt;-->
-<!--&lt;!&ndash;&lt;!&ndash;        <item name="colorPrimary">@color/purple_500</item>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="colorPrimaryVariant">@color/purple_700</item>&ndash;&gt;-->
-<!--&lt;!&ndash;&lt;!&ndash;        <item name="colorOnPrimary">@color/white</item>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;        &lt;!&ndash; Secondary brand color. &ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;&lt;!&ndash;        <item name="colorSecondary">@color/teal_200</item>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="colorSecondaryVariant">@color/teal_700</item>&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="colorOnSecondary">@color/black</item>&ndash;&gt;-->
-<!--&lt;!&ndash;        &lt;!&ndash; Status bar color. &ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;&lt;!&ndash;        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;        &lt;!&ndash; Customize your theme here. &ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="colorPrimary">@color/white</item>&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="colorOnPrimary">@color/gray_color</item>&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="colorSecondary">@color/teal_200</item>&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="actionBarTabTextStyle">@style/GrayTitle</item>&ndash;&gt;-->
-
-<!--&lt;!&ndash;        <item name="actionBarStyle">@style/GrayTitle</item>&ndash;&gt;-->
-
-<!--&lt;!&ndash;        &lt;!&ndash; Primary brand color. &ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="colorPrimary">@color/white</item>&ndash;&gt;-->
-<!--&lt;!&ndash;        &lt;!&ndash;        <item name="">@color/white</item>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;        &lt;!&ndash; 状态栏颜色 &ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;        &lt;!&ndash;        <item name="colorPrimaryDark">@color/purple_700</item>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;        &lt;!&ndash;控制各个控件被选中时的颜色&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="colorAccent">@color/teal_200</item>&ndash;&gt;-->
-<!--&lt;!&ndash;        &lt;!&ndash;        <item name="android:homeAsUpIndicator">@color/colorAccent</item>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="actionBarStyle">@style/GrayTitle</item>&ndash;&gt;-->
-<!--    </style>-->
-
-<!--    <style name="Theme.Sagpro" parent="Theme.AppCompat.Light.DarkActionBar">-->
-<!--        &lt;!&ndash; Primary brand color. &ndash;&gt;-->
-<!--        <item name="colorPrimary">@color/white</item>-->
-<!--&lt;!&ndash;        <item name="colorPrimaryDark">@color/purple_700</item>&ndash;&gt;-->
-<!--        <item name="colorAccent">@color/teal_200</item>-->
-<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
-
-<!--        <item name="android:textColorPrimary">@color/gray_color</item>-->
-
-<!--        <item name="actionBarStyle">@style/GrayTitle</item>-->
-<!--    </style>-->
 
     <!-- Base application theme. -->
-    <style name="Theme.Sagpro" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Sagpro" parent="Theme.MaterialComponents.DayNight.DarkActionBar.Bridge">
         <!-- Primary brand color. -->
         <!-- 通过 colorPrimary 也可以修改标题栏背景色，但是建议放在 actionBarTheme 中去，免得影响其它控件 -->
 <!--        <item name="colorPrimary">@color/purple_500</item>-->

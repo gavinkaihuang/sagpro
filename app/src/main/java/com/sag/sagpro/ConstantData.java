@@ -3,6 +3,7 @@ package com.sag.sagpro;
 public class ConstantData {
 
     public static final String SHARE_DATA = "SHARE_DATA";
+    public static final String SERVICE = "service";
     public static final String CODE = "code";
     public static final String DATA = "data";
     public static final String CODE_SUCCESS = "200";
@@ -14,6 +15,8 @@ public class ConstantData {
 
     /** request services **/
     public static String SIGN_IN = URL + "signin";
+
+    public static String HOME_IMGS = URL + "homeimgs";
 
     public static String CATEGORIES = URL + "categories";
 

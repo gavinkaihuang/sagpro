@@ -7,8 +7,7 @@
         android:icon="@drawable/tab_home"
         android:title="@string/tab_home" />
 
-
-    <item
+   <item
         android:id="@+id/item_navigation_messages"
         android:icon="@drawable/tab_messages"
         android:title="@string/tab_messages" />

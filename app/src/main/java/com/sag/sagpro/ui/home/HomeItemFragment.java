@@ -58,7 +58,10 @@ public class HomeItemFragment extends InnerBaseFragment {
 
         LogUtil.i("------------------HomeItemFragment onCreate");
         placeholderContent = new HomeItemPlaceholderContent();
+        JSONObject jsonObject = new JSONObject();
         AndroidNetworkingUtils.loadURL(ConstantData.CATEGORIES, "CATEGORIES", new JSONObject(), new LoadUrlHandler());
+
+        AndroidNetworkingUtils.loadURL(ConstantData.HOME_IMGS, "HOME_IMGS", jsonObject, new LoadUrlHandler());
     }
 
 
@@ -96,11 +99,16 @@ public class HomeItemFragment extends InnerBaseFragment {
 
 //        binding.viewBanner.
 
-        ArrayList<String> arrayList = new ArrayList<String>();
-        arrayList.add("https://p2.itc.cn/images01/20210510/096eeb9cd3c84bd8ba09b5713679b4f9.jpeg");
-        arrayList.add("https://p2.itc.cn/images01/20210510/096eeb9cd3c84bd8ba09b5713679b4f9.jpeg");
-        arrayList.add("http://i0.hdslb.com/bfs/article/97549c0fd58b940c1306faac923a8685551a6a2a.jpg");
-        binding.viewBanner.setAdapter(new BannerImageAdapter<String>(arrayList) {
+
+
+    }
+
+    private void updateLoopImages() {
+//        ArrayList<String> arrayList = new ArrayList<String>();
+//        arrayList.add("https://p2.itc.cn/images01/20210510/096eeb9cd3c84bd8ba09b5713679b4f9.jpeg");
+//        arrayList.add("https://p2.itc.cn/images01/20210510/096eeb9cd3c84bd8ba09b5713679b4f9.jpeg");
+//        arrayList.add("http://i0.hdslb.com/bfs/article/97549c0fd58b940c1306faac923a8685551a6a2a.jpg");
+        binding.viewBanner.setAdapter(new BannerImageAdapter<String>(placeholderContent.LOOP_IMAGES) {
             @Override
             public void onBindView(BannerImageHolder holder, String data, int position, int size) {
                 Glide.with(holder.imageView)
@@ -111,7 +119,6 @@ public class HomeItemFragment extends InnerBaseFragment {
         //轮播图下面的原点
         binding.viewBanner.setIndicator(new CircleIndicator(HomeItemFragment.this.getContext()));
         binding.viewBanner.setIndicatorRadius(50);
-
     }
 
 
@@ -120,10 +127,9 @@ public class HomeItemFragment extends InnerBaseFragment {
      *
      * @param result
      */
-    private void handleResult(JSONObject result) {
+    private void handleCategoryResult(JSONObject result) {
         try {
-            String code = result.getString(ConstantData.CODE);
-            if (code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
+
                 JSONArray jsonArray = result.getJSONArray(ConstantData.DATA);
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jdata = jsonArray.getJSONObject(i);
@@ -137,10 +143,6 @@ public class HomeItemFragment extends InnerBaseFragment {
                         placeholderContent = new HomeItemPlaceholderContent();
                     placeholderContent.addItem(placeholderItem);
                 }
-            } else {
-                String message = result.getString(ConstantData.MSG);
-                LogUtil.e("------------------" + message);
-            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -153,10 +155,48 @@ public class HomeItemFragment extends InnerBaseFragment {
         });
     }
 
+    private void handleHomeImgsResult(JSONObject result) {
+        try {
+
+            JSONArray jsonArray = result.getJSONArray(ConstantData.DATA);
+//            int size = jsonArray.length();
+            ArrayList<String> imgList = new ArrayList<String>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jdata = jsonArray.getJSONObject(i);
+                placeholderContent.addImage(jdata.getString("img"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        getActivity().runOnUiThread(() -> {
+            updateLoopImages();
+        });
+    }
+
+
 
     class LoadUrlHandler implements URLLoadCallback {
         public void successURLLoadedCallBack(JSONObject result) {
-            handleResult(result);
+            try {
+                String code = result.getString(ConstantData.CODE);
+                //TODO service not work
+                if (!code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
+                    String message = result.getString(ConstantData.MSG);
+                    LogUtil.e("------------------" + message);
+                    return;
+                }
+
+                String service = result.getString(ConstantData.SERVICE);
+                if ("homeImgs".equals(service)) {
+                    handleHomeImgsResult(result);
+                } else {
+                    handleCategoryResult(result);
+                }
+          } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
 
         public Exception failueURLLoadedCallBack(Exception exception) {

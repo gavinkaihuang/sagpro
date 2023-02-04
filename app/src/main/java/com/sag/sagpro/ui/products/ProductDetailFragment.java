@@ -142,10 +142,15 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
                 productDetailViewModel.setContent(generateTempContent(jsonObject.getString("content")));
                 productDetailViewModel.setPrice(jsonObject.getString("price"));
 
-                //TODO change image to list
-                String image = jsonObject.getString("img");
                 ArrayList<String> imageList = new ArrayList<String>();
-                imageList.add(image);
+                JSONArray imageArray = jsonObject.getJSONArray("imgs");
+                for (int i = 0; i < imageArray.length(); i++) {
+                    imageList.add(imageArray.getString(i));
+                }
+//                //TODO change image to list
+//                String image = jsonObject.getString("img");
+//                ArrayList<String> imageList = new ArrayList<String>();
+//                imageList.add(image);
                 productDetailViewModel.setImgList(imageList);
                 onBindingViews();
             } else {

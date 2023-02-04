@@ -1,0 +1,7 @@
+1, button 背景颜色被theme修改，不起作用
+
+用android:background=""修改button的背景没有作用
+这时候可以将res/values/themes.xml下的
+<style name="Theme.HelloWorld" parent="Theme.MaterialComponents.DayNight.DarkActionBar">改为
+<style name="Theme.HelloWorld" parent="Theme.MaterialComponents.DayNight.DarkActionBar.Bridge">
+

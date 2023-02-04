@@ -1,5 +1,6 @@
 package com.sag.sagpro.ui.home.placeholder;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,8 @@ public class HomeItemPlaceholderContent {
      */
     public  Map<String, HomeItemPlaceholderItem> ITEM_MAP = new HashMap<String, HomeItemPlaceholderItem>();
 
+    public  ArrayList<String> LOOP_IMAGES = new ArrayList<String>();
+
 //    private static final int COUNT = 25;
 
 //    static {
@@ -36,6 +39,11 @@ public class HomeItemPlaceholderContent {
         ITEMS.add(item);
         ITEM_MAP.put(item.getCid(), item);
     }
+
+    public void addImage(String imageURL) {
+        LOOP_IMAGES.add(imageURL);
+    }
+
 
 //    private static PlaceholderItem createPlaceholderItem(int position) {
 //        return new PlaceholderItem(String.valueOf(position), "Item " + position, makeDetails(position));

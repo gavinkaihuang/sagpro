@@ -6,8 +6,8 @@
     android:name="com.sag.sagpro.ui.messages.MessageItemFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ui.messages.MessageListFragment"
     tools:listitem="@layout/fragment_message_item" />

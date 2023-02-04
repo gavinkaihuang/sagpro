@@ -9,7 +9,6 @@
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:textAppearance="@style/TextStyle_20_0"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,7 +18,6 @@
         android:id="@+id/contentTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:textAppearance="?attr/textAppearanceListItem"
         app:layout_constraintStart_toStartOf="@+id/titleTextView"
@@ -29,7 +27,8 @@
         android:id="@+id/createdTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:textAppearance="?attr/textAppearanceListItem"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/contentTextView" />
+        app:layout_constraintTop_toTopOf="@+id/titleTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,21 +12,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.facebook.stetho.common.LogUtil;
 import com.sag.sagpro.ConstantData;
 import com.sag.sagpro.R;
 import com.sag.sagpro.databinding.FragmentProductDetailBinding;
 import com.sag.sagpro.databinding.FragmentProductItemListBinding;
 import com.sag.sagpro.ui.InnerBaseFragment;
+import com.sag.sagpro.ui.home.HomeItemFragment;
 import com.sag.sagpro.ui.products.placeholder.ProductDetailPlaceholder;
 import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderContent;
 import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderItem;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
 import com.sag.sagpro.utils.URLLoadCallback;
+import com.youth.banner.adapter.BannerImageAdapter;
+import com.youth.banner.holder.BannerImageHolder;
+import com.youth.banner.indicator.CircleIndicator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class ProductDetailFragment extends InnerBaseFragment implements URLLoadCallback {
 
@@ -86,16 +93,35 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
 
     private void onBindingViews() {
         getActivity().runOnUiThread(() -> {
-            binding.nameTextView.setText(productDetailViewModel.getName());
+
+            //TODO
+            binding.priceTextView.setText("$" + productDetailViewModel.getPrice());
+//            binding.nameTextView.setText(productDetailViewModel.getName());
             binding.contentTextView.setText(productDetailViewModel.getContent());
-            binding.priceTextView.setText(productDetailViewModel.getPrice());
+//            binding.priceTextView.setText(productDetailViewModel.getPrice());
+//
+//            binding.imageView.setDefaultImageResId(R.drawable.img_default);
+//            binding.imageView.setErrorImageResId(R.drawable.img_error);
+//            binding.imageView.setImageUrl(productDetailViewModel.getImg());
+//
+//            updatePageFooterHeight(binding.atoCartButton);
 
-            binding.imageView.setDefaultImageResId(R.drawable.img_default);
-            binding.imageView.setErrorImageResId(R.drawable.img_error);
-            binding.imageView.setImageUrl(productDetailViewModel.getImg());
+            ArrayList<String> arrayList = productDetailViewModel.getImgList();
+            binding.viewBanner.setAdapter(new BannerImageAdapter<String>(arrayList) {
+                @Override
+                public void onBindView(BannerImageHolder holder, String data, int position, int size) {
+                    Glide.with(holder.imageView)
+                            .load(data)
+                            .into(holder.imageView);
+                }
+            });
+            //轮播图下面的原点
+            binding.viewBanner.setIndicator(new CircleIndicator(ProductDetailFragment.this.getContext()));
+            binding.viewBanner.setIndicatorRadius(50);
 
-            updatePageFooterHeight(binding.atoCartButton);
+            updatePageFooterHeight(binding.getRoot());
         });
+
 
 //        binding.nameTextView.setText(productDetailViewModel.getName());
     }
@@ -113,18 +139,14 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
                 productDetailViewModel.setPid(jsonObject.getString("pid"));
                 productDetailViewModel.setCid(jsonObject.getString("cid"));
                 productDetailViewModel.setFid(jsonObject.getString("fid"));
-                productDetailViewModel.setContent(jsonObject.getString("content"));
+                productDetailViewModel.setContent(generateTempContent(jsonObject.getString("content")));
                 productDetailViewModel.setPrice(jsonObject.getString("price"));
-                productDetailViewModel.setImg(jsonObject.getString("img"));
-//                for (int i = 0; i < jsonArray.length(); i++) {
-//                    JSONObject jdata = jsonArray.getJSONObject(i);
-//                    ProductDetailPlaceholder placeholderItem = new ProductDetailPlaceholder();
-//                    placeholderItem.setPid(jdata.getString("pid"));
-//                    placeholderItem.setCid(jdata.getString("cid"));
-//                    placeholderItem.setFid(jdata.getString("fid"));
-//                    placeholderItem.setName(jdata.getString("name"));
-//                    placeholderItem.setImg(jdata.getString("img"));
-//                }
+
+                //TODO change image to list
+                String image = jsonObject.getString("img");
+                ArrayList<String> imageList = new ArrayList<String>();
+                imageList.add(image);
+                productDetailViewModel.setImgList(imageList);
                 onBindingViews();
             } else {
                 String message = result.getString(ConstantData.MSG);
@@ -145,5 +167,13 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
     @Override
     public Exception failueURLLoadedCallBack(Exception exception) {
         return null;
+    }
+
+    private String generateTempContent(String content) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < 100; i++) {
+            sb.append(content + "\n");
+        }
+        return sb.toString();
     }
 }

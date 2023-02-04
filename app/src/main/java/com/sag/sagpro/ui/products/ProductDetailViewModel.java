@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.sag.sagpro.databinding.FragmentProductItemBinding;
 
+import java.util.ArrayList;
+
 public class ProductDetailViewModel extends ViewModel {
     // TODO: Implement the ViewModel
 
@@ -20,6 +22,14 @@ public class ProductDetailViewModel extends ViewModel {
 
     public String getCid() {
         return cid;
+    }
+
+    public ArrayList<String> getImgList() {
+        return imgList;
+    }
+
+    public void setImgList(ArrayList<String> imgList) {
+        this.imgList = imgList;
     }
 
     public void setCid(String cid) {
@@ -40,14 +50,6 @@ public class ProductDetailViewModel extends ViewModel {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
     }
 
     public String getContent() {
@@ -78,7 +80,7 @@ public class ProductDetailViewModel extends ViewModel {
     private String cid = null;
     private String fid = null;
     private String name = null;
-    private String img = null;
+    private ArrayList<String> imgList = null;
     private String content = null;
     private String other = null; //now ingore it
     private String price = null;

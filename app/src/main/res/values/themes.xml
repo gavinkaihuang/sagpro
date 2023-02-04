@@ -328,6 +328,13 @@
     </style>
 
 
+    <style name="TextStyle_Price">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/button_red</item>
+    </style>
+
+
     <style name="BlackTitle" parent="@style/Widget.AppCompat.ActionBar.Solid">
         <item name="titleTextStyle">@style/BlackTitleStyle</item>
         <item name="elevation">1sp</item>

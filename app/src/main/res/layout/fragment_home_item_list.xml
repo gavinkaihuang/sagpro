@@ -13,71 +13,12 @@
     >
 
 
-    <com.sag.sagpro.widgets.EditTextSearch
-        android:layout_centerInParent="true"
-        android:id="@+id/serchEditText"
-        android:background="@drawable/search_edit_round"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:layout_margin="10dp"
-        android:singleLine="true"
-        android:text="Search"
-        android:visibility="gone"/>
-
-    <com.youth.banner.Banner
-        android:id="@+id/viewBanner"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/top_button_shap"
-        />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/categoriesButton"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
-            style="@style/roundbutton"
-            android:layout_weight="1"/>
-
-
-        <ImageButton
-            android:id="@+id/productButton"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-
-
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
         android:name="com.sag.sagpro.ui.home.HomeItemFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/fragment_home_item" />
-
 
 </LinearLayout>

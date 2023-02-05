@@ -30,5 +30,7 @@ public class ConstantData {
 
     public static String ADD_TO_CART = URL + "addcart";
 
+    public static String CART_LIST = URL + "cart-lists";
+
 
 }

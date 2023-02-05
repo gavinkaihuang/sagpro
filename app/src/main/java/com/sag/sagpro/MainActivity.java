@@ -16,6 +16,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationBarView;
+import com.sag.sagpro.activities.CartListActivity;
 import com.sag.sagpro.utils.LoggedInUserHelper;
 import com.sag.sagpro.databinding.ActivityMainBinding;
 import com.sag.sagpro.ui.login.LoginActivity;
@@ -109,7 +110,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
+    /**
+     * Handle cart on clicked
+     * @param item
+     * @return
+     */
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
 
@@ -117,6 +122,10 @@ public class MainActivity extends AppCompatActivity {
         if (isUserLoggedIn) {
             //redirect to cart
 //            Toast.makeText(MainActivity.this, R.string.account_home_page).show();
+//            navController.navigate(R.id.item_navigation_cart_list);
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this, CartListActivity.class);
+            startActivity(intent);
         } else {
             //ask user to login
             redirectToLogin();

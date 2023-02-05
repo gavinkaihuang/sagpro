@@ -154,7 +154,6 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
             mContentView = binding.content;
             imageButton = binding.button;
             mNameView = binding.nameTextView;
-
             LogUtil.i("-----------ItemViewHolder binding's hashcode is " + binding.hashCode());
         }
 
@@ -180,6 +179,21 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
             productButton = binding.productButton;
             viewBanner = binding.viewBanner;
             LogUtil.i("-----------HeaderViewHolder binding's hashcode is " + binding.hashCode());
+        }
+
+        private void setListeners() {
+            categoriesButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    LogUtil.i("-----------categories button on clicked");
+                }
+            });
+            productButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    LogUtil.i("-----------products button on clicked");
+                }
+            });
         }
     }
 

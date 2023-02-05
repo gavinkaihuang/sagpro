@@ -22,7 +22,7 @@
     <string name="login_regist_prompt" tools:ignore="MissingTranslation">Don\'t have an account?</string>
     <string name="login_regist_link" tools:ignore="MissingTranslation">Sign up now</string>
 
-<!--    <string name="title_activity_login" tools:ignore="MissingTranslation">Login</string>-->
+    <!--    <string name="title_activity_login" tools:ignore="MissingTranslation">Login</string>-->
     <string name="title_activity_regist" tools:ignore="MissingTranslation">Sign up</string>
 
     <string name="default_user_name" tools:ignore="MissingTranslation">phw82@sohu.com</string>
@@ -46,13 +46,5 @@
 
     <string name="title_activity_register">RegisterActivity</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_fragment_cart_list" tools:ignore="MissingTranslation">Cart List</string>
 </resources>

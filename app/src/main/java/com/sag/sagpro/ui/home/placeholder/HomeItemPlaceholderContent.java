@@ -1,5 +1,7 @@
 package com.sag.sagpro.ui.home.placeholder;
 
+import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderItem;
+
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,5 +38,18 @@ public class HomeItemPlaceholderContent {
         LOOP_IMAGES.add(imageURL);
     }
 
+
+    /**
+     * Add header view for first line
+     * So we need minus 1
+     * @param position
+     * @return
+     */
+    public HomeItemPlaceholderItem getItem(int position) {
+        position -= 1;
+        if (ITEMS != null && (ITEMS.size() >= position + 1))
+            return ITEMS.get(position);
+        return null;
+    }
 
 }

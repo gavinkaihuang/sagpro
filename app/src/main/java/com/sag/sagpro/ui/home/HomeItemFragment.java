@@ -19,9 +19,12 @@ import com.sag.sagpro.databinding.FragmentHomeItemListBinding;
 import com.sag.sagpro.ui.InnerBaseFragment;
 import com.sag.sagpro.ui.home.placeholder.HomeItemPlaceholderContent;
 import com.sag.sagpro.ui.home.placeholder.HomeItemPlaceholderItem;
+import com.sag.sagpro.ui.products.ProductDetailFragment;
 import com.sag.sagpro.ui.products.ProductListFragment;
+import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderItem;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
 import com.sag.sagpro.utils.ImageLoadCallback;
+import com.sag.sagpro.utils.RecyclerItemClickListener;
 import com.sag.sagpro.utils.UIUtils;
 import com.sag.sagpro.utils.URLLoadCallback;
 import com.youth.banner.adapter.BannerImageAdapter;
@@ -68,6 +71,28 @@ public class HomeItemFragment extends InnerBaseFragment {
         myItemRecyclerViewAdapter.setIsShowHeader(true);//添加Header
         binding.list.setAdapter(myItemRecyclerViewAdapter);
         binding.list.addItemDecoration(UIUtils.getDividerItemBoxDecoration(getContext()));
+
+        //List item click listener
+        binding.list.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), binding.list, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                if (position == 0) {
+                    LogUtil.i("----------head view clicked, ignore it");
+                    return;
+                }
+
+                HomeItemPlaceholderItem itemClicked = placeholderContent.getItem(position);
+                Bundle bundle = new Bundle();
+                bundle.putString(ProductListFragment.PARAMS_CID, itemClicked.cid);
+                LogUtil.i("----------item " + position + " clicked: redirect to category: " + itemClicked.cid + ">>" + itemClicked.name);
+                Navigation.findNavController(view).navigate(R.id.item_navigation_products, bundle);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                LogUtil.i("----------item " + position + " long clicked");
+            }
+        }));
 
         JSONObject jsonObject = new JSONObject();
         AndroidNetworkingUtils.loadURL(ConstantData.CATEGORIES, "CATEGORIES", new JSONObject(), new LoadUrlHandler());

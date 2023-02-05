@@ -34,7 +34,7 @@ import org.json.JSONObject;
 public class ProductListFragment extends InnerBaseFragment {
 
     public static String PARAMS_CID = "PARAMS_CID";
-    private int cid = 0;
+    private String cid = null;
     private int totalResultsNo = 0;
 
     MyProductItemRecyclerViewAdapter myProductItemRecyclerViewAdapter = null;
@@ -58,19 +58,20 @@ public class ProductListFragment extends InnerBaseFragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            cid = getArguments().getInt(PARAMS_CID);
+//            cid = getArguments().getInt(PARAMS_CID);
+            cid = getArguments().getString(PARAMS_CID);
         }
         placeholderContent = new ProductPlaceholderContent();
         loadDataFromServer(0);
     }
 
     private void loadDataFromServer(int startNo) {
-        if (cid < 0)
+        if (cid == null || "".equals(cid))
             return;
 
         try {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("cid", "" + cid);
+            jsonObject.put("cid", cid);
             jsonObject.put("start", "" + startNo);
             AndroidNetworkingUtils.loadURL(ConstantData.PRODUCTS_LIST, "PRODUCTS_LIST", jsonObject, new LoadUrlHandler());
         } catch (JSONException e) {

@@ -62,7 +62,6 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
         productDetailViewModel = new ViewModelProvider(this).get(ProductDetailViewModel.class);
         binding = FragmentProductDetailBinding.inflate(inflater, container, false);
 
-//        onBindingViews();
         binding.addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

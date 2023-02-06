@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.sag.sagpro.ui.login.LoginActivity;
+import com.sag.sagpro.activities.LoginActivity;
 
 public class BaseActivity extends AppCompatActivity {
 

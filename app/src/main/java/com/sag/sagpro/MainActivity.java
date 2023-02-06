@@ -9,7 +9,6 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -19,7 +18,6 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.sag.sagpro.activities.CartListActivity;
 import com.sag.sagpro.utils.LoggedInUserHelper;
 import com.sag.sagpro.databinding.ActivityMainBinding;
-import com.sag.sagpro.ui.login.LoginActivity;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
 
 public class MainActivity extends BaseActivity {

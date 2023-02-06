@@ -4,32 +4,25 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.facebook.stetho.common.LogUtil;
 import com.sag.sagpro.ConstantData;
 import com.sag.sagpro.R;
+import com.sag.sagpro.activities.LoginActivity;
 import com.sag.sagpro.data.model.LoggedInUser;
-import com.sag.sagpro.databinding.ActivityLoginBinding;
 import com.sag.sagpro.databinding.FragmentLoginBinding;
-import com.sag.sagpro.databinding.FragmentProductDetailBinding;
 import com.sag.sagpro.ui.InnerBaseFragment;
-import com.sag.sagpro.ui.products.ProductDetailViewModel;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
 import com.sag.sagpro.utils.LoggedInUserHelper;
 import com.sag.sagpro.utils.URLLoadCallback;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.

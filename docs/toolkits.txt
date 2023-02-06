@@ -8,5 +8,9 @@
 
 2, RecycleView 添加Header后，Header中的按钮的点击事件 TODO
 https://www.codenong.com/29618155/
+解决方案： https://www.zhangshengrong.com/p/4yNqDQ3baA/
+
+3，com.youth.banner.Banner 的点击动作
+https://blog.csdn.net/qq_50840097/article/details/127082505
 
 

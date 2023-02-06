@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name="com.sag.sagpro.SAGApplication"
+        android:name=".SAGApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,27 +17,27 @@
         android:theme="@style/Theme.Sagpro"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity
-            android:name=".activities.CartListActivity"
-            android:label="@string/title_fragment_cart_list"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
 <!--        <activity-->
-<!--            android:name=".RegisterActivity"-->
-<!--            android:exported="false"-->
-<!--            android:label="@string/title_activity_register"-->
-<!--            android:theme="@style/Theme.Sagpro.NoActionBar">-->
+<!--            android:name=".BaseActivity"-->
+<!--            android:exported="false">-->
 <!--            <meta-data-->
 <!--                android:name="android.app.lib_name"-->
 <!--                android:value="" />-->
 <!--        </activity>-->
         <activity
+            android:name=".activities.CartListActivity"
+            android:exported="false"
+            android:label="@string/title_fragment_cart_list">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity> <!-- <activity -->
+
+        <activity
             android:name=".ui.login.LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_login" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

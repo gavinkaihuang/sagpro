@@ -22,7 +22,7 @@ import com.sag.sagpro.databinding.ActivityMainBinding;
 import com.sag.sagpro.ui.login.LoginActivity;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private ActivityMainBinding binding;
     NavController navController = null;
@@ -171,10 +171,15 @@ public class MainActivity extends AppCompatActivity {
         return 0;
     }
 
-    public void redirectToLogin() {
-        Intent intent = new Intent();
-        intent.setClass(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
+    long firstDown = 0l;
+    public void onBackPressed() {
+        if(System.currentTimeMillis() - firstDown < 2000){
+            super.onBackPressed();
+        }else{
+//            Toast.makeText(this, getResources().getString(R.string.prompt_exit), Toast.LENGTH_SHORT).show();
+            firstDown = System.currentTimeMillis();
+        }
     }
+
 }
 

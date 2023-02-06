@@ -187,4 +187,10 @@ public class LoginActivity extends AppCompatActivity {
     public void showLoginFailed(String errorMessage) {
         Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        LoginActivity.this.finish();
+    }
 }

@@ -43,9 +43,14 @@
     <!-- prompt -->
     <string name="prompt_sign_in" tools:ignore="MissingTranslation">Log in or sign up, start your wonderful journey</string>
     <string name="prompt_sign_up" tools:ignore="MissingTranslation">Create Account, sign up to get started!</string>
+    <string name="prompt_exit" tools:ignore="MissingTranslation">Double click back to quit App!</string>
 
     <string name="title_activity_register">RegisterActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="title_fragment_cart_list" tools:ignore="MissingTranslation">Cart List</string>
+
+    <string name="account_login_out" tools:ignore="MissingTranslation">Logout</string>
+    <string name="account_login_in" tools:ignore="MissingTranslation">Login</string>
+    <string name="account_default_user" tools:ignore="MissingTranslation">Default User</string>
 
 </resources>

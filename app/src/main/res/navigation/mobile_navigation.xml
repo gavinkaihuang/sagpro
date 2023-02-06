@@ -71,17 +71,7 @@
         android:label="@string/product_detail_title"
         tools:layout="@layout/fragment_product_detail" />
 
-    <fragment
-        android:id="@+id/item_navigation_signin"
-        android:name="com.sag.sagpro.ui.login.LoginFragment"
-        android:label="@string/title_activity_regist"
-        tools:layout="@layout/fragment_login" />
 
-    <fragment
-        android:id="@+id/item_navigation_regist"
-        android:name="com.sag.sagpro.ui.regist.RegistFragment"
-        android:label="@string/title_activity_regist"
-        tools:layout="@layout/fragment_regist" />
 
 <!--    <fragment-->
 <!--        android:id="@+id/item_navigation_cart_list"-->

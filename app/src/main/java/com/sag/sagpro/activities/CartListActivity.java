@@ -20,14 +20,10 @@ public class CartListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_cart_list);
         binding = ActivityCartListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         navController = Navigation.findNavController(this, R.id.nav_cart_list);
-//        navController.navigate(R.id.item_navigation_cart_list);
-//        navController.
-
 
         try {
             //show back button

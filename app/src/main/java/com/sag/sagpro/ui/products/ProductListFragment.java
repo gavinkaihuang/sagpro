@@ -58,9 +58,11 @@ public class ProductListFragment extends InnerBaseFragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-//            cid = getArguments().getInt(PARAMS_CID);
             cid = getArguments().getString(PARAMS_CID);
         }
+        //TODO set default
+        if (cid == null || "".equals(cid))
+            cid = "1";
         placeholderContent = new ProductPlaceholderContent();
         loadDataFromServer(0);
     }

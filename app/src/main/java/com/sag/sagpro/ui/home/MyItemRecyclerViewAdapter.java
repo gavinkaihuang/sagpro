@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -39,10 +40,10 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
 //public class MyItemRecyclerViewAdapter extends BaseBindingAdapter {
 
-    private static int SIGN_CATEGORY_BUTTON = 0;
-    private static int SIGN_PRUDCT_BUTTON = 1;
-    private static int SIGN_SLIDE_IMAGE = 2;
-    private static int SIGN_ROW_ITEM = 3;
+    private static final int SIGN_CATEGORY_BUTTON = 0;
+    private static final int SIGN_PROUDCT_BUTTON = 1;
+    private static final int SIGN_SLIDE_IMAGE = 2;
+    private static final int SIGN_ROW_ITEM = 3;
 
 
     private boolean isShowHeader;
@@ -94,7 +95,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
             public void onClick(View v) {
                 if (onItemClickListener == null)
                     return;
-                onItemClickListener.onItemClicked(v, position, SIGN_PRUDCT_BUTTON);
+                onItemClickListener.onItemClicked(v, position, SIGN_PROUDCT_BUTTON);
             }
         });
 
@@ -103,7 +104,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
             public void OnBannerClick(Object data, int position) {
                 if (onItemClickListener == null)
                     return;
-                onItemClickListener.onItemClicked(holder.viewBanner, position, SIGN_PRUDCT_BUTTON);
+                onItemClickListener.onItemClicked(holder.viewBanner, position, SIGN_PROUDCT_BUTTON);
             }
         });
     }
@@ -246,9 +247,27 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         this.onItemClickListener = onItemClickListener;
     }
 
+//    private void handleCategory(View view) {
+//        Navigation.findNavController(view).navigate(R.id.item_navigation_categories, null);
+//    }
 
     @Override
     public void onItemClicked(View view, int position, int sign) {
         LogUtil.i("---------item clicked " + position + " and sign=" + sign);
+        switch (sign) {
+            case SIGN_CATEGORY_BUTTON:
+                Navigation.findNavController(view).navigate(R.id.item_navigation_categories, null);
+                break;
+            case SIGN_PROUDCT_BUTTON:
+                Navigation.findNavController(view).navigate(R.id.item_navigation_products, null);
+                break;
+            case SIGN_SLIDE_IMAGE:
+                Navigation.findNavController(view).navigate(R.id.item_navigation_regist, null);
+                break;
+            case SIGN_ROW_ITEM:
+                Navigation.findNavController(view).navigate(R.id.item_navigation_regist, null);
+                break;
+
+        }
     }
 }

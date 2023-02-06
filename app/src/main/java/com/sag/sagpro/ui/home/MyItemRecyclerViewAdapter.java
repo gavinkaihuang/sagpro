@@ -19,6 +19,7 @@ import com.sag.sagpro.R;
 import com.sag.sagpro.databinding.FragmentHomeHeaderBinding;
 import com.sag.sagpro.databinding.FragmentHomeItemBinding;
 import com.sag.sagpro.databinding.FragmentHomeItemListBinding;
+import com.sag.sagpro.interfaces.OnItemClickListener;
 import com.sag.sagpro.ui.home.placeholder.HomeItemPlaceholderItem;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
 import com.sag.sagpro.utils.ImageLoadCallback;
@@ -26,6 +27,7 @@ import com.youth.banner.Banner;
 import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.holder.BannerImageHolder;
 import com.youth.banner.indicator.CircleIndicator;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +35,14 @@ import java.util.List;
 /**
  *
  */
-public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements OnItemClickListener {
 
 //public class MyItemRecyclerViewAdapter extends BaseBindingAdapter {
+
+    private static int SIGN_CATEGORY_BUTTON = 0;
+    private static int SIGN_PRUDCT_BUTTON = 1;
+    private static int SIGN_SLIDE_IMAGE = 2;
+    private static int SIGN_ROW_ITEM = 3;
 
 
     private boolean isShowHeader;
@@ -59,21 +66,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
 
-//    private void updateLoopImages() {
-//        binding.viewBanner.setAdapter(new BannerImageAdapter<String>(placeholderContent.LOOP_IMAGES) {
-//            @Override
-//            public void onBindView(BannerImageHolder holder, String data, int position, int size) {
-//                Glide.with(holder.imageView)
-//                        .load(data)
-//                        .into(holder.imageView);
-//            }
-//        });
-//        //轮播图下面的原点
-//        binding.viewBanner.setIndicator(new CircleIndicator(HomeItemFragment.this.getContext()));
-//        binding.viewBanner.setIndicatorRadius(50);
-//    }
-
-    public void showHeader(RecyclerView.ViewHolder viewHolder) {
+    public void bindHeader(RecyclerView.ViewHolder viewHolder, int position) {
         HeaderViewHolder holder = (HeaderViewHolder) viewHolder;
         holder.viewBanner.setAdapter(new BannerImageAdapter<String>(mImages) {
             @Override
@@ -86,17 +79,36 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         //轮播图下面的原点
         holder.viewBanner.setIndicator(new CircleIndicator(context.getApplicationContext()));
         holder.viewBanner.setIndicatorRadius(50);
+
+        holder.categoriesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener == null)
+                    return;
+                onItemClickListener.onItemClicked(v, position, SIGN_CATEGORY_BUTTON);
+            }
+        });
+
+        holder.productButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener == null)
+                    return;
+                onItemClickListener.onItemClicked(v, position, SIGN_PRUDCT_BUTTON);
+            }
+        });
+
+        holder.viewBanner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(Object data, int position) {
+                if (onItemClickListener == null)
+                    return;
+                onItemClickListener.onItemClicked(holder.viewBanner, position, SIGN_PRUDCT_BUTTON);
+            }
+        });
     }
 
-
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-
-        if (getItemViewType(position) == TYPE_HEADER) {
-            showHeader(viewHolder);
-            return;
-        }
-
+    public void bindItem(RecyclerView.ViewHolder viewHolder, int position) {
         final int realPosition = getRealPosition(viewHolder);
         ItemViewHolder holder = (ItemViewHolder) viewHolder;
         holder.mIdView.setText(mValues.get(realPosition).getCid());
@@ -121,6 +133,27 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
             }
         });
 
+        //TODO imageButton 不向下传递点击动作， 暂时这样
+        holder.imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener == null)
+                    return;
+
+                onItemClickListener.onItemClicked(v, position, SIGN_ROW_ITEM);
+            }
+        });
+    }
+
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+
+        if (getItemViewType(position) == TYPE_HEADER) {
+            bindHeader(viewHolder, position);
+        } else {
+            bindItem(viewHolder, position);
+        }
     }
 
     public void setItems(List<HomeItemPlaceholderItem> items) {
@@ -136,6 +169,9 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         int position = holder.getLayoutPosition();
         return !isShowHeader ? position : position - 1;
     }
+
+
+
 
     /**
      * Category Item
@@ -155,6 +191,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
             imageButton = binding.button;
             mNameView = binding.nameTextView;
             LogUtil.i("-----------ItemViewHolder binding's hashcode is " + binding.hashCode());
+
         }
 
         @Override
@@ -181,25 +218,8 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
             LogUtil.i("-----------HeaderViewHolder binding's hashcode is " + binding.hashCode());
         }
 
-        private void setListeners() {
-            categoriesButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    LogUtil.i("-----------categories button on clicked");
-                }
-            });
-            productButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    LogUtil.i("-----------products button on clicked");
-                }
-            });
-        }
     }
 
-    public boolean isShowHeader() {
-        return isShowHeader;
-    }
 
     public void setIsShowHeader(boolean isShowHeader) {
         this.isShowHeader = isShowHeader;
@@ -217,5 +237,18 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
     public void setmImages(List<String> mImages) {
         this.mImages = mImages;
+    }
+
+
+    OnItemClickListener onItemClickListener = null;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+
+    @Override
+    public void onItemClicked(View view, int position, int sign) {
+        LogUtil.i("---------item clicked " + position + " and sign=" + sign);
     }
 }

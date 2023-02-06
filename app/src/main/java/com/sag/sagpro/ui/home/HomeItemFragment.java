@@ -69,30 +69,9 @@ public class HomeItemFragment extends InnerBaseFragment {
         placeholderContent = new HomeItemPlaceholderContent();
         myItemRecyclerViewAdapter = new MyItemRecyclerViewAdapter(placeholderContent.ITEMS);
         myItemRecyclerViewAdapter.setIsShowHeader(true);//添加Header
+        myItemRecyclerViewAdapter.setOnItemClickListener(myItemRecyclerViewAdapter);
         binding.list.setAdapter(myItemRecyclerViewAdapter);
         binding.list.addItemDecoration(UIUtils.getDividerItemBoxDecoration(getContext()));
-
-        //List item click listener
-        binding.list.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), binding.list, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                if (position == 0) {
-                    LogUtil.i("----------head view clicked, ignore it");
-                    return;
-                }
-
-                HomeItemPlaceholderItem itemClicked = placeholderContent.getItem(position);
-                Bundle bundle = new Bundle();
-                bundle.putString(ProductListFragment.PARAMS_CID, itemClicked.cid);
-                LogUtil.i("----------item " + position + " clicked: redirect to category: " + itemClicked.cid + ">>" + itemClicked.name);
-                Navigation.findNavController(view).navigate(R.id.item_navigation_products, bundle);
-            }
-
-            @Override
-            public void onItemLongClick(View view, int position) {
-                LogUtil.i("----------item " + position + " long clicked");
-            }
-        }));
 
         JSONObject jsonObject = new JSONObject();
         AndroidNetworkingUtils.loadURL(ConstantData.CATEGORIES, "CATEGORIES", new JSONObject(), new LoadUrlHandler());
@@ -105,38 +84,7 @@ public class HomeItemFragment extends InnerBaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        binding.categoriesButton.setBackgroundResource(R.drawable.categories);
-//        binding.categoriesButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//            }
-//        });
-//
-//        binding.productButton.setBackgroundResource(R.drawable.products);
-//        binding.productButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Bundle bundle = new Bundle();
-//                bundle.putInt(ProductListFragment.PARAMS_CID, 1);
-//                Navigation.findNavController(v).navigate(R.id.item_navigation_products, bundle);
-//            }
-//        });
-
     }
-
-//    private void updateLoopImages() {
-//        binding.viewBanner.setAdapter(new BannerImageAdapter<String>(placeholderContent.LOOP_IMAGES) {
-//            @Override
-//            public void onBindView(BannerImageHolder holder, String data, int position, int size) {
-//                Glide.with(holder.imageView)
-//                        .load(data)
-//                        .into(holder.imageView);
-//            }
-//        });
-//        //轮播图下面的原点
-//        binding.viewBanner.setIndicator(new CircleIndicator(HomeItemFragment.this.getContext()));
-//        binding.viewBanner.setIndicatorRadius(50);
-//    }
 
 
     /**
@@ -147,19 +95,19 @@ public class HomeItemFragment extends InnerBaseFragment {
     private void handleCategoryResult(JSONObject result) {
         try {
 
-                JSONArray jsonArray = result.getJSONArray(ConstantData.DATA);
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jdata = jsonArray.getJSONObject(i);
-                    HomeItemPlaceholderItem placeholderItem = new HomeItemPlaceholderItem();
-                    placeholderItem.setCid(jdata.getString("cid"));
-                    placeholderItem.setName(jdata.getString("name"));
-                    placeholderItem.setDescription(jdata.getString("description"));
-                    placeholderItem.setImg(jdata.getString("img"));
+            JSONArray jsonArray = result.getJSONArray(ConstantData.DATA);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jdata = jsonArray.getJSONObject(i);
+                HomeItemPlaceholderItem placeholderItem = new HomeItemPlaceholderItem();
+                placeholderItem.setCid(jdata.getString("cid"));
+                placeholderItem.setName(jdata.getString("name"));
+                placeholderItem.setDescription(jdata.getString("description"));
+                placeholderItem.setImg(jdata.getString("img"));
 
-                    if (placeholderContent == null)
-                        placeholderContent = new HomeItemPlaceholderContent();
-                    placeholderContent.addItem(placeholderItem);
-                }
+                if (placeholderContent == null)
+                    placeholderContent = new HomeItemPlaceholderContent();
+                placeholderContent.addItem(placeholderItem);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -192,7 +140,6 @@ public class HomeItemFragment extends InnerBaseFragment {
     }
 
 
-
     class LoadUrlHandler implements URLLoadCallback {
         public void successURLLoadedCallBack(JSONObject result) {
             try {
@@ -210,7 +157,7 @@ public class HomeItemFragment extends InnerBaseFragment {
                 } else {
                     handleCategoryResult(result);
                 }
-          } catch (JSONException e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
 
@@ -221,13 +168,4 @@ public class HomeItemFragment extends InnerBaseFragment {
         }
     }
 
-//    class LoadImageHandler implements ImageLoadCallback {
-//        public Bitmap loadImageSucceed(Bitmap bitmap) {
-//            return bitmap;
-//        }
-//
-//        public Exception loadImageFailed(Exception exception) {
-//            return exception;
-//        }
-//    }
 }

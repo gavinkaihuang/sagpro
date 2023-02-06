@@ -48,8 +48,12 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
     ProductDetailViewModel productDetailViewModel = null;
     FragmentProductDetailBinding binding = null;
 
-    public static ProductDetailFragment newInstance() {
-        return new ProductDetailFragment();
+    public static ProductDetailFragment newInstance(String productID) {
+        ProductDetailFragment fragment = new ProductDetailFragment();
+        Bundle args = new Bundle();
+        args.putString(PARAMS_PRODUCT_ID, productID);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -131,6 +135,8 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
             binding.viewBanner.setIndicatorRadius(50);
 
             updatePageFooterHeight(binding.getRoot());
+
+            getActivity().setTitle(productDetailViewModel.getName());
         });
     }
 

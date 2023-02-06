@@ -1,5 +1,6 @@
 package com.sag.sagpro.ui.products;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 import com.facebook.stetho.common.LogUtil;
 import com.sag.sagpro.ConstantData;
 import com.sag.sagpro.R;
+import com.sag.sagpro.activities.ProductDetailsActivity;
+import com.sag.sagpro.activities.ProductListActivity;
 import com.sag.sagpro.databinding.FragmentProductItemListBinding;
 import com.sag.sagpro.ui.InnerBaseFragment;
 import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderContent;
@@ -46,7 +49,6 @@ public class ProductListFragment extends InnerBaseFragment {
     public ProductListFragment() {
     }
 
-//    @SuppressWarnings("unused")
     public static ProductListFragment newInstance(String cid, String cname) {
         ProductListFragment fragment = new ProductListFragment();
         Bundle args = new Bundle();
@@ -108,12 +110,14 @@ public class ProductListFragment extends InnerBaseFragment {
         binding.list.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), binding.list, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-//                        ToastUtil.showMessage(context, "position = " + position);
-//                        LogUtil.i("----------item " + position + " clicked");
                         ProductPlaceholderItem itemClicked = placeholderContent.getItem(position);
                         Bundle bundle = new Bundle();
                         bundle.putString(ProductDetailFragment.PARAMS_PRODUCT_ID, itemClicked.pid);
-                        Navigation.findNavController(view).navigate(R.id.item_navigation_product_detail, bundle);
+                       //Navigation.findNavController(view).navigate(R.id.item_navigation_product_detail, bundle
+                       Intent intent = new Intent();
+                       intent.putExtras(bundle);
+                       intent.setClass(view.getContext(), ProductDetailsActivity.class);
+                       view.getContext().startActivity(intent);
                     }
 
                     @Override

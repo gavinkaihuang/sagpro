@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/product_navigation"
+    app:startDestination="@+id/item_navigation_product_list">
+
+
+    <fragment
+        android:id="@+id/item_navigation_product_list"
+        android:name="com.sag.sagpro.ui.products.ProductListFragment"
+        android:label="@string/product_list_title"
+        tools:layout="@layout/fragment_product_item_list" />
+
+</navigation>

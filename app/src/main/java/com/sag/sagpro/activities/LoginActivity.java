@@ -8,11 +8,12 @@ import androidx.navigation.Navigation;
 
 import android.widget.Toast;
 
+import com.sag.sagpro.BaseActivity;
 import com.sag.sagpro.R;
 import com.sag.sagpro.data.model.LoggedInUser;
 import com.sag.sagpro.databinding.ActivityLoginBinding;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
 //    private LoginViewModel loginViewModel;
 //    private ActivityLoginBinding binding;

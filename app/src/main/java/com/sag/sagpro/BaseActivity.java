@@ -19,4 +19,15 @@ public class BaseActivity extends AppCompatActivity {
         intent.setClass(BaseActivity.this, LoginActivity.class);
         startActivity(intent);
     }
+
+    public void showBackArraw(boolean isShow) {
+        if (!isShow)
+            return;
+        try {
+            //show back button
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

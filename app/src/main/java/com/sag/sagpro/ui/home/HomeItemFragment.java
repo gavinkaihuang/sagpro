@@ -127,14 +127,18 @@ public class HomeItemFragment extends InnerBaseFragment {
             ArrayList<String> imgList = new ArrayList<String>();
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jdata = jsonArray.getJSONObject(i);
-                placeholderContent.addImage(jdata.getString("img"));
+                String cid = jdata.getString("cid");
+                String name = jdata.getString("name");
+                String img = jdata.getString("img");
+                LoopImageBean loopImageBean = new LoopImageBean(cid, name,  img);
+                placeholderContent.addImageBean(loopImageBean);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         getActivity().runOnUiThread(() -> {
-            myItemRecyclerViewAdapter.setmImages(placeholderContent.LOOP_IMAGES);
+            myItemRecyclerViewAdapter.setmImageBeans(placeholderContent.LOOP_IMAGES);
 //            updateLoopImages();
         });
     }

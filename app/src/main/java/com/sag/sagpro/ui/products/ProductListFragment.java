@@ -34,7 +34,9 @@ import org.json.JSONObject;
 public class ProductListFragment extends InnerBaseFragment {
 
     public static String PARAMS_CID = "PARAMS_CID";
+    public static String PARAMS_CNAME = "PARAMS_CNAME";
     private String cid = null;
+    private String cname = null;
     private int totalResultsNo = 0;
 
     MyProductItemRecyclerViewAdapter myProductItemRecyclerViewAdapter = null;
@@ -44,11 +46,12 @@ public class ProductListFragment extends InnerBaseFragment {
     public ProductListFragment() {
     }
 
-    @SuppressWarnings("unused")
-    public static ProductListFragment newInstance(int cid) {
+//    @SuppressWarnings("unused")
+    public static ProductListFragment newInstance(String cid, String cname) {
         ProductListFragment fragment = new ProductListFragment();
         Bundle args = new Bundle();
-        args.putInt(PARAMS_CID, cid);
+        args.putString(PARAMS_CID, cid);
+        args.putString(PARAMS_CNAME, cname);
         fragment.setArguments(args);
         return fragment;
     }
@@ -59,21 +62,26 @@ public class ProductListFragment extends InnerBaseFragment {
 
         if (getArguments() != null) {
             cid = getArguments().getString(PARAMS_CID);
+            cname = getArguments().getString(PARAMS_CNAME);
         }
-        //TODO set default
-        if (cid == null || "".equals(cid))
-            cid = "1";
+        if (cname != null) {
+            getActivity().setTitle("Product Type: " + cname);
+            loadDataFromServer(0);
+        } else {
+            getActivity().setTitle("Product Type: All");
+        }
+
         placeholderContent = new ProductPlaceholderContent();
         loadDataFromServer(0);
     }
 
     private void loadDataFromServer(int startNo) {
-        if (cid == null || "".equals(cid))
-            return;
+//        if (cid == null || "".equals(cid))
+//            return;
 
         try {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("cid", cid);
+            jsonObject.put("cid", cid == null ? "": cid);
             jsonObject.put("start", "" + startNo);
             AndroidNetworkingUtils.loadURL(ConstantData.PRODUCTS_LIST, "PRODUCTS_LIST", jsonObject, new LoadUrlHandler());
         } catch (JSONException e) {

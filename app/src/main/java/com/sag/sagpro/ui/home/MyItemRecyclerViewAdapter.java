@@ -1,9 +1,11 @@
 package com.sag.sagpro.ui.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +18,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.facebook.stetho.common.LogUtil;
+import com.sag.sagpro.MainActivity;
 import com.sag.sagpro.R;
+import com.sag.sagpro.activities.CartListActivity;
+import com.sag.sagpro.activities.ProductListActivity;
 import com.sag.sagpro.databinding.FragmentHomeHeaderBinding;
 import com.sag.sagpro.databinding.FragmentHomeItemBinding;
 import com.sag.sagpro.databinding.FragmentHomeItemListBinding;
 import com.sag.sagpro.interfaces.OnItemClickListener;
 import com.sag.sagpro.ui.home.placeholder.HomeItemPlaceholderItem;
+import com.sag.sagpro.ui.products.ProductListFragment;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
 import com.sag.sagpro.utils.ImageLoadCallback;
 import com.youth.banner.Banner;
@@ -48,7 +54,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
     private boolean isShowHeader;
     private List<HomeItemPlaceholderItem> mValues;
-    private List<String> mImages;
+    private List<LoopImageBean> mImageBeans;
     Context context = null;
 
     public MyItemRecyclerViewAdapter(List<HomeItemPlaceholderItem> items) {
@@ -69,13 +75,20 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
     public void bindHeader(RecyclerView.ViewHolder viewHolder, int position) {
         HeaderViewHolder holder = (HeaderViewHolder) viewHolder;
-        holder.viewBanner.setAdapter(new BannerImageAdapter<String>(mImages) {
+        holder.viewBanner.setAdapter(new BannerImageAdapter<LoopImageBean>(mImageBeans) {
             @Override
-            public void onBindView(BannerImageHolder holder, String data, int position, int size) {
+            public void onBindView(BannerImageHolder holder, LoopImageBean data, int position, int size) {
                 Glide.with(holder.imageView)
-                        .load(data)
+                        .load(data.getImage())
                         .into(holder.imageView);
             }
+
+//            @Override
+//            public void onBindView(BannerImageHolder holder, String data, int position, int size) {
+//                Glide.with(holder.imageView)
+//                        .load(data)
+//                        .into(holder.imageView);
+//            }
         });
         //轮播图下面的原点
         holder.viewBanner.setIndicator(new CircleIndicator(context.getApplicationContext()));
@@ -104,7 +117,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
             public void OnBannerClick(Object data, int position) {
                 if (onItemClickListener == null)
                     return;
-                onItemClickListener.onItemClicked(holder.viewBanner, position, SIGN_PROUDCT_BUTTON);
+                onItemClickListener.onItemClicked(holder.viewBanner, position, SIGN_SLIDE_IMAGE);
             }
         });
     }
@@ -236,8 +249,8 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     public static final int TYPE_HEADER = 0;
     public static final int TYPE_NORMAL = 1;
 
-    public void setmImages(List<String> mImages) {
-        this.mImages = mImages;
+    public void setmImageBeans(List<LoopImageBean> mImages) {
+        this.mImageBeans = mImages;
     }
 
 
@@ -256,18 +269,62 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         LogUtil.i("---------item clicked " + position + " and sign=" + sign);
         switch (sign) {
             case SIGN_CATEGORY_BUTTON:
-                Navigation.findNavController(view).navigate(R.id.item_navigation_categories, null);
-                break;
+//                Navigation.findNavController(view).navigate(R.id.item_navigation_categories, null);
+//                break;
             case SIGN_PROUDCT_BUTTON:
-                Navigation.findNavController(view).navigate(R.id.item_navigation_products, null);
+//                Navigation.findNavController(view).navigate(R.id.item_navigation_products, null);
+//                intent = new Intent();
+//                intent.setClass(view.getContext(), ProductListActivity.class);
+//                view.getContext().startActivity(intent);
+//                redirectToProductList(view);
+                redirectToProductList(view);
                 break;
             case SIGN_SLIDE_IMAGE:
-                Navigation.findNavController(view).navigate(R.id.item_navigation_regist, null);
+//                Navigation.findNavController(view).navigate(R.id.item_navigation_regist, null);
+                LogUtil.i("---------item clicked " + position + " and sign=" + sign);
+//                HomeItemPlaceholderItem itemClicked = mValues.get(position - 1);//first one is header
+                LoopImageBean loopImageBean = mImageBeans.get(position);
+                redirectToProductList(view, loopImageBean.getCid(), loopImageBean.getCname());
+//                Bundle bundle = new Bundle();
+//                bundle.putString(ProductListFragment.PARAMS_CID, loopImageBean.getCid());
+//                bundle.putString(ProductListFragment.PARAMS_CNAME, loopImageBean.getCname());
+//
+//                intent = new Intent();
+//                intent.putExtras(bundle);
+//                intent.setClass(view.getContext(), ProductListActivity.class);
+//                view.getContext().startActivity(intent);
+
                 break;
             case SIGN_ROW_ITEM:
-                Navigation.findNavController(view).navigate(R.id.item_navigation_regist, null);
+                HomeItemPlaceholderItem itemClicked = mValues.get(position - 1);//first one is header
+                redirectToProductList(view, itemClicked.cid, itemClicked.name);
+//                Bundle bundle = new Bundle();
+//                bundle.putString(ProductListFragment.PARAMS_CID, itemClicked.cid);
+//                bundle.putString(ProductListFragment.PARAMS_CNAME, itemClicked.name);
+//
+//                intent = new Intent();
+//                intent.putExtras(bundle);
+//                intent.setClass(view.getContext(), ProductListActivity.class);
+//                view.getContext().startActivity(intent);
+
                 break;
 
         }
+    }
+
+    private void redirectToProductList(View view) {
+        redirectToProductList(view, null, null);
+    }
+
+    private void redirectToProductList(View view, String cid, String cname) {
+        Intent intent = new Intent();
+        if (cid != null || !"".equals(cid)) {
+            Bundle bundle = new Bundle();
+            bundle.putString(ProductListFragment.PARAMS_CID, cid);
+            bundle.putString(ProductListFragment.PARAMS_CNAME, cname);
+            intent.putExtras(bundle);
+        }
+        intent.setClass(view.getContext(), ProductListActivity.class);
+        view.getContext().startActivity(intent);
     }
 }

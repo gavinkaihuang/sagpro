@@ -1,5 +1,6 @@
 package com.sag.sagpro.ui.home.placeholder;
 
+import com.sag.sagpro.ui.home.LoopImageBean;
 import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderItem;
 
 import java.sql.Array;
@@ -26,7 +27,7 @@ public class HomeItemPlaceholderContent {
      */
     public  Map<String, HomeItemPlaceholderItem> ITEM_MAP = new HashMap<String, HomeItemPlaceholderItem>();
 
-    public  ArrayList<String> LOOP_IMAGES = new ArrayList<String>();
+    public  ArrayList<LoopImageBean> LOOP_IMAGES = new ArrayList<LoopImageBean>();
 
 
     public void addItem(HomeItemPlaceholderItem item) {
@@ -34,8 +35,8 @@ public class HomeItemPlaceholderContent {
         ITEM_MAP.put(item.getCid(), item);
     }
 
-    public void addImage(String imageURL) {
-        LOOP_IMAGES.add(imageURL);
+    public void addImageBean(LoopImageBean imageBean) {
+        LOOP_IMAGES.add(imageBean);
     }
 
 

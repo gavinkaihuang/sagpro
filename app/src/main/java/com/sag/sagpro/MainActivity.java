@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.item_navigation_homeitem:
                         navController.navigate(R.id.item_navigation_homeitem);
-//                        navController.addToBackStack
                     break;
                 case R.id.item_navigation_messages:
 

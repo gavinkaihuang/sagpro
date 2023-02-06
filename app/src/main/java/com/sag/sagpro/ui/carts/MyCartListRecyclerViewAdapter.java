@@ -40,6 +40,7 @@ public class MyCartListRecyclerViewAdapter extends RecyclerView.Adapter<MyCartLi
         holder.imgImageView.setImageUrl(holder.mItem.getImg());
         holder.nameTextView.setText(holder.mItem.getName());
         holder.numberAdjustView.setText(holder.mItem.getName());
+        holder.priceTextView.setText(holder.mItem.getPrice());
 //        holder.mContentView.setText(mValues.get(position).content);
     }
 

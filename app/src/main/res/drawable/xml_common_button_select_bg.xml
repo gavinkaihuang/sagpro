@@ -6,7 +6,7 @@
         <shape>
            <solid android:color="@color/button_select_color" />
     <!--   <solid android:color="#FFFFFF" />-->
-      <size android:height="40dp" />
+      <size android:height="30dp" />
             <corners
                 android:bottomLeftRadius="10dp"
                 android:bottomRightRadius="10dp"

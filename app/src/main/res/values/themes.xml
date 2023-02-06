@@ -294,6 +294,12 @@
         <item name="android:textColor">#666666</item>
     </style>
 
+    <style name="TextStyle_Button_Text_WHITE">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
     <style name="TextStyle_Prompt">
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">normal</item>

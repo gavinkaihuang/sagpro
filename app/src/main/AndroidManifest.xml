@@ -19,6 +19,7 @@
         tools:targetApi="31">
         <activity
             android:name=".activities.CartListActivity"
+            android:label="@string/title_fragment_cart_list"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

@@ -47,4 +47,5 @@
     <string name="title_activity_register">RegisterActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="title_fragment_cart_list" tools:ignore="MissingTranslation">Cart List</string>
+
 </resources>

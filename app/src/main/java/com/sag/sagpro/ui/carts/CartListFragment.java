@@ -66,6 +66,7 @@ public class CartListFragment extends InnerBaseFragment implements URLLoadCallba
 
         loadDataFromServer();
         LogUtil.i("--------" + this.hashCode());
+
     }
 
     @Override

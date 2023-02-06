@@ -13,20 +13,22 @@ import com.sag.sagpro.R;
 
 public class ItemNoAdjustView extends LinearLayout {
 
+    EditText editEditText = null;
+
     private void init() {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View view = inflater.inflate(R.layout.layout_item_number_ajust, this);
 
         View minusBT = view.findViewById(R.id.numberMinusBT);
         View addBT = view.findViewById(R.id.numberAddBT);
-        EditText editEditText = (EditText) view.findViewById(R.id.numberEditText);
+        editEditText = (EditText) view.findViewById(R.id.numberEditText);
 
         minusBT.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 String number = editEditText.getText().toString();
                 int result = subNumbder(number);
-                editEditText.setText("" + result);
+                ItemNoAdjustView.this.setText("" + result);
             }
         });
         addBT.setOnClickListener(new OnClickListener() {
@@ -34,7 +36,7 @@ public class ItemNoAdjustView extends LinearLayout {
             public void onClick(View v) {
                 String number = editEditText.getText().toString();
                 int result = addNumbder(number);
-                editEditText.setText("" + result);
+                ItemNoAdjustView.this.setText("" + result);
             }
         });
 
@@ -71,6 +73,13 @@ public class ItemNoAdjustView extends LinearLayout {
     }
 
 
+    public void setText(String text) {
+        if (!text.matches("\\d+")) {
+            //TODO input is not a digital
+            return;
+        }
+        editEditText.setText(text);
+    }
 
     private int addNumbder(String number) {
         return formatCaculatorNumber(number, 1);

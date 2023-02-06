@@ -2,25 +2,28 @@ package com.sag.sagpro.ui.carts;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.androidnetworking.widget.ANImageView;
 import com.sag.sagpro.databinding.FragmentCartItemBinding;
+import com.sag.sagpro.ui.messages.placeholder.MessagePlaceholderItem;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
- * TODO: Replace the implementation with code for your data type.
+ *
  */
 public class MyCartListRecyclerViewAdapter extends RecyclerView.Adapter<MyCartListRecyclerViewAdapter.ViewHolder> {
 
-    private final List<CartPlaceholderContent.PlaceholderItem> mValues;
+    private List<CartPlaceholderItem> mValues;
 
 
-    public MyCartListRecyclerViewAdapter(List<CartPlaceholderContent.PlaceholderItem> items) {
+    public MyCartListRecyclerViewAdapter(List<CartPlaceholderItem> items) {
         mValues = items;
     }
 
@@ -34,8 +37,10 @@ public class MyCartListRecyclerViewAdapter extends RecyclerView.Adapter<MyCartLi
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.imgImageView.setImageUrl(holder.mItem.getImg());
+        holder.nameTextView.setText(holder.mItem.getName());
+        holder.numberAdjustView.setText(holder.mItem.getName());
+//        holder.mContentView.setText(mValues.get(position).content);
     }
 
     @Override
@@ -43,20 +48,28 @@ public class MyCartListRecyclerViewAdapter extends RecyclerView.Adapter<MyCartLi
         return mValues.size();
     }
 
+    public void setItems(List<CartPlaceholderItem> items) {
+        this.mValues = items;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public CartPlaceholderContent.PlaceholderItem mItem;
+        public final ANImageView imgImageView;
+        public final TextView nameTextView;
+        public CartPlaceholderItem mItem;
+        com.sag.sagpro.ui.ui.ItemNoAdjustView numberAdjustView;
+        public final TextView priceTextView;
 
         public ViewHolder(FragmentCartItemBinding binding) {
             super(binding.getRoot());
-            mIdView = binding.itemNumber;
-            mContentView = binding.content;
+            imgImageView = binding.imgImageView;
+            nameTextView = binding.nameTextView;
+            numberAdjustView = binding.numberAdjustView;
+            priceTextView = binding.priceTextView;
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + nameTextView.getText() + "'";
         }
     }
 }

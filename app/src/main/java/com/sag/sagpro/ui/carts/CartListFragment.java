@@ -62,11 +62,8 @@ public class CartListFragment extends InnerBaseFragment implements URLLoadCallba
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        placeholderContent = new CartPlaceholderContent();
 
         loadDataFromServer();
-        LogUtil.i("--------" + this.hashCode());
-
     }
 
     @Override

@@ -173,14 +173,9 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
             String number = jsonObject.getString("number");
             String uid = jsonObject.getString("uid");
             String created = jsonObject.getString("created");
-            LogUtils.i("------1 show result: " + msg);
             getActivity().runOnUiThread(() -> {
-                LogUtils.i("------show result: " + msg);
                 ToastUtils.showToast(getActivity().getApplicationContext(), msg);
             });
-//            getActivity().runOnUiThread(() -> {
-//                Toast.makeText(getActivity().getApplicationContext(),  msg, Toast.LENGTH_LONG).show();
-//            });
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -10,8 +10,11 @@ import android.widget.TextView;
 
 
 import com.androidnetworking.widget.ANImageView;
+import com.facebook.stetho.common.LogUtil;
 import com.sag.sagpro.databinding.FragmentCartItemBinding;
+import com.sag.sagpro.interfaces.NumberAdjustHandler;
 import com.sag.sagpro.ui.messages.placeholder.MessagePlaceholderItem;
+import com.sag.sagpro.ui.ui.ItemNoAdjustView;
 
 import java.util.List;
 
@@ -41,7 +44,7 @@ public class MyCartListRecyclerViewAdapter extends RecyclerView.Adapter<MyCartLi
         holder.nameTextView.setText(holder.mItem.getName());
         holder.numberAdjustView.setText(holder.mItem.getName());
         holder.priceTextView.setText(holder.mItem.getPrice());
-//        holder.mContentView.setText(mValues.get(position).content);
+        holder.numberAdjustView.setNumberAdjustHandler(new CartItemNumberAdjustHandler(holder.mItem));
     }
 
     @Override
@@ -71,6 +74,30 @@ public class MyCartListRecyclerViewAdapter extends RecyclerView.Adapter<MyCartLi
         @Override
         public String toString() {
             return super.toString() + " '" + nameTextView.getText() + "'";
+        }
+    }
+
+    /**
+     * Handle user click minus or add button
+     */
+    class CartItemNumberAdjustHandler implements NumberAdjustHandler {
+
+        CartPlaceholderItem item = null;
+        public CartItemNumberAdjustHandler(final CartPlaceholderItem cartPlaceholderItem) {
+            item = cartPlaceholderItem;
+        }
+
+        @Override
+        public void handleMinus(ItemNoAdjustView view, int result) {
+            LogUtil.i("-----------CartItemNumberAdjustHandler's hashcode is " + CartItemNumberAdjustHandler.this.hashCode());
+            LogUtil.i("-----------item pid=" + item.getPid());
+        }
+
+        @Override
+        public void handleAdd(ItemNoAdjustView view, int result) {
+            LogUtil.i("-----------CartItemNumberAdjustHandler's hashcode is " + CartItemNumberAdjustHandler.this.hashCode());
+            LogUtil.i("-----------item pid=" + item.getPid());
+
         }
     }
 }

@@ -77,6 +77,28 @@ public class HomeItemFragment extends InnerBaseFragment {
         AndroidNetworkingUtils.loadURL(ConstantData.CATEGORIES, "CATEGORIES", new JSONObject(), new LoadUrlHandler());
         AndroidNetworkingUtils.loadURL(ConstantData.HOME_IMGS, "HOME_IMGS", jsonObject, new LoadUrlHandler());
 
+        //        //List item click listener
+        binding.list.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), binding.list, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                if (position == 0) {
+                    LogUtil.i("----------head view clicked, ignore it");
+                    return;
+                }
+
+                HomeItemPlaceholderItem itemClicked = placeholderContent.getItem(position);
+                Bundle bundle = new Bundle();
+                bundle.putString(ProductListFragment.PARAMS_CID, itemClicked.cid);
+                LogUtil.i("----------item " + position + " clicked: redirect to category: " + itemClicked.cid + ">>" + itemClicked.name);
+                Navigation.findNavController(view).navigate(R.id.item_navigation_products, bundle);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                LogUtil.i("----------item " + position + " long clicked");
+            }
+        }));
+
         return binding.getRoot();
     }
 

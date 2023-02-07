@@ -37,7 +37,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/viewBanner" />
 
-        <com.sag.sagpro.ui.ui.ItemNoAdjustView
+        <com.sag.sagpro.widgets.ItemNoAdjustView
             android:id="@+id/itemNoAdjustView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
             app:layout_constraintStart_toEndOf="@+id/itemNoAdjustView"
             app:layout_constraintTop_toTopOf="@+id/priceTextView" />
 
-        <com.sag.sagpro.ui.ui.SepLineView
+        <com.sag.sagpro.widgets.SepLineView
             android:id="@+id/sepLineView"
             android:layout_width="match_parent"
             android:layout_height="1dp"

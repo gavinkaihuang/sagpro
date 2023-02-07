@@ -2,10 +2,8 @@ package com.sag.sagpro.ui.carts;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -13,8 +11,7 @@ import com.androidnetworking.widget.ANImageView;
 import com.facebook.stetho.common.LogUtil;
 import com.sag.sagpro.databinding.FragmentCartItemBinding;
 import com.sag.sagpro.interfaces.NumberAdjustHandler;
-import com.sag.sagpro.ui.messages.placeholder.MessagePlaceholderItem;
-import com.sag.sagpro.ui.ui.ItemNoAdjustView;
+import com.sag.sagpro.widgets.ItemNoAdjustView;
 
 import java.util.List;
 
@@ -60,7 +57,7 @@ public class MyCartListRecyclerViewAdapter extends RecyclerView.Adapter<MyCartLi
         public final ANImageView imgImageView;
         public final TextView nameTextView;
         public CartPlaceholderItem mItem;
-        com.sag.sagpro.ui.ui.ItemNoAdjustView numberAdjustView;
+        ItemNoAdjustView numberAdjustView;
         public final TextView priceTextView;
 
         public ViewHolder(FragmentCartItemBinding binding) {

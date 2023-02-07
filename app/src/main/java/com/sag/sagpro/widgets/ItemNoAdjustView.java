@@ -1,4 +1,4 @@
-package com.sag.sagpro.ui.ui;
+package com.sag.sagpro.widgets;
 
 import android.content.Context;
 import android.util.AttributeSet;

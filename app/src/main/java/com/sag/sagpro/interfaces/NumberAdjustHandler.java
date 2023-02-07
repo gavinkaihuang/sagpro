@@ -1,6 +1,6 @@
 package com.sag.sagpro.interfaces;
 
-import com.sag.sagpro.ui.ui.ItemNoAdjustView;
+import com.sag.sagpro.widgets.ItemNoAdjustView;
 
 /**
  * 自定义控件ItemNoAdjustView 处理接口

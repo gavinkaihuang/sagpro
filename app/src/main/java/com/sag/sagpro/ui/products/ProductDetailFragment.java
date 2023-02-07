@@ -176,8 +176,11 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
             LogUtils.i("------1 show result: " + msg);
             getActivity().runOnUiThread(() -> {
                 LogUtils.i("------show result: " + msg);
-                ToastUtils.showToast(getActivity(), msg);
+                ToastUtils.showToast(getActivity().getApplicationContext(), msg);
             });
+//            getActivity().runOnUiThread(() -> {
+//                Toast.makeText(getActivity().getApplicationContext(),  msg, Toast.LENGTH_LONG).show();
+//            });
         } catch (Exception e) {
             e.printStackTrace();
         }

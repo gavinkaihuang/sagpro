@@ -11,7 +11,7 @@ public class ToastUtils {
      * @param value
      */
     public static void showToast(Context context, String value){
-        showToast(context, value);
+        showToast(context, value, Toast.LENGTH_SHORT);
     }
 
     /**
@@ -21,7 +21,7 @@ public class ToastUtils {
      * @param length
      */
     public static void showToast(Context context, String value, int length){
-        Toast toast=Toast.makeText(context, value, Toast.LENGTH_SHORT);
+        Toast toast=Toast.makeText(context, value, length);
         toast.show();
     }
 }

@@ -46,7 +46,7 @@ public class AndroidNetworkingUtils {
      * @param paramsObj
      * @param urlLoadCallback
      */
-    private static void loadURL(String url, String tag,JSONObject paramsObj,  URLLoadCallback urlLoadCallback) {
+    public static void loadURL(String url, String tag,JSONObject paramsObj,  URLLoadCallback urlLoadCallback) {
         try {
 //            JSONObject jsonObject = new JSONObject();
             LogUtil.i("------URL:" + url);

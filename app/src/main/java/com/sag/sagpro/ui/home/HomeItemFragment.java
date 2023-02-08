@@ -76,11 +76,6 @@ public class HomeItemFragment extends InnerBaseFragment {
         myItemRecyclerViewAdapter.setOnItemClickListener(myItemRecyclerViewAdapter);
         binding.list.setAdapter(myItemRecyclerViewAdapter);
         binding.list.addItemDecoration(UIUtils.getDividerItemBoxDecoration(getContext()));
-
-//        JSONObject jsonObject = new JSONObject();
-//        AndroidNetworkingUtils.loadURL(ConstantData.CATEGORIES, "CATEGORIES", new JSONObject(), new LoadUrlHandler());
-//        AndroidNetworkingUtils.loadURL(ConstantData.HOME_IMGS, "HOME_IMGS", jsonObject, new LoadUrlHandler());
-        //        //List item click listener
         binding.list.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), binding.list, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -150,7 +145,7 @@ public class HomeItemFragment extends InnerBaseFragment {
             //TODO service not work
             if (!code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
                 String message = result.getString(ConstantData.MSG);
-                LogUtil.e("------------------" + message);
+                LogUtils.e(message);
                 return;
             }
 
@@ -214,10 +209,8 @@ public class HomeItemFragment extends InnerBaseFragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
         myItemRecyclerViewAdapter.setmImageBeans(placeholderContent.LOOP_IMAGES);
-
+        myItemRecyclerViewAdapter.notifyDataSetChanged();
     }
 
 }

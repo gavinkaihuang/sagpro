@@ -56,6 +56,12 @@ public class AccountFragment extends Fragment {
         });
     }
 
+    public void updateUserUI() {
+        if (LoggedInUserHelper.isUserLoginedIn(getContext()))
+            updateViewsForLoginUser();
+        else
+            updateViewsForNoLoginUser();
+    }
 
     private void updateViewsForLoginUser() {
 
@@ -86,7 +92,7 @@ public class AccountFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        updateViewsForLoginUser();
+        updateUserUI();
         LogUtils.i("AccountFragment onResume");
     }
 }

@@ -76,26 +76,26 @@ public class HomeItemFragment extends InnerBaseFragment {
         myItemRecyclerViewAdapter.setOnItemClickListener(myItemRecyclerViewAdapter);
         binding.list.setAdapter(myItemRecyclerViewAdapter);
         binding.list.addItemDecoration(UIUtils.getDividerItemBoxDecoration(getContext()));
-        binding.list.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), binding.list, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                if (position == 0) {
-                    LogUtils.i("head view clicked, ignore it");
-                    return;
-                }
-
-                HomeItemPlaceholderItem itemClicked = placeholderContent.getItem(position);
-                Bundle bundle = new Bundle();
-                bundle.putString(ProductListFragment.PARAMS_CID, itemClicked.cid);
-                LogUtils.i("item " + position + " clicked: redirect to category: " + itemClicked.cid + ">>" + itemClicked.name);
-                Navigation.findNavController(view).navigate(R.id.item_navigation_products, bundle);
-            }
-
-            @Override
-            public void onItemLongClick(View view, int position) {
-                LogUtils.i("item " + position + " long clicked");
-            }
-        }));
+//        binding.list.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), binding.list, new RecyclerItemClickListener.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, int position) {
+//                if (position == 0) {
+//                    LogUtils.i("head view clicked, ignore it");
+//                    return;
+//                }
+//
+//                HomeItemPlaceholderItem itemClicked = placeholderContent.getItem(position);
+//                Bundle bundle = new Bundle();
+//                bundle.putString(ProductListFragment.PARAMS_CID, itemClicked.cid);
+//                LogUtils.i("item " + position + " clicked: redirect to category: " + itemClicked.cid + ">>" + itemClicked.name);
+//                Navigation.findNavController(view).navigate(R.id.item_navigation_products, bundle);
+//            }
+//
+//            @Override
+//            public void onItemLongClick(View view, int position) {
+//                LogUtils.i("item " + position + " long clicked");
+//            }
+//        }));
 
         return binding.getRoot();
     }

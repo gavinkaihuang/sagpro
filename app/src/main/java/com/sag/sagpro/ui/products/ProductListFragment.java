@@ -77,24 +77,7 @@ public class ProductListFragment extends InnerBaseFragment {
         }
 
         placeholderContent = new ProductPlaceholderContent();
-//        loadDataFromServer(0);
     }
-
-
-//    private void loadDataFromServer(int startNo) {
-//        if (cid == null || "".equals(cid))
-//            return;
-//
-//        try {
-//            JSONObject jsonObject = new JSONObject();
-//            jsonObject.put("cid", cid);
-//            jsonObject.put("start", "" + startNo);
-//            AndroidNetworkingUtils.loadURL(ConstantData.PRODUCTS_LIST, "PRODUCTS_LIST", jsonObject, new LoadUrlHandler());
-//        } catch (JSONException e) {
-//            LogUtils.e(e.getMessage());
-//        }
-//    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -133,16 +116,6 @@ public class ProductListFragment extends InnerBaseFragment {
     }
 
 
-//    class LoadUrlHandler implements URLLoadCallback {
-//        public void successURLLoadedCallBack(JSONObject result) {
-//            handleResult(result);
-//        }
-//
-//        public Exception failueURLLoadedCallBack(Exception exception) {
-//            return exception;
-//        }
-//    }
-
     class LoadImageHandler implements ImageLoadCallback {
         public Bitmap loadImageSucceed(Bitmap bitmap) {
             return bitmap;
@@ -169,8 +142,8 @@ public class ProductListFragment extends InnerBaseFragment {
     }
 
     private void postRequestForDetails(int startNo) {
-        if (cid == null || "".equals(cid))
-            return;
+//        if (cid == null || "".equals(cid))
+//            return;
 
         try {
             JSONObject jsonObject = new JSONObject();

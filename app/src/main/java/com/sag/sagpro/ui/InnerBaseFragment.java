@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.sag.sagpro.MainActivity;
+import com.sag.sagpro.utils.LogUtils;
 import com.sag.sagpro.utils.ScreenUtils;
+import com.sag.sagpro.utils.ToastUtils;
 
 import org.json.JSONObject;
 
@@ -58,7 +60,7 @@ public abstract class InnerBaseFragment extends Fragment implements SingleObserv
 
     @Override
     public void onSubscribe(Disposable d) {
-
+        LogUtils.i("in onSubscribe with " + d);
     }
 
     @Override
@@ -68,7 +70,7 @@ public abstract class InnerBaseFragment extends Fragment implements SingleObserv
 
     @Override
     public void onError(Throwable e) {
-
+        ToastUtils.showToast(getActivity(), e.getMessage());
     }
 
     /**

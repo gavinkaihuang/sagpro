@@ -9,7 +9,12 @@ import androidx.fragment.app.Fragment;
 import com.sag.sagpro.MainActivity;
 import com.sag.sagpro.utils.ScreenUtils;
 
-public class InnerBaseFragment extends Fragment {
+import org.json.JSONObject;
+
+import io.reactivex.SingleObserver;
+import io.reactivex.disposables.Disposable;
+
+public abstract class InnerBaseFragment extends Fragment implements SingleObserver<JSONObject> {
 
     private boolean isUpdatePageFooterHeight = false;
 
@@ -37,4 +42,36 @@ public class InnerBaseFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Handle Data Result,
+     * RX2AndroidNetworkingUtils will call back in UI thread
+     * @param result
+     */
+    protected void handleResultForUI(JSONObject result) {
+
+    }
+
+    /**
+     * SingleObserver<JSONObject> mathod start
+     */
+
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onSuccess(JSONObject jsonObject) {
+        handleResultForUI(jsonObject);
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    /**
+     * SingleObserver<JSONObject> mathod end
+     */
 }

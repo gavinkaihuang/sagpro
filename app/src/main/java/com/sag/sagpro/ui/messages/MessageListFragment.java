@@ -9,14 +9,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.facebook.stetho.common.LogUtil;
 import com.sag.sagpro.ConstantData;
+import com.sag.sagpro.utils.LogUtils;
 import com.sag.sagpro.utils.LoggedInUserHelper;
 import com.sag.sagpro.databinding.FragmentMessageItemListBinding;
 import com.sag.sagpro.ui.InnerBaseFragment;
 import com.sag.sagpro.ui.messages.placeholder.MessagePlaceholderContent;
 import com.sag.sagpro.ui.messages.placeholder.MessagePlaceholderItem;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
+import com.sag.sagpro.utils.RX2AndroidNetworkingUtils;
 import com.sag.sagpro.utils.RecyclerItemClickListener;
 import com.sag.sagpro.utils.UIUtils;
 import com.sag.sagpro.utils.URLLoadCallback;
@@ -28,7 +29,7 @@ import org.json.JSONObject;
 /**
  * A fragment representing a list of Items.
  */
-public class MessageListFragment extends InnerBaseFragment implements URLLoadCallback {
+public class MessageListFragment extends InnerBaseFragment {
 
     MyMessageItemRecyclerViewAdapter myMessageRecyclerViewAdapter = null;
     private MessagePlaceholderContent placeholderContent = null;
@@ -47,23 +48,9 @@ public class MessageListFragment extends InnerBaseFragment implements URLLoadCal
         super.onCreate(savedInstanceState);
 
         placeholderContent = new MessagePlaceholderContent();
-        loadDataFromServer(0);
+        postRequest();
     }
 
-    private void loadDataFromServer(int startNo) {
-
-//        {"language":"en","app":"ios","version":"1.0.0","token":"$Pe!nmRFNhbfUdg9VD5CJWjZMls%uSoO"}
-        try {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("language", "en");
-            jsonObject.put("app", "Android");
-            jsonObject.put("version", "1.0.0");
-            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
-            AndroidNetworkingUtils.loadURL(ConstantData.MESSAGES, "MESSAGES", jsonObject, this);
-        } catch (JSONException e) {
-            LogUtil.e("-----------" + e.getMessage());
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,22 +69,19 @@ public class MessageListFragment extends InnerBaseFragment implements URLLoadCal
         binding.list.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), binding.list, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-//                        ToastUtil.showMessage(context, "position = " + position);
-//                        LogUtil.i("----------item " + position + " clicked");
-//                ProductPlaceholderItem itemClicked = placeholderContent.getItem(position);
-//                Bundle bundle = new Bundle();
-//                bundle.putString(ProductDetailFragment.PARAMS_PRODUCT_ID, itemClicked.pid);
-//                Navigation.findNavController(view).navigate(R.id.item_navigation_product_detail, bundle);
+                //TODO message item click action handle here
             }
 
             @Override
             public void onItemLongClick(View view, int position) {
-                LogUtil.i("----------item " + position + " long clicked");
+                LogUtils.i("item " + position + " long clicked");
             }
         }));
     }
 
-    private void handleResult(JSONObject result) {
+    @Override
+    protected void handleResultForUI(JSONObject result) {
+        super.handleResultForUI(result);
         try {
             String code = result.getString(ConstantData.CODE);
             if (code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
@@ -116,7 +100,7 @@ public class MessageListFragment extends InnerBaseFragment implements URLLoadCal
                 }
             } else {
                 String message = result.getString(ConstantData.MSG);
-                LogUtil.e("------------------" + message);
+                LogUtils.e(message);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -124,20 +108,37 @@ public class MessageListFragment extends InnerBaseFragment implements URLLoadCal
 
         //update userinterface
         myMessageRecyclerViewAdapter.setItems(placeholderContent.ITEMS);
-        getActivity().runOnUiThread(() -> {
+//        getActivity().runOnUiThread(() -> {
 //            LogUtil.i("----------product adapter ask ui reflash");
-            myMessageRecyclerViewAdapter.notifyDataSetChanged();
-            updatePageFooterHeight(binding.list);
-        });
+        myMessageRecyclerViewAdapter.notifyDataSetChanged();
+        updatePageFooterHeight(binding.list);
+//        });
+
+//        LogUtils.i("----->>>>---Thread.currentThread().hashCode()=" + Thread.currentThread().hashCode());
     }
 
-    @Override
-    public void successURLLoadedCallBack(JSONObject result) {
-        handleResult(result);
+
+    /*
+     * request data from server start
+     */
+
+    public void postRequest() {
+        JSONObject paramsObject = generateParams();
+        RX2AndroidNetworkingUtils.postForData(ConstantData.MESSAGES, paramsObject, this);
     }
 
-    @Override
-    public Exception failueURLLoadedCallBack(Exception exception) {
+    public JSONObject generateParams() {
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("language", "en");
+            jsonObject.put("app", "Android");
+            jsonObject.put("version", "1.0.0");
+            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
+            return jsonObject;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         return null;
     }
+
 }

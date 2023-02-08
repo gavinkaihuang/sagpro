@@ -30,6 +30,7 @@ import com.sag.sagpro.ui.home.placeholder.HomeItemPlaceholderItem;
 import com.sag.sagpro.ui.products.ProductListFragment;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
 import com.sag.sagpro.utils.ImageLoadCallback;
+import com.sag.sagpro.utils.LogUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.holder.BannerImageHolder;
@@ -78,6 +79,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         holder.viewBanner.setAdapter(new BannerImageAdapter<LoopImageBean>(mImageBeans) {
             @Override
             public void onBindView(BannerImageHolder holder, LoopImageBean data, int position, int size) {
+                LogUtils.i("holder.viewBanner to reload image: " + data.getImage());
                 Glide.with(holder.imageView)
                         .load(data.getImage())
                         .into(holder.imageView);

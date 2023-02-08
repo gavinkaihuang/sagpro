@@ -139,30 +139,4 @@ public class RegistFragment  extends InnerBaseFragment {
     }
 
 
-//    public void successURLLoadedCallBack(JSONObject result) {
-//        try {
-//            String code = result.getString(ConstantData.CODE);
-//            if (code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
-//                String service = result.getString(ConstantData.SERVICE);
-//                handleResult(result);
-//            } else {
-//                String message = result.getString(ConstantData.MSG);
-//                LogUtil.e("------------------" + message);
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//        getActivity().runOnUiThread(() -> {
-//            ((LoginActivity) getActivity()).updateUiWithUser(loggedInUser);
-//            getActivity().setResult(Activity.RESULT_OK);
-//            getActivity().finish();
-//        });
-//    }
-//
-//    @Override
-//    public Exception failueURLLoadedCallBack(Exception exception) {
-//        return null;
-//    }
-
 }

@@ -48,7 +48,7 @@ public class MessageListFragment extends InnerBaseFragment {
         super.onCreate(savedInstanceState);
 
         placeholderContent = new MessagePlaceholderContent();
-        postRequest();
+//        postRequest();
     }
 
 
@@ -79,7 +79,33 @@ public class MessageListFragment extends InnerBaseFragment {
         }));
     }
 
-    @Override
+
+    /*
+     * request data from server start
+     */
+
+    /**
+     * Step 1
+     */
+    public void postRequest() {
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("language", "en");
+            jsonObject.put("app", "Android");
+            jsonObject.put("version", "1.0.0");
+            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
+            RX2AndroidNetworkingUtils.postForData(ConstantData.MESSAGES, jsonObject, this);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * Step 2
+     *
+     * @param result
+     */
     protected void handleResultForUI(JSONObject result) {
         super.handleResultForUI(result);
         try {
@@ -108,39 +134,9 @@ public class MessageListFragment extends InnerBaseFragment {
 
         //update userinterface
         myMessageRecyclerViewAdapter.setItems(placeholderContent.ITEMS);
-//        getActivity().runOnUiThread(() -> {
-//            LogUtil.i("----------product adapter ask ui reflash");
         myMessageRecyclerViewAdapter.notifyDataSetChanged();
         updatePageFooterHeight(binding.list);
-//        });
-
-//        LogUtils.i("----->>>>---Thread.currentThread().hashCode()=" + Thread.currentThread().hashCode());
     }
-
-
-    /*
-     * request data from server start
-     */
-
-    public void postRequest() {
-        JSONObject paramsObject = generateParams();
-        RX2AndroidNetworkingUtils.postForData(ConstantData.MESSAGES, paramsObject, this);
-    }
-
-    public JSONObject generateParams() {
-        try {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("language", "en");
-            jsonObject.put("app", "Android");
-            jsonObject.put("version", "1.0.0");
-            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
-            return jsonObject;
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
 
 
 }

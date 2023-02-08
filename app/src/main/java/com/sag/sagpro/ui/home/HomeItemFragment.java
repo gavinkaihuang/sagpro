@@ -60,7 +60,7 @@ public class HomeItemFragment extends InnerBaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        postRequest();
+//        postRequest();
     }
 
 

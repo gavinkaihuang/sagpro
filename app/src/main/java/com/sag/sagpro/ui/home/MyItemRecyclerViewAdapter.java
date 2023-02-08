@@ -65,7 +65,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LogUtil.i("------------------onCreateViewHolder");
+        LogUtils.i("onCreateViewHolder");
         context = parent.getContext();
         if (isShowHeader && viewType == TYPE_HEADER)
             return new HeaderViewHolder(FragmentHomeHeaderBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
@@ -206,7 +206,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
             mContentView = binding.content;
             imageButton = binding.button;
             mNameView = binding.nameTextView;
-            LogUtil.i("-----------ItemViewHolder binding's hashcode is " + binding.hashCode());
+            LogUtils.i("ItemViewHolder binding's hashcode is " + binding.hashCode());
 
         }
 
@@ -231,7 +231,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
             categoriesButton = binding.categoriesButton;
             productButton = binding.productButton;
             viewBanner = binding.viewBanner;
-            LogUtil.i("-----------HeaderViewHolder binding's hashcode is " + binding.hashCode());
+            LogUtils.i("HeaderViewHolder binding's hashcode is " + binding.hashCode());
         }
 
     }
@@ -268,47 +268,20 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public void onItemClicked(View view, int position, int sign) {
-        LogUtil.i("---------item clicked " + position + " and sign=" + sign);
+        LogUtils.i("item clicked " + position + " and sign=" + sign);
         switch (sign) {
             case SIGN_CATEGORY_BUTTON:
-//                Navigation.findNavController(view).navigate(R.id.item_navigation_categories, null);
-//                break;
             case SIGN_PROUDCT_BUTTON:
-//                Navigation.findNavController(view).navigate(R.id.item_navigation_products, null);
-//                intent = new Intent();
-//                intent.setClass(view.getContext(), ProductListActivity.class);
-//                view.getContext().startActivity(intent);
-//                redirectToProductList(view);
                 redirectToProductList(view);
                 break;
             case SIGN_SLIDE_IMAGE:
-//                Navigation.findNavController(view).navigate(R.id.item_navigation_regist, null);
-                LogUtil.i("---------item clicked " + position + " and sign=" + sign);
-//                HomeItemPlaceholderItem itemClicked = mValues.get(position - 1);//first one is header
+                LogUtils.i("item clicked " + position + " and sign=" + sign);
                 LoopImageBean loopImageBean = mImageBeans.get(position);
                 redirectToProductList(view, loopImageBean.getCid(), loopImageBean.getCname());
-//                Bundle bundle = new Bundle();
-//                bundle.putString(ProductListFragment.PARAMS_CID, loopImageBean.getCid());
-//                bundle.putString(ProductListFragment.PARAMS_CNAME, loopImageBean.getCname());
-//
-//                intent = new Intent();
-//                intent.putExtras(bundle);
-//                intent.setClass(view.getContext(), ProductListActivity.class);
-//                view.getContext().startActivity(intent);
-
                 break;
             case SIGN_ROW_ITEM:
                 HomeItemPlaceholderItem itemClicked = mValues.get(position - 1);//first one is header
                 redirectToProductList(view, itemClicked.cid, itemClicked.name);
-//                Bundle bundle = new Bundle();
-//                bundle.putString(ProductListFragment.PARAMS_CID, itemClicked.cid);
-//                bundle.putString(ProductListFragment.PARAMS_CNAME, itemClicked.name);
-//
-//                intent = new Intent();
-//                intent.putExtras(bundle);
-//                intent.setClass(view.getContext(), ProductListActivity.class);
-//                view.getContext().startActivity(intent);
-
                 break;
 
         }

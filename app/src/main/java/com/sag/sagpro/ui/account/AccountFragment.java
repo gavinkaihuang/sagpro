@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.sag.sagpro.BaseActivity;
 import com.sag.sagpro.R;
 import com.sag.sagpro.data.model.LoggedInUser;
+import com.sag.sagpro.utils.LogUtils;
 import com.sag.sagpro.utils.LoggedInUserHelper;
 import com.sag.sagpro.databinding.FragmentAccountBinding;
 
@@ -33,9 +34,8 @@ public class AccountFragment extends Fragment {
         final TextView userNameTextView = binding.userNameTextView;
         userNameTextView.setText(loggedInUser.getUserName());
 
-
         onClickListeners();
-        updateViewsForLoginUser();
+
         return root;
     }
 
@@ -81,5 +81,12 @@ public class AccountFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateViewsForLoginUser();
+        LogUtils.i("AccountFragment onResume");
     }
 }

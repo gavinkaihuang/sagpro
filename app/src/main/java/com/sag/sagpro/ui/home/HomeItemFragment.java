@@ -24,6 +24,7 @@ import com.sag.sagpro.ui.products.ProductListFragment;
 import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderItem;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
 import com.sag.sagpro.utils.ImageLoadCallback;
+import com.sag.sagpro.utils.LogUtils;
 import com.sag.sagpro.utils.LoggedInUserHelper;
 import com.sag.sagpro.utils.RX2AndroidNetworkingUtils;
 import com.sag.sagpro.utils.RecyclerItemClickListener;
@@ -84,20 +85,20 @@ public class HomeItemFragment extends InnerBaseFragment {
             @Override
             public void onItemClick(View view, int position) {
                 if (position == 0) {
-                    LogUtil.i("----------head view clicked, ignore it");
+                    LogUtils.i("head view clicked, ignore it");
                     return;
                 }
 
                 HomeItemPlaceholderItem itemClicked = placeholderContent.getItem(position);
                 Bundle bundle = new Bundle();
                 bundle.putString(ProductListFragment.PARAMS_CID, itemClicked.cid);
-                LogUtil.i("----------item " + position + " clicked: redirect to category: " + itemClicked.cid + ">>" + itemClicked.name);
+                LogUtils.i("item " + position + " clicked: redirect to category: " + itemClicked.cid + ">>" + itemClicked.name);
                 Navigation.findNavController(view).navigate(R.id.item_navigation_products, bundle);
             }
 
             @Override
             public void onItemLongClick(View view, int position) {
-                LogUtil.i("----------item " + position + " long clicked");
+                LogUtils.i("item " + position + " long clicked");
             }
         }));
 
@@ -111,42 +112,6 @@ public class HomeItemFragment extends InnerBaseFragment {
     }
 
 
-//    class LoadUrlHandler implements URLLoadCallback {
-//        public void successURLLoadedCallBack(JSONObject result) {
-//            try {
-//                String code = result.getString(ConstantData.CODE);
-//                //TODO service not work
-//                if (!code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
-//                    String message = result.getString(ConstantData.MSG);
-//                    LogUtil.e("------------------" + message);
-//                    return;
-//                }
-//
-//                String service = result.getString(ConstantData.SERVICE);
-//                if ("homeImgs".equals(service)) {
-//                    handleHomeImgsResult(result);
-//                } else {
-//                    handleCategoryResult(result);
-//                }
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//
-//        }
-//
-//        public Exception failueURLLoadedCallBack(Exception exception) {
-//            return exception;
-//        }
-//    }
-
-
-    /*
-     * request data from server start
-     */
-
-//    JSONObject jsonObject = new JSONObject();
-//        AndroidNetworkingUtils.loadURL(ConstantData.CATEGORIES, "CATEGORIES", new JSONObject(), new LoadUrlHandler());
-//        AndroidNetworkingUtils.loadURL(ConstantData.HOME_IMGS, "HOME_IMGS", jsonObject, new LoadUrlHandler());
 
     public void postRequest() {
         postRequestForCategories();

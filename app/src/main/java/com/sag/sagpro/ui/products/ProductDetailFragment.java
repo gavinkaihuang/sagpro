@@ -230,6 +230,7 @@ public class ProductDetailFragment extends InnerBaseFragment {
      * @param result
      */
     protected void handleResultForUI(JSONObject result) {
+        super.handleResultForUI(result);
         try {
             String code = result.getString(ConstantData.CODE);
             if (code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {

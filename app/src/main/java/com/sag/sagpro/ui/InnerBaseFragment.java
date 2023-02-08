@@ -68,7 +68,7 @@ public abstract class InnerBaseFragment extends Fragment implements SingleObserv
      * RX2AndroidNetworkingUtils will call back in UI thread
      * @param result
      */
-    protected void handleResultForUI(JSONObject result) {
+    protected void handleResultForUI(final JSONObject result) {
 
     }
 

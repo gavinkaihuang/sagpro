@@ -111,8 +111,6 @@ public class HomeItemFragment extends InnerBaseFragment {
     }
 
 
-
-
 //    class LoadUrlHandler implements URLLoadCallback {
 //        public void successURLLoadedCallBack(JSONObject result) {
 //            try {
@@ -230,10 +228,9 @@ public class HomeItemFragment extends InnerBaseFragment {
 
         //update userinterface
         myItemRecyclerViewAdapter.setItems(placeholderContent.ITEMS);
-//        getActivity().runOnUiThread(() -> {
-            myItemRecyclerViewAdapter.notifyDataSetChanged();
-            updatePageFooterHeight(binding.list);
-//        });
+        myItemRecyclerViewAdapter.notifyDataSetChanged();
+        updatePageFooterHeight(binding.list);
+
     }
 
     private void handleHomeImgsResult(JSONObject result) {
@@ -246,22 +243,16 @@ public class HomeItemFragment extends InnerBaseFragment {
                 String cid = jdata.getString("cid");
                 String name = jdata.getString("name");
                 String img = jdata.getString("img");
-                LoopImageBean loopImageBean = new LoopImageBean(cid, name,  img);
+                LoopImageBean loopImageBean = new LoopImageBean(cid, name, img);
                 placeholderContent.addImageBean(loopImageBean);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-<<<<<<< HEAD
-        getActivity().runOnUiThread(() -> {
-            myItemRecyclerViewAdapter.setmImageBeans(placeholderContent.LOOP_IMAGES);
-=======
-//        getActivity().runOnUiThread(() -> {
-            myItemRecyclerViewAdapter.setmImages(placeholderContent.LOOP_IMAGES);
->>>>>>> 975afdd4f714cbe92ed4cb5e6e543fc503969375
-//            updateLoopImages();
-//        });
+
+        myItemRecyclerViewAdapter.setmImageBeans(placeholderContent.LOOP_IMAGES);
+
     }
 
 }

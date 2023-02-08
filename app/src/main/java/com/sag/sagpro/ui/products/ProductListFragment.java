@@ -70,7 +70,8 @@ public class ProductListFragment extends InnerBaseFragment {
         }
         if (cname != null) {
             getActivity().setTitle("Product Type: " + cname);
-            loadDataFromServer(0);
+//            loadDataFromServer(0);/
+            //TODO product type
         } else {
             getActivity().setTitle("Product Type: All");
         }
@@ -79,21 +80,7 @@ public class ProductListFragment extends InnerBaseFragment {
 //        loadDataFromServer(0);
     }
 
-<<<<<<< HEAD
-    private void loadDataFromServer(int startNo) {
-//        if (cid == null || "".equals(cid))
-//            return;
 
-        try {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("cid", cid == null ? "": cid);
-            jsonObject.put("start", "" + startNo);
-            AndroidNetworkingUtils.loadURL(ConstantData.PRODUCTS_LIST, "PRODUCTS_LIST", jsonObject, new LoadUrlHandler());
-        } catch (JSONException e) {
-            LogUtil.e("-----------" + e.getMessage());
-        }
-    }
-=======
 //    private void loadDataFromServer(int startNo) {
 //        if (cid == null || "".equals(cid))
 //            return;
@@ -107,7 +94,7 @@ public class ProductListFragment extends InnerBaseFragment {
 //            LogUtils.e(e.getMessage());
 //        }
 //    }
->>>>>>> 975afdd4f714cbe92ed4cb5e6e543fc503969375
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -124,7 +111,7 @@ public class ProductListFragment extends InnerBaseFragment {
         binding.list.setAdapter(myProductItemRecyclerViewAdapter);
         binding.list.addItemDecoration(UIUtils.getDividerItemLineDecoration(getContext()));
         binding.list.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), binding.list, new RecyclerItemClickListener.OnItemClickListener() {
-<<<<<<< HEAD
+
                     @Override
                     public void onItemClick(View view, int position) {
                         ProductPlaceholderItem itemClicked = placeholderContent.getItem(position);
@@ -136,15 +123,7 @@ public class ProductListFragment extends InnerBaseFragment {
                        intent.setClass(view.getContext(), ProductDetailsActivity.class);
                        view.getContext().startActivity(intent);
                     }
-=======
-            @Override
-            public void onItemClick(View view, int position) {
-                ProductPlaceholderItem itemClicked = placeholderContent.getItem(position);
-                Bundle bundle = new Bundle();
-                bundle.putString(ProductDetailFragment.PARAMS_PRODUCT_ID, itemClicked.pid);
-                Navigation.findNavController(view).navigate(R.id.item_navigation_product_detail, bundle);
-            }
->>>>>>> 975afdd4f714cbe92ed4cb5e6e543fc503969375
+
 
             @Override
             public void onItemLongClick(View view, int position) {

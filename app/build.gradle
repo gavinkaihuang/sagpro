@@ -51,6 +51,8 @@ dependencies {
 
     //network library
     implementation 'com.amitshekhar.android:android-networking:1.0.2'
+//    implementation 'com.amitshekhar.android:rx-android-networking:1.0.0'
+    implementation 'com.amitshekhar.android:rx2-android-networking:1.0.2'
 
     implementation 'com.amitshekhar.android:jackson-android-networking:1.0.2'
 

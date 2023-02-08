@@ -19,6 +19,7 @@ import com.sag.sagpro.databinding.FragmentLoginBinding;
 import com.sag.sagpro.ui.InnerBaseFragment;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
 import com.sag.sagpro.utils.LoggedInUserHelper;
+import com.sag.sagpro.utils.RX2AndroidNetworkingUtils;
 import com.sag.sagpro.utils.URLLoadCallback;
 
 import org.json.JSONException;
@@ -29,9 +30,10 @@ import org.json.JSONObject;
  * Use the {@link LoginFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LoginFragment extends InnerBaseFragment implements URLLoadCallback {
+public class LoginFragment extends InnerBaseFragment {
 
     private FragmentLoginBinding binding;
+    LoggedInUser loggedInUser = null;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -80,7 +82,7 @@ public class LoginFragment extends InnerBaseFragment implements URLLoadCallback 
             public void onClick(View v) {
                 String userName = binding.emailEditText.getText().toString();
                 String password = binding.passwordEditText.getText().toString();
-                loadDataFromServer(userName, password);
+                postRequestForLogin(userName, password);
             }
         });
 
@@ -92,19 +94,71 @@ public class LoginFragment extends InnerBaseFragment implements URLLoadCallback 
        return binding.getRoot();
     }
 
-    private void loadDataFromServer(String userName, String password) {
+
+
+
+//    @Override
+//    public void successURLLoadedCallBack(JSONObject result) {
+//        try {
+//            String code = result.getString(ConstantData.CODE);
+//            if (code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
+//                String service = result.getString(ConstantData.SERVICE);
+//                handleResult(result);
+//            } else {
+//                String message = result.getString(ConstantData.MSG);
+//                LogUtil.e("------------------" + message);
+//            }
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//        getActivity().runOnUiThread(() -> {
+//            ((LoginActivity) getActivity()).updateUiWithUser(loggedInUser);
+//            getActivity().setResult(Activity.RESULT_OK);
+//            getActivity().finish();
+//        });
+//    }
+//
+//    @Override
+//    public Exception failueURLLoadedCallBack(Exception exception) {
+//        return null;
+//    }
+
+
+    /**
+     * Step 1
+     */
+    protected void postRequest() {
+        //dont't need to post request
+    }
+
+
+    private void postRequestForLogin(String userName, String password) {
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("email", userName);
             jsonObject.put("password", password);
 
-            AndroidNetworkingUtils.loadURL(ConstantData.SIGN_IN, "SIGN_IN", jsonObject, this);
+            RX2AndroidNetworkingUtils.postForData(ConstantData.SIGN_IN, jsonObject, this);
+//            AndroidNetworkingUtils.loadURL(ConstantData.SIGN_IN, "SIGN_IN", jsonObject, this);
         } catch (JSONException e) {
             LogUtil.e("-----------" + e.getMessage());
         }
     }
 
-    LoggedInUser loggedInUser = null;
+
+    /**
+     * Step 2
+     * Handle Data Result,
+     * RX2AndroidNetworkingUtils will call back in UI thread
+     *
+     * @param result
+     */
+    protected void handleResultForUI(final JSONObject result) {
+        super.handleResultForUI(result);
+        handleResult(result);
+    }
+
     private void handleResult(JSONObject result) {
         try {
             JSONObject jsonObject = result.getJSONObject(ConstantData.DATA);
@@ -117,37 +171,15 @@ public class LoginFragment extends InnerBaseFragment implements URLLoadCallback 
             loggedInUser.setToken(jsonObject.getString("token"));
             loggedInUser.setExpireDate(jsonObject.getString("expiredate"));
             LoggedInUserHelper.saveUserToLocal(getActivity(), loggedInUser);//save to local storeage
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
 
-    @Override
-    public void successURLLoadedCallBack(JSONObject result) {
-        try {
-            String code = result.getString(ConstantData.CODE);
-            if (code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
-                String service = result.getString(ConstantData.SERVICE);
-                handleResult(result);
-            } else {
-                String message = result.getString(ConstantData.MSG);
-                LogUtil.e("------------------" + message);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        getActivity().runOnUiThread(() -> {
+            //for UI
             ((LoginActivity) getActivity()).updateUiWithUser(loggedInUser);
             getActivity().setResult(Activity.RESULT_OK);
             getActivity().finish();
-        });
-    }
 
-    @Override
-    public Exception failueURLLoadedCallBack(Exception exception) {
-        return null;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
-
 
 }

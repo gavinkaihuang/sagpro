@@ -26,7 +26,9 @@ import com.sag.sagpro.ui.products.MyProductItemRecyclerViewAdapter;
 import com.sag.sagpro.ui.products.ProductListFragment;
 import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderContent;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
+import com.sag.sagpro.utils.LogUtils;
 import com.sag.sagpro.utils.LoggedInUserHelper;
+import com.sag.sagpro.utils.RX2AndroidNetworkingUtils;
 import com.sag.sagpro.utils.UIUtils;
 import com.sag.sagpro.utils.URLLoadCallback;
 
@@ -37,11 +39,12 @@ import org.json.JSONObject;
 /**
  * A fragment representing a list of Items.
  */
-public class CartListFragment extends InnerBaseFragment implements URLLoadCallback  {
+public class CartListFragment extends InnerBaseFragment {
 
     FragmentCartItemListBinding binding = null;
     MyCartListRecyclerViewAdapter adapter = null;
     private CartPlaceholderContent placeholderContent = null;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -54,7 +57,6 @@ public class CartListFragment extends InnerBaseFragment implements URLLoadCallba
     public static CartListFragment newInstance(int columnCount) {
         CartListFragment fragment = new CartListFragment();
         Bundle args = new Bundle();
-//        args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,8 +64,6 @@ public class CartListFragment extends InnerBaseFragment implements URLLoadCallba
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        loadDataFromServer();
     }
 
     @Override
@@ -81,29 +81,70 @@ public class CartListFragment extends InnerBaseFragment implements URLLoadCallba
         binding.list.addItemDecoration(UIUtils.getDividerItemLineDecoration(getContext()));
     }
 
-    private void loadDataFromServer() {
-        //{"language":"en","app":"ios","version":"1.0.0","token":"$Pe!nmRFNhbfUdg9VD5CJWjZMls%uSoO"}
 
+//    @Override
+//    public void successURLLoadedCallBack(JSONObject result) {
+//        handleResult(result);
+//    }
+//
+//    @Override
+//    public Exception failueURLLoadedCallBack(Exception exception) {
+//        return null;
+//    }
+
+
+    public CartPlaceholderContent getPlaceholderContentInstant() {
+        if (placeholderContent == null)
+            placeholderContent = new CartPlaceholderContent();
+        return placeholderContent;
+    }
+
+
+    /**
+     * Step 1
+     */
+    protected void postRequest() {
+        postRequestForCartList();
+    }
+
+//    private void loadDataFromServer() {
+//        //{"language":"en","app":"ios","version":"1.0.0","token":"$Pe!nmRFNhbfUdg9VD5CJWjZMls%uSoO"}
+//
+//        try {
+//            JSONObject jsonObject = new JSONObject();
+//            jsonObject.put("language", "en");
+//            jsonObject.put("app", "android");
+//            jsonObject.put("version", "1.0.0");
+//            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
+//            AndroidNetworkingUtils.loadURL(ConstantData.CART_LIST, "CART_LIST", jsonObject, this);
+//        } catch (JSONException e) {
+//            LogUtil.e("-----------" + e.getMessage());
+//        }
+//    }
+
+    private void postRequestForCartList() {
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("language", "en");
             jsonObject.put("app", "android");
             jsonObject.put("version", "1.0.0");
             jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
-            AndroidNetworkingUtils.loadURL(ConstantData.CART_LIST, "CART_LIST", jsonObject, this);
+            RX2AndroidNetworkingUtils.postForData(ConstantData.CART_LIST, jsonObject, this);
         } catch (JSONException e) {
             LogUtil.e("-----------" + e.getMessage());
         }
     }
 
-    @Override
-    public void successURLLoadedCallBack(JSONObject result) {
+    /**
+     * Step 2
+     * Handle Data Result,
+     * RX2AndroidNetworkingUtils will call back in UI thread
+     *
+     * @param result
+     */
+    protected void handleResultForUI(final JSONObject result) {
+        super.handleResultForUI(result);
         handleResult(result);
-    }
-
-    @Override
-    public Exception failueURLLoadedCallBack(Exception exception) {
-        return null;
     }
 
     private void handleResult(JSONObject result) {
@@ -121,12 +162,6 @@ public class CartListFragment extends InnerBaseFragment implements URLLoadCallba
                     placeholderItem.setPrice(jdata.getString("price"));
                     placeholderItem.setNumber(jdata.getString("number"));
                     placeholderItem.setImg(jdata.getString("img"));
-//                    placeholderItem.setTitle(jdata.getString("title"));
-//                    placeholderItem.setContent(jdata.getString("content"));
-//                    placeholderItem.setCreated(jdata.getString("created"));
-//
-//                    if (placeholderContent == null)
-//                        placeholderContent = new CartPlaceholderContent();
                     getPlaceholderContentInstant().addItem(placeholderItem);
                 }
             } else {
@@ -139,17 +174,7 @@ public class CartListFragment extends InnerBaseFragment implements URLLoadCallba
 
         //update userinterface
         adapter.setItems(getPlaceholderContentInstant().ITEMS);
-        getActivity().runOnUiThread(() -> {
-//            LogUtil.i("----------product adapter ask ui reflash");
-            adapter.notifyDataSetChanged();
-            updatePageFooterHeight(binding.list);
-        });
+        adapter.notifyDataSetChanged();
+        updatePageFooterHeight(binding.list);
     }
-
-    public CartPlaceholderContent getPlaceholderContentInstant() {
-        if (placeholderContent == null)
-            placeholderContent = new CartPlaceholderContent();
-        return placeholderContent;
-    }
-
 }

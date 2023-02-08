@@ -23,6 +23,8 @@ import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderContent;
 import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderItem;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
 import com.sag.sagpro.utils.ImageLoadCallback;
+import com.sag.sagpro.utils.LogUtils;
+import com.sag.sagpro.utils.RX2AndroidNetworkingUtils;
 import com.sag.sagpro.utils.RecyclerItemClickListener;
 import com.sag.sagpro.utils.UIUtils;
 import com.sag.sagpro.utils.URLLoadCallback;
@@ -74,9 +76,10 @@ public class ProductListFragment extends InnerBaseFragment {
         }
 
         placeholderContent = new ProductPlaceholderContent();
-        loadDataFromServer(0);
+//        loadDataFromServer(0);
     }
 
+<<<<<<< HEAD
     private void loadDataFromServer(int startNo) {
 //        if (cid == null || "".equals(cid))
 //            return;
@@ -90,6 +93,21 @@ public class ProductListFragment extends InnerBaseFragment {
             LogUtil.e("-----------" + e.getMessage());
         }
     }
+=======
+//    private void loadDataFromServer(int startNo) {
+//        if (cid == null || "".equals(cid))
+//            return;
+//
+//        try {
+//            JSONObject jsonObject = new JSONObject();
+//            jsonObject.put("cid", cid);
+//            jsonObject.put("start", "" + startNo);
+//            AndroidNetworkingUtils.loadURL(ConstantData.PRODUCTS_LIST, "PRODUCTS_LIST", jsonObject, new LoadUrlHandler());
+//        } catch (JSONException e) {
+//            LogUtils.e(e.getMessage());
+//        }
+//    }
+>>>>>>> 975afdd4f714cbe92ed4cb5e6e543fc503969375
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -105,9 +123,8 @@ public class ProductListFragment extends InnerBaseFragment {
         myProductItemRecyclerViewAdapter = new MyProductItemRecyclerViewAdapter(placeholderContent.ITEMS);
         binding.list.setAdapter(myProductItemRecyclerViewAdapter);
         binding.list.addItemDecoration(UIUtils.getDividerItemLineDecoration(getContext()));
-//        binding.list.add
-
         binding.list.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), binding.list, new RecyclerItemClickListener.OnItemClickListener() {
+<<<<<<< HEAD
                     @Override
                     public void onItemClick(View view, int position) {
                         ProductPlaceholderItem itemClicked = placeholderContent.getItem(position);
@@ -119,19 +136,90 @@ public class ProductListFragment extends InnerBaseFragment {
                        intent.setClass(view.getContext(), ProductDetailsActivity.class);
                        view.getContext().startActivity(intent);
                     }
+=======
+            @Override
+            public void onItemClick(View view, int position) {
+                ProductPlaceholderItem itemClicked = placeholderContent.getItem(position);
+                Bundle bundle = new Bundle();
+                bundle.putString(ProductDetailFragment.PARAMS_PRODUCT_ID, itemClicked.pid);
+                Navigation.findNavController(view).navigate(R.id.item_navigation_product_detail, bundle);
+            }
+>>>>>>> 975afdd4f714cbe92ed4cb5e6e543fc503969375
 
-                    @Override
-                    public void onItemLongClick(View view, int position) {
-//                        ToastUtil.showMessage(context, "long position = " + position);
-                        LogUtil.i("----------item " + position + " long clicked");
-                    }
-                }));
-   }
+            @Override
+            public void onItemLongClick(View view, int position) {
+                LogUtils.i("item " + position + " long clicked");
+            }
+        }));
+    }
 
+
+//    class LoadUrlHandler implements URLLoadCallback {
+//        public void successURLLoadedCallBack(JSONObject result) {
+//            handleResult(result);
+//        }
+//
+//        public Exception failueURLLoadedCallBack(Exception exception) {
+//            return exception;
+//        }
+//    }
+
+    class LoadImageHandler implements ImageLoadCallback {
+        public Bitmap loadImageSucceed(Bitmap bitmap) {
+            return bitmap;
+        }
+
+        public Exception loadImageFailed(Exception exception) {
+            return exception;
+        }
+    }
+
+    /**
+     * -----------------------------------------------------------------------------------
+     */
+
+    /*
+     * request data from server start
+     */
+
+    /**
+     * Step 1
+     */
+    protected void postRequest() {
+        postRequestForDetails(0);
+    }
+
+    private void postRequestForDetails(int startNo) {
+        if (cid == null || "".equals(cid))
+            return;
+
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("cid", cid);
+            jsonObject.put("start", "" + startNo);
+//            AndroidNetworkingUtils.loadURL(ConstantData.PRODUCTS_LIST, "PRODUCTS_LIST", jsonObject, new LoadUrlHandler());
+            RX2AndroidNetworkingUtils.postForData(ConstantData.PRODUCTS_LIST, jsonObject, this);
+        } catch (JSONException e) {
+            LogUtils.e(e.getMessage());
+        }
+    }
+
+    /**
+     * Step 2
+     * Handle Data Result,
+     * RX2AndroidNetworkingUtils will call back in UI thread
+     *
+     * @param result
+     */
+    protected void handleResultForUI(final JSONObject result) {
+        super.handleResultForUI(result);
+        handleResult(result);
+    }
 
 
     /**
      * handle list data from server
+     *
      * @param result
      */
     private void handleResult(JSONObject result) {
@@ -157,7 +245,7 @@ public class ProductListFragment extends InnerBaseFragment {
                 }
             } else {
                 String message = result.getString(ConstantData.MSG);
-                LogUtil.e("------------------" + message);
+                LogUtils.e(message);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -165,29 +253,9 @@ public class ProductListFragment extends InnerBaseFragment {
 
         //update userinterface
         myProductItemRecyclerViewAdapter.setItems(placeholderContent.ITEMS);
-        getActivity().runOnUiThread(() -> {
-//            LogUtil.i("----------product adapter ask ui reflash");
-            myProductItemRecyclerViewAdapter.notifyDataSetChanged();
-            updatePageFooterHeight(binding.list);
-        });
+        myProductItemRecyclerViewAdapter.notifyDataSetChanged();
+        updatePageFooterHeight(binding.list);
     }
 
 
-    class LoadUrlHandler implements URLLoadCallback {
-        public void successURLLoadedCallBack(JSONObject result) {
-            handleResult(result);
-        }
-        public Exception failueURLLoadedCallBack(Exception exception) {
-            return exception;
-        }
-    }
-
-    class LoadImageHandler implements ImageLoadCallback {
-        public Bitmap loadImageSucceed(Bitmap bitmap) {
-            return bitmap;
-        }
-        public Exception loadImageFailed(Exception exception) {
-            return exception;
-        }
-    }
 }

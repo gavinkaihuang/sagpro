@@ -26,6 +26,7 @@ import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderContent;
 import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderItem;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
 import com.sag.sagpro.utils.LoggedInUserHelper;
+import com.sag.sagpro.utils.RX2AndroidNetworkingUtils;
 import com.sag.sagpro.utils.ToastUtils;
 import com.sag.sagpro.utils.URLLoadCallback;
 import com.youth.banner.adapter.BannerImageAdapter;
@@ -39,7 +40,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ProductDetailFragment extends InnerBaseFragment implements URLLoadCallback {
+public class ProductDetailFragment extends InnerBaseFragment {
 
     public static final String PARAMS_PRODUCT_ID = "PARAMS_PRODUCT_ID";
     private ProductDetailViewModel mViewModel;
@@ -69,48 +70,16 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
         binding.addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addToCartToServer();
+//                addToCartToServer();
+                postRequestForAddCart();
             }
         });
 
-        loadDataFromServer();
+//        loadDataFromServer();
         return binding.getRoot();
     }
 
-//    @Override
-//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//        mViewModel = new ViewModelProvider(this).get(ProductDetailViewModel.class);
-//        // TODO: Use the ViewModel
-//    }
 
-    private void addToCartToServer() {
-        //{"productid":"1001","price": 100.00,"number":"10","token":"$Pe!nmRFNhbfUdg9VD5CJWjZMls%uSoO"}
-
-//        String number = binding.itemNoAdjustView.getValue();
-        try {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("productid", productID);
-            jsonObject.put("price", "100.0");
-            jsonObject.put("number", binding.itemNoAdjustView.getValue());
-            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
-            AndroidNetworkingUtils.loadURL(ConstantData.ADD_TO_CART, "ADD_TO_CART", jsonObject, this);
-        } catch (JSONException e) {
-            LogUtil.e("-----------" + e.getMessage());
-        }
-    }
-
-    private void loadDataFromServer() {
-        if (productID == null) return;
-
-        try {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("productid", productID);
-            AndroidNetworkingUtils.loadURL(ConstantData.PRODUCTS_DETAIL, "PRODUCTS_DETAIL", jsonObject, this);
-        } catch (JSONException e) {
-            LogUtil.e("-----------" + e.getMessage());
-        }
-    }
 
     /**
      * 更新请求返回数据到用户界面
@@ -138,6 +107,152 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
 
             getActivity().setTitle(productDetailViewModel.getName());
         });
+    }
+
+
+
+//    /**
+//     * Load data from server, than handle it
+//     */
+//    public void successURLLoadedCallBack(JSONObject result) {
+//        try {
+//            String code = result.getString(ConstantData.CODE);
+//            if (code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
+//                String service = result.getString(ConstantData.SERVICE);
+//                if ("addCart".equalsIgnoreCase(service)) {
+//                    handleAddToCartResult(result);
+//                } else if ("productDetail".equalsIgnoreCase(service)){
+//                    handleDetailResult(result);
+//                }
+//           } else {
+//                String message = result.getString(ConstantData.MSG);
+//                LogUtil.e("------------------" + message);
+//            }
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+//
+//    public Exception failueURLLoadedCallBack(Exception exception) {
+//        return null;
+//    }
+
+
+
+
+    /*
+     * request data from server start
+     */
+
+    protected void postRequest() {
+        postRequestForDetails();
+    }
+
+    private void postRequestForDetails() {
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("productid", productID);
+//            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
+            RX2AndroidNetworkingUtils.postForData(ConstantData.PRODUCTS_DETAIL, jsonObject, this);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void postRequestForAddCart() {
+        try {
+            JSONObject paramsObject = new JSONObject();
+            paramsObject.put("productid", productID);
+            paramsObject.put("price", "100.0");
+            paramsObject.put("number", binding.itemNoAdjustView.getValue());
+            paramsObject.put("token", LoggedInUserHelper.getToken(getActivity()));
+            RX2AndroidNetworkingUtils.postForData(ConstantData.ADD_TO_CART, paramsObject, this);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+//
+//    public JSONObject generateParams() {
+//        try {
+//            JSONObject jsonObject = new JSONObject();
+//            jsonObject.put("productid", productID);
+//            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
+//            return jsonObject;
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
+
+//    public JSONObject generateAddToCartParams() {
+//        try {
+//            JSONObject jsonObject = new JSONObject();
+//            jsonObject.put("productid", productID);
+//            jsonObject.put("price", "100.0");
+//            jsonObject.put("number", binding.itemNoAdjustView.getValue());
+//            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
+//            return jsonObject;
+//        } catch (JSONException e) {
+//            LogUtil.e("-----------" + e.getMessage());
+//        }
+//        return null;
+//    }
+
+
+//    private void addToCartToServer() {
+//        //{"productid":"1001","price": 100.00,"number":"10","token":"$Pe!nmRFNhbfUdg9VD5CJWjZMls%uSoO"}
+//
+////        String number = binding.itemNoAdjustView.getValue();
+//        try {
+//            JSONObject jsonObject = new JSONObject();
+//            jsonObject.put("productid", productID);
+//            jsonObject.put("price", "100.0");
+//            jsonObject.put("number", binding.itemNoAdjustView.getValue());
+//            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
+//            AndroidNetworkingUtils.loadURL(ConstantData.ADD_TO_CART, "ADD_TO_CART", jsonObject, this);
+//        } catch (JSONException e) {
+//            LogUtil.e("-----------" + e.getMessage());
+//        }
+//    }
+//
+//    private void loadDataFromServer() {
+//        if (productID == null) return;
+//
+//        try {
+//            JSONObject jsonObject = new JSONObject();
+//            jsonObject.put("productid", productID);
+//            AndroidNetworkingUtils.loadURL(ConstantData.PRODUCTS_DETAIL, "PRODUCTS_DETAIL", jsonObject, this);
+//        } catch (JSONException e) {
+//            LogUtil.e("-----------" + e.getMessage());
+//        }
+//    }
+
+
+    /**
+     * Step 2
+     * Handle Data Result,
+     * RX2AndroidNetworkingUtils will call back in UI thread
+     * @param result
+     */
+    protected void handleResultForUI(JSONObject result) {
+        super.handleResultForUI(result);
+        try {
+            String code = result.getString(ConstantData.CODE);
+            if (code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
+                String service = result.getString(ConstantData.SERVICE);
+                if ("addCart".equalsIgnoreCase(service)) {
+                    handleAddToCartResult(result);
+                } else if ("productDetail".equalsIgnoreCase(service)){
+                    handleDetailResult(result);
+                }
+           } else {
+                String message = result.getString(ConstantData.MSG);
+                LogUtil.e("------------------" + message);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -187,34 +302,5 @@ public class ProductDetailFragment extends InnerBaseFragment implements URLLoadC
         }
     }
 
-
-    @Override
-    /**
-     * Load data from server, than handle it
-     */
-    public void successURLLoadedCallBack(JSONObject result) {
-        try {
-            String code = result.getString(ConstantData.CODE);
-            if (code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
-                String service = result.getString(ConstantData.SERVICE);
-                if ("addCart".equalsIgnoreCase(service)) {
-                    handleAddToCartResult(result);
-                } else if ("productDetail".equalsIgnoreCase(service)){
-                    handleDetailResult(result);
-                }
-           } else {
-                String message = result.getString(ConstantData.MSG);
-                LogUtil.e("------------------" + message);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    @Override
-    public Exception failueURLLoadedCallBack(Exception exception) {
-        return null;
-    }
 
 }

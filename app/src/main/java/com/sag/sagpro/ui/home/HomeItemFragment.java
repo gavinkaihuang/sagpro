@@ -24,6 +24,8 @@ import com.sag.sagpro.ui.products.ProductListFragment;
 import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderItem;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
 import com.sag.sagpro.utils.ImageLoadCallback;
+import com.sag.sagpro.utils.LoggedInUserHelper;
+import com.sag.sagpro.utils.RX2AndroidNetworkingUtils;
 import com.sag.sagpro.utils.RecyclerItemClickListener;
 import com.sag.sagpro.utils.UIUtils;
 import com.sag.sagpro.utils.URLLoadCallback;
@@ -58,6 +60,7 @@ public class HomeItemFragment extends InnerBaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        postRequest();
     }
 
 
@@ -73,10 +76,9 @@ public class HomeItemFragment extends InnerBaseFragment {
         binding.list.setAdapter(myItemRecyclerViewAdapter);
         binding.list.addItemDecoration(UIUtils.getDividerItemBoxDecoration(getContext()));
 
-        JSONObject jsonObject = new JSONObject();
-        AndroidNetworkingUtils.loadURL(ConstantData.CATEGORIES, "CATEGORIES", new JSONObject(), new LoadUrlHandler());
-        AndroidNetworkingUtils.loadURL(ConstantData.HOME_IMGS, "HOME_IMGS", jsonObject, new LoadUrlHandler());
-
+//        JSONObject jsonObject = new JSONObject();
+//        AndroidNetworkingUtils.loadURL(ConstantData.CATEGORIES, "CATEGORIES", new JSONObject(), new LoadUrlHandler());
+//        AndroidNetworkingUtils.loadURL(ConstantData.HOME_IMGS, "HOME_IMGS", jsonObject, new LoadUrlHandler());
         //        //List item click listener
         binding.list.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), binding.list, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -109,6 +111,98 @@ public class HomeItemFragment extends InnerBaseFragment {
     }
 
 
+
+
+//    class LoadUrlHandler implements URLLoadCallback {
+//        public void successURLLoadedCallBack(JSONObject result) {
+//            try {
+//                String code = result.getString(ConstantData.CODE);
+//                //TODO service not work
+//                if (!code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
+//                    String message = result.getString(ConstantData.MSG);
+//                    LogUtil.e("------------------" + message);
+//                    return;
+//                }
+//
+//                String service = result.getString(ConstantData.SERVICE);
+//                if ("homeImgs".equals(service)) {
+//                    handleHomeImgsResult(result);
+//                } else {
+//                    handleCategoryResult(result);
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//
+//        }
+//
+//        public Exception failueURLLoadedCallBack(Exception exception) {
+//            return exception;
+//        }
+//    }
+
+
+    /*
+     * request data from server start
+     */
+
+//    JSONObject jsonObject = new JSONObject();
+//        AndroidNetworkingUtils.loadURL(ConstantData.CATEGORIES, "CATEGORIES", new JSONObject(), new LoadUrlHandler());
+//        AndroidNetworkingUtils.loadURL(ConstantData.HOME_IMGS, "HOME_IMGS", jsonObject, new LoadUrlHandler());
+
+    public void postRequest() {
+        postRequestForCategories();
+        postRequestForHomeImages();
+    }
+
+    private void postRequestForCategories() {
+        JSONObject paramsObject = generateParams();
+        RX2AndroidNetworkingUtils.postForData(ConstantData.CATEGORIES, paramsObject, this);
+    }
+
+    private void postRequestForHomeImages() {
+        JSONObject paramsObject = generateParams();
+        RX2AndroidNetworkingUtils.postForData(ConstantData.HOME_IMGS, paramsObject, this);
+    }
+
+    public JSONObject generateParams() {
+        try {
+            JSONObject jsonObject = new JSONObject();
+//            jsonObject.put("language", "en");
+//            jsonObject.put("app", "Android");
+//            jsonObject.put("version", "1.0.0");
+//            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
+            return jsonObject;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    protected void handleResultForUI(JSONObject result) {
+        super.handleResultForUI(result);
+
+        try {
+            String code = result.getString(ConstantData.CODE);
+            //TODO service not work
+            if (!code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
+                String message = result.getString(ConstantData.MSG);
+                LogUtil.e("------------------" + message);
+                return;
+            }
+
+            String service = result.getString(ConstantData.SERVICE);
+            if ("homeImgs".equalsIgnoreCase(service)) {
+                handleHomeImgsResult(result);
+            } else {
+                handleCategoryResult(result);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     /**
      * handle list data from server
      *
@@ -136,10 +230,10 @@ public class HomeItemFragment extends InnerBaseFragment {
 
         //update userinterface
         myItemRecyclerViewAdapter.setItems(placeholderContent.ITEMS);
-        getActivity().runOnUiThread(() -> {
+//        getActivity().runOnUiThread(() -> {
             myItemRecyclerViewAdapter.notifyDataSetChanged();
             updatePageFooterHeight(binding.list);
-        });
+//        });
     }
 
     private void handleHomeImgsResult(JSONObject result) {
@@ -159,39 +253,15 @@ public class HomeItemFragment extends InnerBaseFragment {
             e.printStackTrace();
         }
 
+<<<<<<< HEAD
         getActivity().runOnUiThread(() -> {
             myItemRecyclerViewAdapter.setmImageBeans(placeholderContent.LOOP_IMAGES);
+=======
+//        getActivity().runOnUiThread(() -> {
+            myItemRecyclerViewAdapter.setmImages(placeholderContent.LOOP_IMAGES);
+>>>>>>> 975afdd4f714cbe92ed4cb5e6e543fc503969375
 //            updateLoopImages();
-        });
-    }
-
-
-    class LoadUrlHandler implements URLLoadCallback {
-        public void successURLLoadedCallBack(JSONObject result) {
-            try {
-                String code = result.getString(ConstantData.CODE);
-                //TODO service not work
-                if (!code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
-                    String message = result.getString(ConstantData.MSG);
-                    LogUtil.e("------------------" + message);
-                    return;
-                }
-
-                String service = result.getString(ConstantData.SERVICE);
-                if ("homeImgs".equals(service)) {
-                    handleHomeImgsResult(result);
-                } else {
-                    handleCategoryResult(result);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-        public Exception failueURLLoadedCallBack(Exception exception) {
-            return exception;
-        }
+//        });
     }
 
 }

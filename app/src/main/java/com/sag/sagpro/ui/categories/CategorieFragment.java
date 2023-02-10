@@ -119,4 +119,49 @@ public class CategorieFragment extends Fragment {
             return exception;
         }
     }
+
+    class LoadImageHandlerForGitTest implements ImageLoadCallback {
+        public Bitmap loadImageSucceed(Bitmap bitmap) {
+            return bitmap;
+        }
+        public Exception loadImageFailed(Exception exception) {
+            return exception;
+        }
+    }
+
+    class LoadImageHandlerForGitTest1 implements ImageLoadCallback {
+        public Bitmap loadImageSucceed(Bitmap bitmap) {
+            return bitmap;
+        }
+        public Exception loadImageFailed(Exception exception) {
+            return exception;
+        }
+    }
+
+    class LoadImageHandlerForGitTest2 implements ImageLoadCallback {
+        public Bitmap loadImageSucceed(Bitmap bitmap) {
+            return bitmap;
+        }
+        public Exception loadImageFailed(Exception exception) {
+            return exception;
+        }
+    }
+
+    class LoadImageHandlerForGitTest3 implements ImageLoadCallback {
+        public Bitmap loadImageSucceed(Bitmap bitmap) {
+            return bitmap;
+        }
+        public Exception loadImageFailed(Exception exception) {
+            return exception;
+        }
+    }
+
+    class LoadImageHandlerForGitTest4 implements ImageLoadCallback {
+        public Bitmap loadImageSucceed(Bitmap bitmap) {
+            return bitmap;
+        }
+        public Exception loadImageFailed(Exception exception) {
+            return exception;
+        }
+    }
 }

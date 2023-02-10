@@ -30,9 +30,15 @@ public class ItemNoAdjustView extends LinearLayout {
     }
 
     public void setText(String text) {
-        if (!text.matches("\\d+")) {
+        if (!text.matches("^[+]{0,1}(\\d+)$")) {
             ToastUtils.showToast(getContext(), getResources().getString(R.string.prompt_input_only_digital));
             return;
+        }
+        int number = 0;
+        try {
+            number = Integer.parseInt(text);
+        } catch (NumberFormatException e) {
+            number = 1;
         }
         editEditText.setText(text);
     }

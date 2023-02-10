@@ -89,6 +89,7 @@ public class RegistFragment  extends InnerBaseFragment {
     }
 
     private void postRequestForRegistUser(String firstName, String lastName, String email, String password) {
+        super.postRequest();
         try {//{"email":"phw82@sohu.com","password":"111111","firstname":"peter","lastname":"pan"}
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("firstname", firstName);

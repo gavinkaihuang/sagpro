@@ -146,6 +146,7 @@ public class ProductDetailFragment extends InnerBaseFragment {
      */
 
     protected void postRequest() {
+        super.postRequest();
         postRequestForDetails();
     }
 

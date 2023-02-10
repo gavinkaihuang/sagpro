@@ -104,6 +104,7 @@ public class CartListFragment extends InnerBaseFragment {
      * Step 1
      */
     protected void postRequest() {
+        super.postRequest();
         postRequestForCartList();
     }
 

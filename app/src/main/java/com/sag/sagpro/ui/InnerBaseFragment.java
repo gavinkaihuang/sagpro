@@ -1,6 +1,7 @@
 package com.sag.sagpro.ui;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.sag.sagpro.MainActivity;
+import com.sag.sagpro.R;
 import com.sag.sagpro.utils.LogUtils;
 import com.sag.sagpro.utils.ScreenUtils;
 import com.sag.sagpro.utils.ToastUtils;
@@ -59,7 +61,7 @@ public abstract class InnerBaseFragment extends Fragment implements SingleObserv
      * send net work request
      */
     protected void postRequest() {
-
+        showProgressDialog();
     }
 
     /**
@@ -85,14 +87,34 @@ public abstract class InnerBaseFragment extends Fragment implements SingleObserv
     public void onSuccess(JSONObject jsonObject) {
         LogUtils.i(jsonObject.toString());
         handleResultForUI(jsonObject);
+        dismissProgressDialog();
     }
 
     @Override
     public void onError(Throwable e) {
         ToastUtils.showToast(getActivity(), e.getMessage());
+        dismissProgressDialog();
     }
 
     /**
      * SingleObserver<JSONObject> mathod end
      */
+
+
+    private ProgressDialog progressDialog;
+    private synchronized void showProgressDialog() {
+        progressDialog = new ProgressDialog(this.getContext());
+//        progressDialog.setTitle("请稍后");
+        progressDialog.setMessage(getString(R.string.prompt_loading_dialog));
+//        progressDialog.setMax(100);
+//        progressDialog.setProgress(0);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+    }
+
+    private synchronized void dismissProgressDialog() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+    }
 }

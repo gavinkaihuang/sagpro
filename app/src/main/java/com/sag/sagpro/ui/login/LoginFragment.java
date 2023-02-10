@@ -130,10 +130,12 @@ public class LoginFragment extends InnerBaseFragment {
      */
     protected void postRequest() {
         //dont't need to post request
+
     }
 
 
     private void postRequestForLogin(String userName, String password) {
+        super.postRequest();
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("email", userName);

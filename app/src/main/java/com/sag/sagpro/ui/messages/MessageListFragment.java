@@ -88,6 +88,7 @@ public class MessageListFragment extends InnerBaseFragment {
      * Step 1
      */
     public void postRequest() {
+        super.postRequest();
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("language", "en");

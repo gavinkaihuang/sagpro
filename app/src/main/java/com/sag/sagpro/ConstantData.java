@@ -11,7 +11,8 @@ public class ConstantData {
 
     public static final String MSG = "msg";
 
-    public static String URL = "http://sag-stage.woyaoai.cn/sag/";
+//    public static String URL = "http://sag-stage.woyaoai.cn/sag/";
+    public static String URL = "http://sag-stage.nongjiaju.com/sag/";
 
     /** request services **/
     public static String SIGN_IN = URL + "signin";

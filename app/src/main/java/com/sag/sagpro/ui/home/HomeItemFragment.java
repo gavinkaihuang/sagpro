@@ -109,6 +109,7 @@ public class HomeItemFragment extends InnerBaseFragment {
 
 
     public void postRequest() {
+        super.postRequest();
         postRequestForCategories();
         postRequestForHomeImages();
     }

@@ -152,7 +152,10 @@ public class CartListFragment extends InnerBaseFragment {
         try {
             String code = result.getString(ConstantData.CODE);
             if (code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
-                JSONArray jsonArray = result.getJSONArray(ConstantData.DATA);
+                JSONObject jsonObject = result.getJSONObject(ConstantData.DATA);
+//                JSONArray jsonArray = result.getJSONArray(ConstantData.DATA);
+                String totalPrice = jsonObject.getString("total");
+                JSONArray jsonArray = jsonObject.getJSONArray("list");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jdata = jsonArray.getJSONObject(i);
                     CartPlaceholderItem placeholderItem = new CartPlaceholderItem();
@@ -165,6 +168,8 @@ public class CartListFragment extends InnerBaseFragment {
                     placeholderItem.setImg(jdata.getString("img"));
                     getPlaceholderContentInstant().addItem(placeholderItem);
                 }
+
+                getPlaceholderContentInstant().setTotalPrice(totalPrice);
             } else {
                 String message = result.getString(ConstantData.MSG);
                 LogUtil.e("------------------" + message);
@@ -177,5 +182,11 @@ public class CartListFragment extends InnerBaseFragment {
         adapter.setItems(getPlaceholderContentInstant().ITEMS);
         adapter.notifyDataSetChanged();
         updatePageFooterHeight(binding.list);
+        updatePrice();
+    }
+
+    private void updatePrice() {
+//        priceTextView
+        binding.priceTextView.setText(getPlaceholderContentInstant().getTotalPrice());
     }
 }

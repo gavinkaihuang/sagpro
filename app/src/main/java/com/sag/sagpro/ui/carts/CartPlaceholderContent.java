@@ -19,6 +19,20 @@ public class CartPlaceholderContent {
 
     public static Map<String, CartPlaceholderItem> ITEM_MAP = new HashMap<String, CartPlaceholderItem>();
 
+    private static String totalPrice = null;
+
+    public static void setTotalPrice(String price) {
+        totalPrice = totalPrice;
+    }
+
+    public static String getTotalPrice() {
+        if (totalPrice == null)
+            return "0.0";
+        return totalPrice;
+//        Double price = new Double(totalPrice);
+//        return price;
+    }
+
     public static void addItem(CartPlaceholderItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.getPid(), item);

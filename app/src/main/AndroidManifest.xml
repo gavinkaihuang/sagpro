@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+    <!--        android:roundIcon="@mipmap/ic_launcher_round"-->
     <application
         android:name=".SAGApplication"
         android:allowBackup="true"
@@ -12,7 +12,6 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/app_logo_g"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sagpro"
         android:usesCleartextTraffic="true"

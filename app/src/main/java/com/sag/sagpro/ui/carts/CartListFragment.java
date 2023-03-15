@@ -150,6 +150,8 @@ public class CartListFragment extends InnerBaseFragment {
 
     private void handleResult(JSONObject result) {
         try {
+            getPlaceholderContentInstant().clearItems();
+
             String code = result.getString(ConstantData.CODE);
             if (code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
                 JSONObject jsonObject = result.getJSONObject(ConstantData.DATA);

@@ -43,6 +43,7 @@
         android:background="@drawable/xml_common_button"
         android:text="PayPal"
         android:textAppearance="@style/TextStyle_Button_Text_WHITE"
+        android:layout_marginTop="@dimen/margin_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -54,6 +55,6 @@
         app:layoutManager="LinearLayoutManager"
         tools:context=".ui.carts.CartListFragment"
         tools:listitem="@layout/fragment_cart_item"
-        app:layout_constraintBottom_toTopOf="@+id/payButton"/>
+        app:layout_constraintBottom_toTopOf="@+id/payButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

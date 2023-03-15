@@ -14,18 +14,18 @@ import java.util.Map;
 public class CartPlaceholderContent {
 
 
-    public static List<CartPlaceholderItem> ITEMS = new ArrayList<CartPlaceholderItem>();
+    public List<CartPlaceholderItem> ITEMS = new ArrayList<CartPlaceholderItem>();
 
 
-    public static Map<String, CartPlaceholderItem> ITEM_MAP = new HashMap<String, CartPlaceholderItem>();
+    public Map<String, CartPlaceholderItem> ITEM_MAP = new HashMap<String, CartPlaceholderItem>();
 
-    private static String totalPrice = null;
+    private String totalPrice = null;
 
-    public static void setTotalPrice(String price) {
-        totalPrice = totalPrice;
+    public void setTotalPrice(String price) {
+        totalPrice = price;
     }
 
-    public static String getTotalPrice() {
+    public String getTotalPrice() {
         if (totalPrice == null)
             return "0.0";
         return totalPrice;
@@ -33,9 +33,14 @@ public class CartPlaceholderContent {
 //        return price;
     }
 
-    public static void addItem(CartPlaceholderItem item) {
+    public void addItem(CartPlaceholderItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.getPid(), item);
+    }
+
+    public void clearItems() {
+        ITEMS.clear();
+        ITEM_MAP.clear();
     }
 
 

@@ -50,7 +50,7 @@
 
     <string name="title_activity_register">RegisterActivity</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="title_fragment_cart_list" tools:ignore="MissingTranslation">Cart List</string>
+    <string name="title_fragment_cart_list" tools:ignore="MissingTranslation">Cart</string>
 
     <string name="account_login_out" tools:ignore="MissingTranslation">Logout</string>
     <string name="account_login_in" tools:ignore="MissingTranslation">Login</string>

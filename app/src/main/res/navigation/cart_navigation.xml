@@ -10,5 +10,6 @@
         android:id="@+id/item_navigation_cart_list"
         android:name="com.sag.sagpro.ui.carts.CartListFragment"
         android:label="@string/title_fragment_cart_list"
-        tools:layout="@layout/fragment_cart_item_list" />
+        tools:layout="@layout/fragment_cart_item_list"
+        />
 </navigation>

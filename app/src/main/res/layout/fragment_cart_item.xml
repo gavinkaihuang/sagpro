@@ -20,9 +20,8 @@
     <com.androidnetworking.widget.ANImageView
         android:id="@+id/imgImageView"
         android:layout_width="@dimen/common_image_width"
-        android:layout_height="wrap_content"
-        android:src="@drawable/img_default"
-        android:background="@drawable/xml_view_bg_border"
+        android:layout_height="100dp"
+        android:src="@drawable/image_load_default"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

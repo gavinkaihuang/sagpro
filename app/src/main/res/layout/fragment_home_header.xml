@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/margin_small"
-    android:layout_marginBottom="@dimen/margin_middle">
+    android:layout_marginBottom="@dimen/margin_half_small" >
 
     <com.youth.banner.Banner
         android:id="@+id/viewBanner"
@@ -20,9 +20,10 @@
         android:id="@+id/categoriesButton"
         style="@style/roundbutton"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:layout_marginTop="@dimen/margin_middle"
         android:layout_weight="0.5"
+        android:layout_margin="5dp"
         android:gravity="center"
         android:background="@drawable/categories"
         app:layout_constraintEnd_toStartOf="@+id/productButton"
@@ -32,8 +33,10 @@
     <ImageButton
         android:id="@+id/productButton"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:layout_weight="0.5"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:gravity="center"
         android:background="@drawable/products"
         app:layout_constraintStart_toEndOf="@+id/categoriesButton"

@@ -15,8 +15,8 @@
     <item android:drawable="@drawable/side_btn"/>
     -->
 
-    <item android:drawable="@drawable/s_cart_select" android:state_selected="true"/>
-    <item android:drawable="@drawable/s_cart_select" android:state_pressed="true"/>
-    <item android:drawable="@drawable/s_cart_select" android:state_focused="true"/>
-    <item android:drawable="@drawable/s_cart"/>
+    <item android:drawable="@drawable/icon_cart" android:state_selected="true"/>
+    <item android:drawable="@drawable/icon_cart" android:state_pressed="true"/>
+    <item android:drawable="@drawable/icon_cart" android:state_focused="true"/>
+    <item android:drawable="@drawable/icon_cart"/>
 </selector>

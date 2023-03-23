@@ -10,9 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.sag.sagpro.ConstantData;
+import com.sag.sagpro.databinding.FragmentMessageItemListBinding;
 import com.sag.sagpro.utils.LogUtils;
 import com.sag.sagpro.utils.LoggedInUserHelper;
-import com.sag.sagpro.databinding.FragmentMessageItemListBinding;
 import com.sag.sagpro.ui.InnerBaseFragment;
 import com.sag.sagpro.ui.messages.placeholder.MessagePlaceholderContent;
 import com.sag.sagpro.ui.messages.placeholder.MessagePlaceholderItem;
@@ -64,7 +64,7 @@ public class MessageListFragment extends InnerBaseFragment {
 
         myMessageRecyclerViewAdapter = new MyMessageItemRecyclerViewAdapter(placeholderContent.ITEMS);
         binding.list.setAdapter(myMessageRecyclerViewAdapter);
-        binding.list.addItemDecoration(UIUtils.getDividerItemLineDecoration(getContext()));
+//        binding.list.addItemDecoration(UIUtils.getDividerItemLineDecoration(getContext()));
 
         binding.list.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), binding.list, new RecyclerItemClickListener.OnItemClickListener() {
             @Override

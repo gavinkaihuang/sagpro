@@ -53,19 +53,19 @@
     </style>
 
     <style name="TextStyle_Name">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/deep_gray_color</item>
     </style>
 
     <style name="TextStyle_Date">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/deep_gray_color</item>
     </style>
 
     <style name="TextStyle_Content">
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/gray_color</item>
     </style>

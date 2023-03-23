@@ -78,7 +78,7 @@ public class CartListFragment extends InnerBaseFragment {
 
         adapter = new MyCartListRecyclerViewAdapter(getPlaceholderContentInstant().ITEMS);
         binding.list.setAdapter(adapter);
-        binding.list.addItemDecoration(UIUtils.getDividerItemLineDecoration(getContext()));
+//        binding.list.addItemDecoration(UIUtils.getDividerItemLineDecoration(getContext()));
     }
 
 

@@ -40,7 +40,7 @@ public class MyProductItemRecyclerViewAdapter extends RecyclerView.Adapter<MyPro
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.imageView.setDefaultImageResId(R.drawable.img_default);
+        holder.imageView.setDefaultImageResId(R.drawable.image_load_default);
         holder.imageView.setErrorImageResId(R.drawable.img_error);
         holder.imageView.setImageUrl(mValues.get(position).getImg());
         holder.nameTextView.setText(mValues.get(position).getName());

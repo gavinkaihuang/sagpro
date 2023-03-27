@@ -48,21 +48,18 @@
 
     <string name="prompt_loading_dialog" tools:ignore="MissingTranslation">Loading data......</string>
 
-    <string name="title_activity_register">RegisterActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="title_fragment_cart_list" tools:ignore="MissingTranslation">Cart</string>
 
+    <!-- account pages -->
     <string name="account_login_out" tools:ignore="MissingTranslation">Logout</string>
     <string name="account_login_in" tools:ignore="MissingTranslation">Login</string>
     <string name="account_default_user" tools:ignore="MissingTranslation">Default User</string>
-    <string name="title_activity_splash">SplashActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- cart pages -->
+    <string name="prompt_set_address" tools:ignore="MissingTranslation">Set your address</string>
+    <string name="button_set_address" tools:ignore="MissingTranslation">Set</string>
+
+
 
 </resources>

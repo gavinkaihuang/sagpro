@@ -62,4 +62,6 @@ dependencies {
     implementation 'io.github.youth5201314:banner:2.2.2'
     implementation 'com.github.bumptech.glide:glide:4.13.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
+
+    implementation('com.paypal.checkout:android-sdk:X.X.X')
 }

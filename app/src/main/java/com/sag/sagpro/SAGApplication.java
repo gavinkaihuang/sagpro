@@ -29,20 +29,20 @@ public class SAGApplication extends Application {
                 .build();
         AndroidNetworking.initialize(this.getApplicationContext(), okHttpClient);
 
-        //paypal
-        SettingsConfig settingsConfig = new SettingsConfig(true, false);
-        String returnUrl = "com.sag.sagpro://paypalpay";
-        CheckoutConfig checkoutConfig = new CheckoutConfig(
-                this,
-                 "PAYPAL_CLIENT_ID",
-                 Environment.SANDBOX,
-                 CurrencyCode.USD,
-                 UserAction.PAY_NOW,
-                 settingsConfig,
-                 returnUrl
-        );
-        PayPalCheckout.setConfig(
-
-        )
+//        //paypal
+//        SettingsConfig settingsConfig = new SettingsConfig(true, false);
+//        String returnUrl = "com.sag.sagpro://paypalpay";
+//        CheckoutConfig checkoutConfig = new CheckoutConfig(
+//                this,
+//                 "PAYPAL_CLIENT_ID",
+//                 Environment.SANDBOX,
+//                 CurrencyCode.USD,
+//                 UserAction.PAY_NOW,
+//                 settingsConfig,
+//                 returnUrl
+//        );
+//        PayPalCheckout.setConfig(
+//
+//        )
     }
 }

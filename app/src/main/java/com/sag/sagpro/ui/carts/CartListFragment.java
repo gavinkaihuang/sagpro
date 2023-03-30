@@ -1,10 +1,13 @@
 package com.sag.sagpro.ui.carts;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -53,6 +56,8 @@ public class CartListFragment extends InnerBaseFragment {
     MyCartListRecyclerViewAdapter adapter = null;
     private CartPlaceholderContent placeholderContent = null;
 
+    private ActivityResultLauncher<Intent> launcher;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -72,6 +77,13 @@ public class CartListFragment extends InnerBaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == Activity.RESULT_OK) {
+                Intent data = result.getData();
+                // 处理返回的数据
+            }
+        });
     }
 
     @Override
@@ -91,11 +103,11 @@ public class CartListFragment extends InnerBaseFragment {
         binding.payButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+//                https://www.oodlestechnologies.com/blogs/integrating-paypal-payments-in-an-android-application/
                 PayPalConfiguration config = new PayPalConfiguration()
                         .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX) //设置 PayPal 环境为沙盒测试环境
-                        .clientId("YOUR_CLIENT_ID") //设置 PayPal 客户端 ID
-                        .merchantName("YOUR_MERCHANT_NAME") //设置商家名称
+                        .clientId("AQJMGOlCTW_q7wm1kNwyeUrmvBlYUsemPCZ2HzHCsteNq5CepXJnqGC1U5IKncmE3ieufmbswgQkfOjh") //设置 PayPal 客户端 ID
+                        .merchantName("SAGPro") //设置商家名称
                         .merchantPrivacyPolicyUri(Uri.parse("YOUR_MERCHANT_PRIVACY_POLICY_URI")) //设置隐私政策 URL
                         .merchantUserAgreementUri(Uri.parse("YOUR_MERCHANT_USER_AGREEMENT_URI")) //设置用户协议 URL
                         .acceptCreditCards(false) //设置是否接受信用卡支付
@@ -108,16 +120,23 @@ public class CartListFragment extends InnerBaseFragment {
                 getActivity().startService(intent);
 
                 //生成付款请求
-                PayPalPayment payment = new PayPalPayment(new BigDecimal("10"), "USD", "Test Payment",
+                PayPalPayment payment = new PayPalPayment(new BigDecimal("0.01"), "USD", "Test Payment",
                         PayPalPayment.PAYMENT_INTENT_SALE);
 
                 //启动 PayPal 付款页面
                 Intent intent2 = new Intent(getActivity(), PaymentActivity.class);
                 intent2.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
                 intent2.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
-                startActivityForResult(intent, 11);
+//                startActivityForResult(intent, 11);
+                launcher.launch(intent);
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        getActivity().stopService(new Intent(getActivity(), PayPalService.class));
+        super.onDestroy();
     }
 
     @Override

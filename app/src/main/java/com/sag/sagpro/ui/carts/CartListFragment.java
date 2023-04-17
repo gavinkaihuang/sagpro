@@ -20,10 +20,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.facebook.stetho.common.LogUtil;
-import com.paypal.android.sdk.payments.PayPalConfiguration;
-import com.paypal.android.sdk.payments.PayPalPayment;
-import com.paypal.android.sdk.payments.PayPalService;
-import com.paypal.android.sdk.payments.PaymentActivity;
 import com.sag.sagpro.ConstantData;
 import com.sag.sagpro.R;
 import com.sag.sagpro.databinding.FragmentCartItemBinding;
@@ -55,7 +51,6 @@ public class CartListFragment extends InnerBaseFragment {
     FragmentCartItemListBinding binding = null;
     MyCartListRecyclerViewAdapter adapter = null;
     private CartPlaceholderContent placeholderContent = null;
-    PayPalConfiguration config = null;
 
     private ActivityResultLauncher<Intent> launcher;
 
@@ -79,7 +74,7 @@ public class CartListFragment extends InnerBaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        initPayPalConfig();
+//        initPayPalConfig();
 
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == Activity.RESULT_OK) {
@@ -108,43 +103,52 @@ public class CartListFragment extends InnerBaseFragment {
             public void onClick(View v) {
 //                https://www.oodlestechnologies.com/blogs/integrating-paypal-payments-in-an-android-application/
 
-                //生成付款请求
-                PayPalPayment payment = new PayPalPayment(new BigDecimal("0.01"), "USD", "Test Payment",
-                        PayPalPayment.PAYMENT_INTENT_SALE);
+//                //生成付款请求
+//                PayPalPayment payment = new PayPalPayment(new BigDecimal("0.01"), "USD", "Test Payment",
+//                        PayPalPayment.PAYMENT_INTENT_SALE);
+//
+//                //启动 PayPal 付款页面
+//                Intent intent = new Intent(getActivity(), PaymentActivity.class);
+//                intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+//                intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
+////                startActivityForResult(intent, 11);
+//                launcher.launch(intent);
 
-                //启动 PayPal 付款页面
-                Intent intent = new Intent(getActivity(), PaymentActivity.class);
-                intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-                intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
-//                startActivityForResult(intent, 11);
-                launcher.launch(intent);
+//                Order order = new Order(
+//                        PayPalCheckoutConstant.PAYPAL_ORDER_AMOUNT,    // 订单金额
+//                        PayPalCheckoutConstant.PAYPAL_ORDER_CURRENCY,  // 货币类型
+//                        PayPalCheckoutConstant.PAYPAL_ORDER_INTENT,    // 支付意图
+//                        PayPalCheckoutConstant.PAYPAL_ORDER_DESCRIPTION // 订单描述
+//                );
+
             }
         });
     }
 
-    private void initPayPalConfig() {
-        config = new PayPalConfiguration()
-                .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX) //设置 PayPal 环境为沙盒测试环境
-                .clientId("AQJMGOlCTW_q7wm1kNwyeUrmvBlYUsemPCZ2HzHCsteNq5CepXJnqGC1U5IKncmE3ieufmbswgQkfOjh") //设置 PayPal 客户端 ID
-                .merchantName("Sample Paypal")
-                .merchantPrivacyPolicyUri(Uri.parse("https://www.example.com/privacy"))
-                .merchantUserAgreementUri(Uri.parse("https://www.example.com/legal"));
-//                .merchantName("SAGPro") //设置商家名称
-//                .merchantPrivacyPolicyUri(Uri.parse("YOUR_MERCHANT_PRIVACY_POLICY_URI")) //设置隐私政策 URL
-//                .merchantUserAgreementUri(Uri.parse("YOUR_MERCHANT_USER_AGREEMENT_URI")) //设置用户协议 URL
-//                .acceptCreditCards(false) //设置是否接受信用卡支付
-//                .languageOrLocale("en_US") //设置语言或区域
-//                .rememberUser(false); //设置是否记住用户
-
-        //创建 PayPalService 对象
-        Intent intent = new Intent(getActivity(), PayPalService.class);
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-        getActivity().startService(intent);
-    }
+//    https://developer.paypal.com/limited-release/paypal-mobile-checkout/android/
+//    private void initPayPalConfig() {
+//        config = new PayPalConfiguration()
+//                .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX) //设置 PayPal 环境为沙盒测试环境
+//                .clientId("AQJMGOlCTW_q7wm1kNwyeUrmvBlYUsemPCZ2HzHCsteNq5CepXJnqGC1U5IKncmE3ieufmbswgQkfOjh") //设置 PayPal 客户端 ID
+//                .merchantName("Sample Paypal")
+//                .merchantPrivacyPolicyUri(Uri.parse("https://www.example.com/privacy"))
+//                .merchantUserAgreementUri(Uri.parse("https://www.example.com/legal"));
+////                .merchantName("SAGPro") //设置商家名称
+////                .merchantPrivacyPolicyUri(Uri.parse("YOUR_MERCHANT_PRIVACY_POLICY_URI")) //设置隐私政策 URL
+////                .merchantUserAgreementUri(Uri.parse("YOUR_MERCHANT_USER_AGREEMENT_URI")) //设置用户协议 URL
+////                .acceptCreditCards(false) //设置是否接受信用卡支付
+////                .languageOrLocale("en_US") //设置语言或区域
+////                .rememberUser(false); //设置是否记住用户
+//
+//        //创建 PayPalService 对象
+//        Intent intent = new Intent(getActivity(), PayPalService.class);
+//        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+//        getActivity().startService(intent);
+//    }
 
     @Override
     public void onDestroy() {
-        getActivity().stopService(new Intent(getActivity(), PayPalService.class));
+//        getActivity().stopService(new Intent(getActivity(), PayPalService.class));
         super.onDestroy();
     }
 

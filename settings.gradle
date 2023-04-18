@@ -4,16 +4,18 @@ pluginManagement {
         google()
         mavenCentral()
 
-        // ~/.gradle/gradle.properties should be configured!
-        maven {
-            url  "https://cardinalcommerceprod.jfrog.io/artifactory/android"
+//        // ~/.gradle/gradle.properties should be configured!
+//        maven {
+//            url  "https://cardinalcommerceprod.jfrog.io/artifactory/android"
 //            credentials {
 //                // Be sure to add these non-sensitive credentials in order to retrieve dependencies from
 //                // the private repository.
-//                username paypal_sgerritz
-//                password AKCp8jQ8tAahqpT5JjZ4FRP2mW7GMoFZ674kGqHmupTesKeAY2G8NcmPKLuTxTGkKjDLRzDUQ
+//                username mavenUsername
+//                password mavenPassword
+////                username paypal_sgerritz
+////                password AKCp8jQ8tAahqpT5JjZ4FRP2mW7GMoFZ674kGqHmupTesKeAY2G8NcmPKLuTxTGkKjDLRzDUQ
 //            }
-        }
+//        }
     }
 }
 dependencyResolutionManagement {
@@ -23,6 +25,19 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { name 'ali';
             url 'https://maven.aliyun.com/repository/public/'}
+
+        // ~/.gradle/gradle.properties should be configured!
+        maven {
+            url  "https://cardinalcommerceprod.jfrog.io/artifactory/android"
+            credentials {
+                // Be sure to add these non-sensitive credentials in order to retrieve dependencies from
+                // the private repository.
+                username mavenUsername
+                password mavenPassword
+//                username paypal_sgerritz
+//                password AKCp8jQ8tAahqpT5JjZ4FRP2mW7GMoFZ674kGqHmupTesKeAY2G8NcmPKLuTxTGkKjDLRzDUQ
+            }
+        }
     }
 }
 rootProject.name = "sagpro"

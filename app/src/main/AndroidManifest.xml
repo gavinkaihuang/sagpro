@@ -27,12 +27,43 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+
+                <data android:host="paypalpay"
+                    android:scheme="com.sag.sagpro" />
             </intent-filter>
 
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <activity
+            android:name="com.paypal.openid.RedirectUriReceiverActivity"
+            android:excludeFromRecents="true"
+            android:theme="@style/PYPLAppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="paypalpay"
+                    android:scheme="com.sag.sagpro" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.paypal.pyplcheckout.home.view.activities.PYPLInitiateCheckoutActivity"
+            android:theme="@style/AppFullScreenTheme"
+            android:exported="true">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="paypalxo"
+                    android:scheme="com.sag.sagpro" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".activities.ProductDetailsActivity"
             android:exported="false"

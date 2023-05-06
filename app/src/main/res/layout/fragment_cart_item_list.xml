@@ -85,17 +85,26 @@
         />
 
         -->
-    <com.paypal.checkout.paymentbutton.PaymentButtonContainer
-        android:id="@+id/payButton"
-        android:layout_width="120dp"
+<!--    <com.paypal.checkout.paymentbutton.PaymentButtonContainer-->
+<!--        android:id="@+id/payButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:paypal_button_color="silver"-->
+<!--        app:paypal_button_label="pay"-->
+<!--        app:paypal_button_shape="rectangle"-->
+<!--        app:paypal_button_size="large"-->
+<!--        app:paypal_button_enabled="true"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"/>-->
+
+
+    <com.paypal.checkout.paymentbutton.PayPalButton
+        android:id="@+id/payPalButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:paypal_button_color="silver"
-        app:paypal_button_label="pay"
-        app:paypal_button_shape="rectangle"
-        app:paypal_button_size="large"
-        app:paypal_button_enabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"

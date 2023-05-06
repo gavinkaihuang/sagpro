@@ -38,7 +38,7 @@ public class SAGProApplication extends Application {
         String returnUrl = "com.sag.sagpro://paypalpay";
         CheckoutConfig checkoutConfig = new CheckoutConfig(
                 this,
-                 "PAYPAL_CLIENT_ID",
+                 "AWwyvW8ZhWdvytFGXWKfq2kyNHBUnPmSOz-1VIHeig5jLwQymszWC4QzTYSQKOStbWqeeK6ryE8DWVLN",
                  Environment.SANDBOX,
                  CurrencyCode.USD,
                  UserAction.PAY_NOW,
@@ -46,6 +46,14 @@ public class SAGProApplication extends Application {
                  returnUrl
         );
         PayPalCheckout.setConfig(checkoutConfig);
+//        PayPalCheckout.setConfig(new CheckoutConfig(
+//                this,
+//                "PAYPAL_CLIENT_ID",
+//                Environment.SANDBOX,
+//                returnUrl,
+//                CurrencyCode.USD,
+//                UserAction.PAY_NOW
+//        ));
     }
 
 //    private void initPaypal() {

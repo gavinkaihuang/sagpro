@@ -15,11 +15,31 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.facebook.stetho.common.LogUtil;
+import com.paypal.checkout.approve.Approval;
+import com.paypal.checkout.approve.OnApprove;
+import com.paypal.checkout.cancel.OnCancel;
+import com.paypal.checkout.createorder.CreateOrder;
+import com.paypal.checkout.createorder.CreateOrderActions;
+import com.paypal.checkout.createorder.CurrencyCode;
+import com.paypal.checkout.createorder.OrderIntent;
+import com.paypal.checkout.createorder.UserAction;
+import com.paypal.checkout.error.ErrorInfo;
+import com.paypal.checkout.error.OnError;
+import com.paypal.checkout.order.Amount;
+import com.paypal.checkout.order.AppContext;
+import com.paypal.checkout.order.CaptureOrderResult;
+import com.paypal.checkout.order.OnCaptureComplete;
+import com.paypal.checkout.order.Order;
+import com.paypal.checkout.order.PurchaseUnit;
+import com.paypal.checkout.shipping.OnShippingChange;
+import com.paypal.checkout.shipping.ShippingChangeActions;
+import com.paypal.checkout.shipping.ShippingChangeData;
 import com.sag.sagpro.ConstantData;
 import com.sag.sagpro.R;
 import com.sag.sagpro.databinding.FragmentCartItemBinding;
@@ -37,11 +57,13 @@ import com.sag.sagpro.utils.RX2AndroidNetworkingUtils;
 import com.sag.sagpro.utils.UIUtils;
 import com.sag.sagpro.utils.URLLoadCallback;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 /**
  * A fragment representing a list of Items.
@@ -98,31 +120,115 @@ public class CartListFragment extends InnerBaseFragment {
         binding.list.setAdapter(adapter);
 //        binding.list.addItemDecoration(UIUtils.getDividerItemLineDecoration(getContext()));
 
-        binding.payButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                https://www.oodlestechnologies.com/blogs/integrating-paypal-payments-in-an-android-application/
-
-//                //生成付款请求
-//                PayPalPayment payment = new PayPalPayment(new BigDecimal("0.01"), "USD", "Test Payment",
-//                        PayPalPayment.PAYMENT_INTENT_SALE);
+//        binding.payPalButton.setup(
 //
-//                //启动 PayPal 付款页面
-//                Intent intent = new Intent(getActivity(), PaymentActivity.class);
-//                intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-//                intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
-////                startActivityForResult(intent, 11);
-//                launcher.launch(intent);
+//        );
+        binding.payPalButton.setup(new CreateOrder() {
+                                       @Override
+                                       public void create(@NotNull CreateOrderActions createOrderActions) {
+                                           ArrayList<PurchaseUnit> purchaseUnits = new ArrayList<>();
+                                           purchaseUnits.add(
+                                                   new PurchaseUnit.Builder()
+                                                           .amount(
+                                                                   new Amount.Builder()
+                                                                           .currencyCode(CurrencyCode.USD)
+                                                                           .value("10.00")
+                                                                           .build()
+                                                           )
+                                                           .build()
+                                           );
+                                           Order order = new Order(
+                                                   OrderIntent.CAPTURE,
+                                                   new AppContext.Builder()
+                                                           .userAction(UserAction.PAY_NOW)
+                                                           .build(),
+                                                   purchaseUnits
+                                           );
+                                           createOrderActions.create(order, (CreateOrderActions.OnOrderCreated) null);
+                                       }
+                                   },
+                new OnApprove() {
+                    @Override
+                    public void onApprove(@NotNull Approval approval) {
+                        approval.getOrderActions().capture(new OnCaptureComplete() {
+                            @Override
+                            public void onCaptureComplete(@NotNull CaptureOrderResult result) {
+                                Log.i("CaptureOrder", String.format("CaptureOrderResult: %s", result));
+                            }
+                        });
+                    }
+                },
+                new OnShippingChange() {
+                    @Override
+                    public void onShippingChanged(@NonNull ShippingChangeData shippingChangeData, @NonNull ShippingChangeActions shippingChangeActions) {
 
-//                Order order = new Order(
-//                        PayPalCheckoutConstant.PAYPAL_ORDER_AMOUNT,    // 订单金额
-//                        PayPalCheckoutConstant.PAYPAL_ORDER_CURRENCY,  // 货币类型
-//                        PayPalCheckoutConstant.PAYPAL_ORDER_INTENT,    // 支付意图
-//                        PayPalCheckoutConstant.PAYPAL_ORDER_DESCRIPTION // 订单描述
-//                );
+                    }
+                },
+                new OnCancel() {
+                    @Override
+                    public void onCancel() {
+                        Log.d("onCancel", "Buyer cancelled the paypal experience.");
+                    }
+                },
+                new OnError() {
+                    @Override
+                    public void onError(@NonNull ErrorInfo errorInfo) {
+                        Log.d("OnError", errorInfo.toString());
+                    }
+                });
+//        binding.payPalButton.setup(
+//                new CreateOrder() {
+//                    @Override
+//                    public void create(@NotNull CreateOrderActions createOrderActions) {
+//                        Log.i("CaptureOrder", "create: ");
+//                    }
+//                },
+//                new OnApprove() {
+//                    @Override
+//                    public void onApprove(@NotNull Approval approval) {
+//                        Log.i("CaptureOrder", "getOrderId: " + approval.getData().getOrderId());
+//                    }
+//                }
+////                ,
+////                new OnCancel() {
+////                    @Override
+////                    public void onCancel() {
+////                        Log.d("CaptureOrder", "Buyer cancelled the PayPal experience.");
+////                    }
+////                },
+////                new OnError() {
+////                    @Override
+////                    public void onError(@NotNull ErrorInfo errorInfo) {
+////                        Log.d("CaptureOrder", String.format("Error: %s", errorInfo));
+////                    }
+////                }
+//        );
 
-            }
-        });
+//        binding.payButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                https://www.oodlestechnologies.com/blogs/integrating-paypal-payments-in-an-android-application/
+//
+////                //生成付款请求
+////                PayPalPayment payment = new PayPalPayment(new BigDecimal("0.01"), "USD", "Test Payment",
+////                        PayPalPayment.PAYMENT_INTENT_SALE);
+////
+////                //启动 PayPal 付款页面
+////                Intent intent = new Intent(getActivity(), PaymentActivity.class);
+////                intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+////                intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
+//////                startActivityForResult(intent, 11);
+////                launcher.launch(intent);
+//
+////                Order order = new Order(
+////                        PayPalCheckoutConstant.PAYPAL_ORDER_AMOUNT,    // 订单金额
+////                        PayPalCheckoutConstant.PAYPAL_ORDER_CURRENCY,  // 货币类型
+////                        PayPalCheckoutConstant.PAYPAL_ORDER_INTENT,    // 支付意图
+////                        PayPalCheckoutConstant.PAYPAL_ORDER_DESCRIPTION // 订单描述
+////                );
+//
+//            }
+//        });
     }
 
 //    https://developer.paypal.com/limited-release/paypal-mobile-checkout/android/

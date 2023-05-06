@@ -118,11 +118,6 @@ public class CartListFragment extends InnerBaseFragment {
 
         adapter = new MyCartListRecyclerViewAdapter(getPlaceholderContentInstant().ITEMS);
         binding.list.setAdapter(adapter);
-//        binding.list.addItemDecoration(UIUtils.getDividerItemLineDecoration(getContext()));
-
-//        binding.payPalButton.setup(
-//
-//        );
         binding.payPalButton.setup(new CreateOrder() {
                                        @Override
                                        public void create(@NotNull CreateOrderActions createOrderActions) {
@@ -154,6 +149,12 @@ public class CartListFragment extends InnerBaseFragment {
                             @Override
                             public void onCaptureComplete(@NotNull CaptureOrderResult result) {
                                 Log.i("CaptureOrder", String.format("CaptureOrderResult: %s", result));
+                                if (result instanceof CaptureOrderResult.Success) {
+                                    //ORDER IS SUCCESS
+                                } else {
+                                    //TODO
+
+                                }
                             }
                         });
                     }
@@ -176,102 +177,14 @@ public class CartListFragment extends InnerBaseFragment {
                         Log.d("OnError", errorInfo.toString());
                     }
                 });
-//        binding.payPalButton.setup(
-//                new CreateOrder() {
-//                    @Override
-//                    public void create(@NotNull CreateOrderActions createOrderActions) {
-//                        Log.i("CaptureOrder", "create: ");
-//                    }
-//                },
-//                new OnApprove() {
-//                    @Override
-//                    public void onApprove(@NotNull Approval approval) {
-//                        Log.i("CaptureOrder", "getOrderId: " + approval.getData().getOrderId());
-//                    }
-//                }
-////                ,
-////                new OnCancel() {
-////                    @Override
-////                    public void onCancel() {
-////                        Log.d("CaptureOrder", "Buyer cancelled the PayPal experience.");
-////                    }
-////                },
-////                new OnError() {
-////                    @Override
-////                    public void onError(@NotNull ErrorInfo errorInfo) {
-////                        Log.d("CaptureOrder", String.format("Error: %s", errorInfo));
-////                    }
-////                }
-//        );
 
-//        binding.payButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                https://www.oodlestechnologies.com/blogs/integrating-paypal-payments-in-an-android-application/
-//
-////                //生成付款请求
-////                PayPalPayment payment = new PayPalPayment(new BigDecimal("0.01"), "USD", "Test Payment",
-////                        PayPalPayment.PAYMENT_INTENT_SALE);
-////
-////                //启动 PayPal 付款页面
-////                Intent intent = new Intent(getActivity(), PaymentActivity.class);
-////                intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-////                intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
-//////                startActivityForResult(intent, 11);
-////                launcher.launch(intent);
-//
-////                Order order = new Order(
-////                        PayPalCheckoutConstant.PAYPAL_ORDER_AMOUNT,    // 订单金额
-////                        PayPalCheckoutConstant.PAYPAL_ORDER_CURRENCY,  // 货币类型
-////                        PayPalCheckoutConstant.PAYPAL_ORDER_INTENT,    // 支付意图
-////                        PayPalCheckoutConstant.PAYPAL_ORDER_DESCRIPTION // 订单描述
-////                );
-//
-//            }
-//        });
     }
 
-//    https://developer.paypal.com/limited-release/paypal-mobile-checkout/android/
-//    private void initPayPalConfig() {
-//        config = new PayPalConfiguration()
-//                .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX) //设置 PayPal 环境为沙盒测试环境
-//                .clientId("AQJMGOlCTW_q7wm1kNwyeUrmvBlYUsemPCZ2HzHCsteNq5CepXJnqGC1U5IKncmE3ieufmbswgQkfOjh") //设置 PayPal 客户端 ID
-//                .merchantName("Sample Paypal")
-//                .merchantPrivacyPolicyUri(Uri.parse("https://www.example.com/privacy"))
-//                .merchantUserAgreementUri(Uri.parse("https://www.example.com/legal"));
-////                .merchantName("SAGPro") //设置商家名称
-////                .merchantPrivacyPolicyUri(Uri.parse("YOUR_MERCHANT_PRIVACY_POLICY_URI")) //设置隐私政策 URL
-////                .merchantUserAgreementUri(Uri.parse("YOUR_MERCHANT_USER_AGREEMENT_URI")) //设置用户协议 URL
-////                .acceptCreditCards(false) //设置是否接受信用卡支付
-////                .languageOrLocale("en_US") //设置语言或区域
-////                .rememberUser(false); //设置是否记住用户
-//
-//        //创建 PayPalService 对象
-//        Intent intent = new Intent(getActivity(), PayPalService.class);
-//        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-//        getActivity().startService(intent);
-//    }
 
     @Override
     public void onDestroy() {
-//        getActivity().stopService(new Intent(getActivity(), PayPalService.class));
         super.onDestroy();
     }
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//    }
-
-    //    @Override
-//    public void successURLLoadedCallBack(JSONObject result) {
-//        handleResult(result);
-//    }
-//
-//    @Override
-//    public Exception failueURLLoadedCallBack(Exception exception) {
-//        return null;
-//    }
 
 
     public CartPlaceholderContent getPlaceholderContentInstant() {
@@ -289,20 +202,6 @@ public class CartListFragment extends InnerBaseFragment {
         postRequestForCartList();
     }
 
-//    private void loadDataFromServer() {
-//        //{"language":"en","app":"ios","version":"1.0.0","token":"$Pe!nmRFNhbfUdg9VD5CJWjZMls%uSoO"}
-//
-//        try {
-//            JSONObject jsonObject = new JSONObject();
-//            jsonObject.put("language", "en");
-//            jsonObject.put("app", "android");
-//            jsonObject.put("version", "1.0.0");
-//            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
-//            AndroidNetworkingUtils.loadURL(ConstantData.CART_LIST, "CART_LIST", jsonObject, this);
-//        } catch (JSONException e) {
-//            LogUtil.e("-----------" + e.getMessage());
-//        }
-//    }
 
     private void postRequestForCartList() {
         try {

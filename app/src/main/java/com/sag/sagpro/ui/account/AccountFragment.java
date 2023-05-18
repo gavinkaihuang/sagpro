@@ -1,6 +1,7 @@
 package com.sag.sagpro.ui.account;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.sag.sagpro.BaseActivity;
 import com.sag.sagpro.R;
+import com.sag.sagpro.activities.AddressListActivity;
+import com.sag.sagpro.activities.LoginActivity;
 import com.sag.sagpro.data.model.LoggedInUser;
 import com.sag.sagpro.utils.LogUtils;
 import com.sag.sagpro.utils.LoggedInUserHelper;
@@ -52,6 +55,15 @@ public class AccountFragment extends Fragment {
                         ((BaseActivity) activity).redirectToLogin();;
                     }
                 }
+            }
+        });
+
+        binding.shipImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), AddressListActivity.class);
+                startActivity(intent);
             }
         });
     }

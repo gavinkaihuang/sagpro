@@ -13,8 +13,7 @@ import com.facebook.stetho.common.LogUtil;
 import com.sag.sagpro.ConstantData;
 import com.sag.sagpro.databinding.FragmentCartItemBinding;
 import com.sag.sagpro.interfaces.NumberAdjustHandler;
-import com.sag.sagpro.utils.LoggedInUserHelper;
-import com.sag.sagpro.utils.PramsUtils;
+import com.sag.sagpro.utils.ParamsUtils;
 import com.sag.sagpro.utils.RX2AndroidNetworkingUtils;
 import com.sag.sagpro.widgets.ItemNoAdjustView;
 
@@ -123,7 +122,7 @@ public class MyCartListRecyclerViewAdapter extends RecyclerView.Adapter<MyCartLi
                 JSONArray dataArray = new JSONArray();
                 dataArray.put(oneItemObject);
 
-                JSONObject jsonObject = PramsUtils.getRequestParamsRoot(context);
+                JSONObject jsonObject = ParamsUtils.getRequestParamsRoot(context);
                 jsonObject.put("data", dataArray);
 //                jsonObject.put("app", "android");
 //                jsonObject.put("version", "1.0.0");

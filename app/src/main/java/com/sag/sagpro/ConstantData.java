@@ -35,5 +35,22 @@ public class ConstantData {
 
     public static String UPDATE_CART = URL + "updatecart";
 
+//    http://sag-stage.woyaoai.cn/test.php
+
+    public static String ADDRESS_LIST = URL + "address/list";
+
+    public static String ADDRESS_CREATE = URL + "address/create";
+
+    public static String ADDRESS_EDIT = URL + "address/edit";
+
+    public static String ADDRESS_DELETE = URL + "address/delete";
+
+    public static String ORDER_LIST = URL + "order/list";
+
+    public static String ORDER_CREATE = URL + "order/create";
+
+    public static String ORDER_VIEW = URL + "order/view";
+
+
 
 }

@@ -29,14 +29,12 @@ public class AddressListActivity extends BaseActivity {
         //反射方式无法传递参数，改为老方法
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.container, AddressListFragment.newInstance(1))
+                .add(R.id.container, AddressListFragment.newInstance())
                 .commit();
 
 
 
         showBackArraw(true);
-
-
     }
 
     @Override

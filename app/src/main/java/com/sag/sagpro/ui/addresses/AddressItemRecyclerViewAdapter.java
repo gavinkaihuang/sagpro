@@ -3,26 +3,35 @@ package com.sag.sagpro.ui.addresses;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sag.sagpro.databinding.FragmentAddressItemBinding;
-import com.sag.sagpro.ui.addresses.placeholder.PlaceholderContent.PlaceholderItem;
+import com.sag.sagpro.ui.addresses.placeholder.AddressPlaceholderItem;
+import com.sag.sagpro.ui.placeholder.PlaceholderItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyAddressItemRecyclerViewAdapter extends RecyclerView.Adapter<MyAddressItemRecyclerViewAdapter.ViewHolder> {
+public class AddressItemRecyclerViewAdapter extends RecyclerView.Adapter<AddressItemRecyclerViewAdapter.ViewHolder> {
 
-    private final List<PlaceholderItem> mValues;
+    private List<PlaceholderItem> mValues;
 
-    public MyAddressItemRecyclerViewAdapter(List<PlaceholderItem> items) {
+    public AddressItemRecyclerViewAdapter() {
+        mValues = new ArrayList<PlaceholderItem>();
+    }
+
+    public void setItems(List<PlaceholderItem> items) {
         mValues = items;
     }
+
+//    public void addItem(PlaceholderItem item) {
+//        mValues.add(item);
+//    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -33,9 +42,11 @@ public class MyAddressItemRecyclerViewAdapter extends RecyclerView.Adapter<MyAdd
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+        AddressPlaceholderItem item = (AddressPlaceholderItem) mValues.get(position);
+
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mIdView.setText(item.getAid());
+        holder.mContentView.setText(item.getAddress());
     }
 
     @Override

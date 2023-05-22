@@ -22,12 +22,12 @@ public class MessagePlaceholderContent {
     /**
      * A map of sample (placeholder) items, by ID.
      */
-    public  Map<String, MessagePlaceholderItem> ITEM_MAP = new HashMap<String, MessagePlaceholderItem>();
+//    public  Map<String, MessagePlaceholderItem> ITEM_MAP = new HashMap<String, MessagePlaceholderItem>();
 
 
     public  void addItem(MessagePlaceholderItem item) {
         ITEMS.add(item);
-        ITEM_MAP.put(item.getMid(), item);
+//        ITEM_MAP.put(item.getMid(), item);
     }
 
     public MessagePlaceholderItem getItem(int position) {

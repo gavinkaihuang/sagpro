@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 import java.util.Locale;
 
-public class PramsUtils {
+public class ParamsUtils {
 
     public static JSONObject getRequestParamsRoot(Context context) {
         JSONObject jsonObject = new JSONObject();

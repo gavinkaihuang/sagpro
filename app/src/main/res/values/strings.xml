@@ -59,9 +59,17 @@
     <!-- cart pages -->
     <string name="prompt_set_address" tools:ignore="MissingTranslation">Set your address</string>
     <string name="button_set_address" tools:ignore="MissingTranslation">Set</string>
-    <string name="title_activity_address_list">Address List</string>
-    <!-- Strings used for fragments for navigation -->
 
+    <!-- address -->
+    <string name="title_activity_address_list">Address List</string>
+    <string name="button_add_address">Add Address</string>
+    <string name="label_address_name">Name</string>
+    <string name="label_address_address">Address</string>
+    <string name="label_address_phone">Phone</string>
+    <string name="label_address_default">Set as default</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Strings used for fragments for navigation -->
 
 
 </resources>

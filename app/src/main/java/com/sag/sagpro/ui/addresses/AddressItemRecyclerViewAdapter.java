@@ -45,8 +45,9 @@ public class AddressItemRecyclerViewAdapter extends RecyclerView.Adapter<Address
         AddressPlaceholderItem item = (AddressPlaceholderItem) mValues.get(position);
 
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(item.getAid());
-        holder.mContentView.setText(item.getAddress());
+        holder.nameView.setText(item.getName());
+        holder.addressView.setText(item.getAddress());
+        holder.phoneView.setText(item.getPhone());
     }
 
     @Override
@@ -55,19 +56,21 @@ public class AddressItemRecyclerViewAdapter extends RecyclerView.Adapter<Address
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView nameView;
+        public final TextView addressView;
+        public final TextView phoneView;
         public PlaceholderItem mItem;
 
         public ViewHolder(FragmentAddressItemBinding binding) {
             super(binding.getRoot());
-            mIdView = binding.itemNumber;
-            mContentView = binding.content;
+            nameView = binding.nameTV;
+            addressView = binding.addressTV;
+            phoneView = binding.phoneTV;
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + addressView.getText() + "'";
         }
     }
 }

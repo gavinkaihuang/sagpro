@@ -1,8 +1,11 @@
 package com.sag.sagpro.ui.addresses;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +15,10 @@ import android.view.ViewGroup;
 
 import com.sag.sagpro.ConstantData;
 import com.sag.sagpro.R;
+import com.sag.sagpro.activities.ProductDetailsActivity;
+import com.sag.sagpro.databinding.FragmentAddressItemBinding;
+import com.sag.sagpro.databinding.FragmentAddressItemListBinding;
+import com.sag.sagpro.databinding.FragmentProductItemListBinding;
 import com.sag.sagpro.ui.InnerBaseFragment;
 import com.sag.sagpro.ui.addresses.placeholder.AddressPlaceholderItem;
 import com.sag.sagpro.ui.placeholder.PlaceholderContent;
@@ -31,6 +38,7 @@ public class AddressListFragment extends InnerBaseFragment {
     private int totalResultsNo = 0;
     private PlaceholderContent placeholderContent = null;
     private AddressItemRecyclerViewAdapter itemRecyclerViewAdapter = null;
+    private FragmentAddressItemListBinding binding = null;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -58,16 +66,37 @@ public class AddressListFragment extends InnerBaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_address_item_list, container, false);
+
+        binding = FragmentAddressItemListBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+//        binding = FragmentAddressItemBinding.inflate()
+//        View view = inflater.inflate(R.layout.fragment_address_item_list, container, false);
+//        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         Context context = view.getContext();
         itemRecyclerViewAdapter = new AddressItemRecyclerViewAdapter();
-        RecyclerView recyclerView = (RecyclerView) view;
+
+        RecyclerView recyclerView = (RecyclerView) binding.list;
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(itemRecyclerViewAdapter);
-        return view;
-    }
 
+        binding.addAddressBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //TODO
+//                Intent intent = new Intent();
+//                intent.putExtras(bundle);
+//                intent.setClass(view.getContext(), ProductDetailsActivity.class);
+//                view.getContext().startActivity(intent);
+            }
+        });
+    }
 
     /*
      * request data from server start

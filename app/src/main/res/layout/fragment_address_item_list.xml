@@ -1,13 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list"
-    android:name="com.sag.sagpro.ui.addresses.AddressItemFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.addresses.AddressListFragment"
-    tools:listitem="@layout/fragment_address_item" />
+    android:orientation="vertical">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:name="com.sag.sagpro.ui.addresses.AddressItemFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
+        app:layoutManager="LinearLayoutManager"
+        tools:context=".ui.addresses.AddressListFragment"
+        tools:listitem="@layout/fragment_address_item" />
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+
+        <Button
+            android:id="@+id/addAddressBT"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_large_height"
+            android:background="@drawable/xml_common_button"
+            android:enabled="true"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:layout_gravity="center"
+            android:text="@string/button_add_address"
+            android:textAppearance="@style/TextStyle_18_4"
+             />
+<!--    </LinearLayout>-->
+
+</LinearLayout>

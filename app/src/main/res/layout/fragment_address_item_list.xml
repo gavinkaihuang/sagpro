@@ -32,6 +32,7 @@
             android:enabled="true"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
+            android:layout_marginBottom="20dp"
             android:layout_gravity="center"
             android:text="@string/button_add_address"
             android:textAppearance="@style/TextStyle_18_4"

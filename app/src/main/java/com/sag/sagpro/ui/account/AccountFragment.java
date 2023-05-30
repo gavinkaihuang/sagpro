@@ -15,12 +15,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.sag.sagpro.BaseActivity;
 import com.sag.sagpro.R;
-import com.sag.sagpro.activities.AddressListActivity;
-import com.sag.sagpro.activities.LoginActivity;
+import com.sag.sagpro.activities.AddressActivity;
 import com.sag.sagpro.data.model.LoggedInUser;
+import com.sag.sagpro.databinding.FragmentAccountBinding;
 import com.sag.sagpro.utils.LogUtils;
 import com.sag.sagpro.utils.LoggedInUserHelper;
-import com.sag.sagpro.databinding.FragmentAccountBinding;
 
 public class AccountFragment extends Fragment {
 
@@ -68,7 +67,7 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(getActivity(), AddressListActivity.class);
+                intent.setClass(getActivity(), AddressActivity.class);
                 startActivity(intent);
             }
         });

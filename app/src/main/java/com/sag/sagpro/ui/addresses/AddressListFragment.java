@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,6 +41,7 @@ public class AddressListFragment extends InnerBaseFragment {
     private PlaceholderContent placeholderContent = null;
     private AddressItemRecyclerViewAdapter itemRecyclerViewAdapter = null;
     private FragmentAddressItemListBinding binding = null;
+    NavController navController = null;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -94,6 +97,10 @@ public class AddressListFragment extends InnerBaseFragment {
 //                intent.putExtras(bundle);
 //                intent.setClass(view.getContext(), ProductDetailsActivity.class);
 //                view.getContext().startActivity(intent);
+
+//                navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_login);
+//                navController.navigate(R.id.item_navigation_signin);
+                Navigation.findNavController(v).navigate(R.id.item_navigation_address_add, null);
             }
         });
     }

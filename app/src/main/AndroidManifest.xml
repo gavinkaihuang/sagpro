@@ -46,36 +46,36 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name="com.paypal.openid.RedirectUriReceiverActivity"
-            android:excludeFromRecents="true"
-            android:theme="@style/PYPLAppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+<!--        <activity-->
+<!--            android:name="com.paypal.openid.RedirectUriReceiverActivity"-->
+<!--            android:excludeFromRecents="true"-->
+<!--            android:theme="@style/PYPLAppTheme">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.VIEW" />-->
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--                <category android:name="android.intent.category.BROWSABLE" />-->
 
-                <data
-                    android:host="paypalpay"
-                    android:scheme="com.sag.sagpro" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.paypal.pyplcheckout.home.view.activities.PYPLInitiateCheckoutActivity"
-            android:exported="true"
-            android:theme="@style/AppFullScreenTheme">
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
+<!--                <data-->
+<!--                    android:host="paypalpay"-->
+<!--                    android:scheme="com.sag.sagpro" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+<!--        <activity-->
+<!--            android:name="com.paypal.pyplcheckout.home.view.activities.PYPLInitiateCheckoutActivity"-->
+<!--            android:exported="true"-->
+<!--            android:theme="@style/AppFullScreenTheme">-->
+<!--            <intent-filter android:autoVerify="true">-->
+<!--                <action android:name="android.intent.action.VIEW" />-->
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--                <category android:name="android.intent.category.BROWSABLE" />-->
 
-                <data
-                    android:host="paypalxo"
-                    android:scheme="com.sag.sagpro" />
-            </intent-filter>
-        </activity>
+<!--                <data-->
+<!--                    android:host="paypalxo"-->
+<!--                    android:scheme="com.sag.sagpro" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
         <activity
             android:name=".activities.ProductDetailsActivity"
             android:exported="false"
@@ -102,7 +102,7 @@
                 android:value="" />
         </activity> <!-- <activity -->
         <activity
-            android:name=".activities.AddressListActivity"
+            android:name=".activities.AddressActivity"
             android:exported="false"
             android:screenOrientation="portrait">
             <meta-data

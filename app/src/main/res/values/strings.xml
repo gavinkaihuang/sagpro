@@ -55,31 +55,33 @@
     <string name="account_login_out" tools:ignore="MissingTranslation">Logout</string>
     <string name="account_login_in" tools:ignore="MissingTranslation">Login</string>
     <string name="account_default_user" tools:ignore="MissingTranslation">Default User</string>
+    <string name="account_cart" tools:ignore="MissingTranslation">Carts</string>
+    <string name="account_address" tools:ignore="MissingTranslation">Addresses</string>
+    <string name="account_order" tools:ignore="MissingTranslation">Orders</string>
 
     <!-- cart pages -->
     <string name="prompt_set_address" tools:ignore="MissingTranslation">Set your address</string>
     <string name="button_set_address" tools:ignore="MissingTranslation">Set</string>
 
     <!-- address -->
-    <string name="title_activity_address_list">Address List</string>
-    <string name="button_add_address">Add Address</string>
-    <string name="button_update_address">Update</string>
-    <string name="button_delete_address">Delete</string>
+    <string name="title_activity_address_list" tools:ignore="MissingTranslation">Address List</string>
+    <string name="button_add_address" tools:ignore="MissingTranslation">Add Address</string>
+    <string name="button_update_address" tools:ignore="MissingTranslation">Update</string>
+    <string name="button_delete_address" tools:ignore="MissingTranslation">Delete</string>
 
-    <string name="label_address_name">Name *</string>
-    <string name="label_address_name_required">Name required!</string>
-    <string name="label_address_address">Address *</string>
-    <string name="label_address_address_required">Address required!</string>
-    <string name="label_address_phone">Phone *</string>
-    <string name="label_address_phone_required">Phone required!</string>
-    <string name="label_address_default">Set as default</string>
+    <string name="label_address_name" tools:ignore="MissingTranslation">Name *</string>
+    <string name="label_address_name_required" tools:ignore="MissingTranslation">Name required!</string>
+    <string name="label_address_address" tools:ignore="MissingTranslation">Address *</string>
+    <string name="label_address_address_required" tools:ignore="MissingTranslation">Address required!</string>
+    <string name="label_address_phone" tools:ignore="MissingTranslation">Phone *</string>
+    <string name="label_address_phone_required" tools:ignore="MissingTranslation">Phone required!</string>
+    <string name="label_address_default" tools:ignore="MissingTranslation">Set as default</string>
 
-    <string name="title_activity_address_add">Address Add</string>
-    <string name="title_activity_address_edit">Address Edit</string>
+    <string name="title_activity_address_add" tools:ignore="MissingTranslation">Address Add</string>
+    <string name="title_activity_address_edit" tools:ignore="MissingTranslation">Address Edit</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-<!--    <string name="hello_blank_fragment">Hello blank fragment</string>-->
-<!--    &lt;!&ndash; Strings used for fragments for navigation &ndash;&gt;-->
+    <!-- order -->
+    <string name="title_activity_order_list" tools:ignore="MissingTranslation">Order List</string>
 
 
 </resources>

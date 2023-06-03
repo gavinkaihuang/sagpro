@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/address_navigation"
+    app:startDestination="@+id/item_navigation_order_list">
+
+
+    <fragment
+        android:id="@+id/item_navigation_order_list"
+        android:name="com.sag.sagpro.ui.orders.OrderListFragment"
+        android:label="@string/title_activity_order_list"
+        tools:layout="@layout/fragment_order_item_list" />
+
+<!--    <fragment-->
+<!--        android:id="@+id/item_navigation_address_add"-->
+<!--        android:name="com.sag.sagpro.ui.addresses.AddressAddFragment"-->
+<!--        android:label="@string/title_activity_address_add"-->
+<!--        tools:layout="@layout/fragment_address_add" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/item_navigation_address_edit"-->
+<!--        android:name="com.sag.sagpro.ui.addresses.AddressEditFragment"-->
+<!--        android:label="@string/title_activity_address_add"-->
+<!--        tools:layout="@layout/fragment_address_add" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/item_navigation_regist"-->
+<!--        android:name="com.sag.sagpro.ui.regist.RegistFragment"-->
+<!--        android:label="@string/title_activity_regist"-->
+<!--        tools:layout="@layout/fragment_regist" />-->
+</navigation>

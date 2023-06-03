@@ -16,6 +16,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.sag.sagpro.BaseActivity;
 import com.sag.sagpro.R;
 import com.sag.sagpro.activities.AddressActivity;
+import com.sag.sagpro.activities.CartListActivity;
+import com.sag.sagpro.activities.OrdersActivity;
 import com.sag.sagpro.data.model.LoggedInUser;
 import com.sag.sagpro.databinding.FragmentAccountBinding;
 import com.sag.sagpro.utils.LogUtils;
@@ -68,6 +70,22 @@ public class AccountFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), AddressActivity.class);
+                startActivity(intent);
+            }
+        });
+        binding.payImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), CartListActivity.class);
+                startActivity(intent);
+            }
+        });
+        binding.reciveImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), OrdersActivity.class);
                 startActivity(intent);
             }
         });

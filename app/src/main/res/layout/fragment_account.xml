@@ -85,6 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:src="@drawable/account_more"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/reciveImageView" />
 
@@ -102,6 +103,7 @@
         android:layout_width="@dimen/image_icon_width"
         android:layout_height="wrap_content"
         android:src="@drawable/account_order"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/moreImageView"
         app:layout_constraintStart_toEndOf="@+id/reciveImageView"
         app:layout_constraintTop_toTopOf="@+id/reciveImageView" />
@@ -110,7 +112,7 @@
         android:id="@+id/pageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pay"
+        android:text="@string/account_cart"
         app:layout_constraintEnd_toEndOf="@+id/payImageView"
         app:layout_constraintStart_toStartOf="@+id/payImageView"
         app:layout_constraintTop_toBottomOf="@+id/payImageView" />
@@ -119,7 +121,7 @@
         android:id="@+id/shipTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ship"
+        android:text="@string/account_address"
         app:layout_constraintEnd_toEndOf="@+id/shipImageView"
         app:layout_constraintStart_toStartOf="@+id/shipImageView"
         app:layout_constraintTop_toBottomOf="@+id/shipImageView" />
@@ -128,7 +130,7 @@
         android:id="@+id/reciveTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Receive"
+        android:text="@string/account_order"
         app:layout_constraintEnd_toEndOf="@+id/reciveImageView"
         app:layout_constraintStart_toStartOf="@+id/reciveImageView"
         app:layout_constraintTop_toBottomOf="@+id/reciveImageView" />
@@ -138,6 +140,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Info"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/infoImageView"
         app:layout_constraintStart_toStartOf="@+id/infoImageView"
         app:layout_constraintTop_toBottomOf="@+id/infoImageView" />
@@ -147,6 +150,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="More"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/moreImageView"
         app:layout_constraintStart_toStartOf="@+id/moreImageView"
         app:layout_constraintTop_toBottomOf="@+id/moreImageView" />

@@ -25,14 +25,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/nameET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/xml_border_with_corner"
-                android:hint="@string/label_address_name_required"
                 android:singleLine="true"
                 android:lines="1" />
 
@@ -40,7 +40,8 @@
                 android:id="@+id/labelNamePrompt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone" />
+                android:textColor="@color/button_red"
+                android:visibility="gone"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -60,7 +61,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/addressET"
@@ -68,13 +70,13 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/xml_border_with_corner"
                 android:gravity="top"
-                android:hint="@string/label_address_address_required"
                 android:lines="3" />
 
             <TextView
                 android:id="@+id/labelAddressPrompt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/button_red"
                 android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
@@ -96,14 +98,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/phoneET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/xml_border_with_corner"
-                android:hint="@string/label_address_phone_required"
                 android:singleLine="true"
                 android:lines="1" />
 
@@ -111,6 +113,7 @@
                 android:id="@+id/labelPhonePrompt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/button_red"
                 android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>

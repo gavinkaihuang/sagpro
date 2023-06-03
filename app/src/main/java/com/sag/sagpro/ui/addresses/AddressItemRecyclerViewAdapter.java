@@ -45,7 +45,10 @@ public class AddressItemRecyclerViewAdapter extends RecyclerView.Adapter<Address
         AddressPlaceholderItem item = (AddressPlaceholderItem) mValues.get(position);
 
         holder.mItem = mValues.get(position);
-        holder.nameView.setText(item.getName());
+        if (item.getChoose().equals("1")) {
+            holder.nameView.setText(item.getName() + " (default)");
+        } else
+            holder.nameView.setText(item.getName());
         holder.addressView.setText(item.getAddress());
         holder.phoneView.setText(item.getPhone());
     }

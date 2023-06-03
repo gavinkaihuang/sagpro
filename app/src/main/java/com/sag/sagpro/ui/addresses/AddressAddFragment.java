@@ -67,8 +67,6 @@ public class AddressAddFragment extends InnerBaseFragment {
                 String isChecked = binding.defaultAddCB.isChecked() ? "1" : "0";
                 if (checkParams(name, address, phone))
                     actionPostRequest(name, address, phone, isChecked);
-
-
             }
         });
 
@@ -77,8 +75,26 @@ public class AddressAddFragment extends InnerBaseFragment {
 
 
     private boolean checkParams(String name, String address, String phone) {
+        boolean isPassed = true;
+        if ("".equals(name)) {
+            isPassed = false;
+            binding.labelNamePrompt.setText(R.string.label_address_name_required);
+            binding.labelNamePrompt.setVisibility(View.VISIBLE);
+        }
 
-        return true;
+        if ("".equals(address)) {
+            isPassed = false;
+            binding.labelAddressPrompt.setText(R.string.label_address_address_required);
+            binding.labelAddressPrompt.setVisibility(View.VISIBLE);
+        }
+
+        if ("".equals(phone)) {
+            isPassed = false;
+            binding.labelPhonePrompt.setText(R.string.label_address_phone_required);
+            binding.labelPhonePrompt.setVisibility(View.VISIBLE);
+        }
+
+        return isPassed;
     }
 
     private void actionPostRequest(String name, String address, String phone, String choose) {

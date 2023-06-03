@@ -53,6 +53,7 @@ import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderContent;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
 import com.sag.sagpro.utils.LogUtils;
 import com.sag.sagpro.utils.LoggedInUserHelper;
+import com.sag.sagpro.utils.ParamsUtils;
 import com.sag.sagpro.utils.RX2AndroidNetworkingUtils;
 import com.sag.sagpro.utils.UIUtils;
 import com.sag.sagpro.utils.URLLoadCallback;
@@ -205,13 +206,15 @@ public class CartListFragment extends InnerBaseFragment {
 
     private void postRequestForCartList() {
         try {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("language", "en");
-            jsonObject.put("app", "android");
-            jsonObject.put("version", "1.0.0");
-            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
+            JSONObject jsonObject = ParamsUtils.getRequestParamsRoot(getContext());
+//            JSONObject jsonObject = new JSONObject();
+//
+//            jsonObject.put("language", "en");
+//            jsonObject.put("app", "android");
+//            jsonObject.put("version", "1.0.0");
+//            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
             RX2AndroidNetworkingUtils.postForData(ConstantData.CART_LIST, jsonObject, this);
-        } catch (JSONException e) {
+        } catch (Exception e) {
             LogUtil.e("-----------" + e.getMessage());
         }
     }

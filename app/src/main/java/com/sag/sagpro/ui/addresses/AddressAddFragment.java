@@ -1,5 +1,6 @@
 package com.sag.sagpro.ui.addresses;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,25 +12,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.facebook.stetho.common.LogUtil;
+import com.sag.sagpro.ConstantData;
 import com.sag.sagpro.R;
+import com.sag.sagpro.activities.LoginActivity;
+import com.sag.sagpro.data.model.LoggedInUser;
 import com.sag.sagpro.databinding.FragmentAddressAddBinding;
 import com.sag.sagpro.databinding.FragmentLoginBinding;
+import com.sag.sagpro.ui.InnerBaseFragment;
+import com.sag.sagpro.utils.LoggedInUserHelper;
+import com.sag.sagpro.utils.ParamsUtils;
+import com.sag.sagpro.utils.RX2AndroidNetworkingUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AddressAddFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddressAddFragment extends Fragment {
+public class AddressAddFragment extends InnerBaseFragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private FragmentAddressAddBinding binding;
 
@@ -37,39 +40,17 @@ public class AddressAddFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AddressAddFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AddressAddFragment newInstance(String param1, String param2) {
-        AddressAddFragment fragment = new AddressAddFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         binding = FragmentAddressAddBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+       return binding.getRoot();
     }
 
     @Override
@@ -79,8 +60,76 @@ public class AddressAddFragment extends Fragment {
         binding.addAddressBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.item_navigation_address_list, null);
+
+                String name = binding.nameET.getText().toString();
+                String address = binding.addressET.getText().toString();
+                String phone = binding.phoneET.getText().toString();
+                String isChecked = binding.defaultAddCB.isChecked() ? "1" : "0";
+                if (checkParams(name, address, phone))
+                    actionPostRequest(name, address, phone, isChecked);
+
+
             }
         });
+
+        dismissProgressDialog();
     }
+
+
+    private boolean checkParams(String name, String address, String phone) {
+
+        return true;
+    }
+
+    private void actionPostRequest(String name, String address, String phone, String choose) {
+        super.postRequest();
+        try {
+            JSONObject jsonObject = ParamsUtils.getRequestParamsRoot(getContext());
+//            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("name", name);
+            jsonObject.put("address", address);
+            jsonObject.put("phone", phone);
+            jsonObject.put("choose", choose);
+
+            RX2AndroidNetworkingUtils.postForData(ConstantData.ADDRESS_CREATE, jsonObject, this);
+//            AndroidNetworkingUtils.loadURL(ConstantData.SIGN_IN, "SIGN_IN", jsonObject, this);
+        } catch (JSONException e) {
+            LogUtil.e("-----------" + e.getMessage());
+        }
+    }
+
+    protected void handleResultForUI(final JSONObject result) {
+
+
+        Navigation.findNavController(binding.addAddressBT).navigate(R.id.item_navigation_address_list, null);
+    }
+
+    @Override
+    public void onSuccess(JSONObject jsonObject) {
+        super.onSuccess(jsonObject);
+    }
+
+    //    private void handleResult(JSONObject result) {
+//        try {
+//            JSONObject jsonObject = result.getJSONObject(ConstantData.DATA);
+//
+//            String email = binding.emailEditText.getText().toString();
+//            String password = binding.passwordEditText.getText().toString();
+//
+//            loggedInUser = new LoggedInUser(null, email);
+//            loggedInUser.setPassword(password);
+//            loggedInUser.setToken(jsonObject.getString("token"));
+//            loggedInUser.setExpireDate(jsonObject.getString("expiredate"));
+//            LoggedInUserHelper.saveUserToLocal(getActivity(), loggedInUser);//save to local storeage
+//
+//            //update UID
+//            ((LoginActivity) getActivity()).updateUiWithUser(loggedInUser);
+//            getActivity().setResult(Activity.RESULT_OK);
+//            getActivity().finish();
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
 }

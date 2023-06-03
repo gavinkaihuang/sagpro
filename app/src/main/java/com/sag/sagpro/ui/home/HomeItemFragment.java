@@ -26,6 +26,7 @@ import com.sag.sagpro.utils.AndroidNetworkingUtils;
 import com.sag.sagpro.utils.ImageLoadCallback;
 import com.sag.sagpro.utils.LogUtils;
 import com.sag.sagpro.utils.LoggedInUserHelper;
+import com.sag.sagpro.utils.ParamsUtils;
 import com.sag.sagpro.utils.RX2AndroidNetworkingUtils;
 import com.sag.sagpro.utils.RecyclerItemClickListener;
 import com.sag.sagpro.utils.UIUtils;
@@ -115,28 +116,30 @@ public class HomeItemFragment extends InnerBaseFragment {
     }
 
     private void postRequestForCategories() {
-        JSONObject paramsObject = generateParams();
+//        JSONObject paramsObject = generateParams();
+        JSONObject paramsObject = ParamsUtils.getRequestParamsRoot(getContext());
         RX2AndroidNetworkingUtils.postForData(ConstantData.CATEGORIES, paramsObject, this);
     }
 
     private void postRequestForHomeImages() {
-        JSONObject paramsObject = generateParams();
-        RX2AndroidNetworkingUtils.postForData(ConstantData.HOME_IMGS, paramsObject, this);
+//        JSONObject paramsObject = generateParams();
+        JSONObject jsonObject = ParamsUtils.getRequestParamsRoot(getContext());
+        RX2AndroidNetworkingUtils.postForData(ConstantData.HOME_IMGS, jsonObject, this);
     }
 
-    public JSONObject generateParams() {
-        try {
-            JSONObject jsonObject = new JSONObject();
-//            jsonObject.put("language", "en");
-//            jsonObject.put("app", "Android");
-//            jsonObject.put("version", "1.0.0");
-//            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
-            return jsonObject;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+//    public JSONObject generateParams() {
+//        try {
+//            JSONObject jsonObject = new JSONObject();
+////            jsonObject.put("language", "en");
+////            jsonObject.put("app", "Android");
+////            jsonObject.put("version", "1.0.0");
+////            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
+//            return jsonObject;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 
     protected void handleResultForUI(JSONObject result) {
         super.handleResultForUI(result);

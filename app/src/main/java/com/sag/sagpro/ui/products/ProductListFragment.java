@@ -24,6 +24,7 @@ import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderItem;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
 import com.sag.sagpro.utils.ImageLoadCallback;
 import com.sag.sagpro.utils.LogUtils;
+import com.sag.sagpro.utils.ParamsUtils;
 import com.sag.sagpro.utils.RX2AndroidNetworkingUtils;
 import com.sag.sagpro.utils.RecyclerItemClickListener;
 import com.sag.sagpro.utils.UIUtils;
@@ -147,7 +148,8 @@ public class ProductListFragment extends InnerBaseFragment {
 //            return;
 
         try {
-            JSONObject jsonObject = new JSONObject();
+//            JSONObject jsonObject = new JSONObject();
+            JSONObject jsonObject = ParamsUtils.getRequestParamsRoot(getContext());
             jsonObject.put("cid", cid);
             jsonObject.put("start", "" + startNo);
 //            AndroidNetworkingUtils.loadURL(ConstantData.PRODUCTS_LIST, "PRODUCTS_LIST", jsonObject, new LoadUrlHandler());

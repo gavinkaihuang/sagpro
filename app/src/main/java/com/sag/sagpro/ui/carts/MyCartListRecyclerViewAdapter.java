@@ -116,6 +116,7 @@ public class MyCartListRecyclerViewAdapter extends RecyclerView.Adapter<MyCartLi
 //            data":[{"cartid":"3","price": 100.00, "number":100},{"cartid":"4","price": 100.00,"number":100},{"cartid":"5","price": 100.00,"number":100}],
             try {
                 JSONObject oneItemObject = new JSONObject();
+//                JSONObject oneItemObject = ParamsUtils.getRequestParamsRoot(context);
                 oneItemObject.put("cartid", cartId);
                 oneItemObject.put("price", price);
                 oneItemObject.put("number", "" + number);

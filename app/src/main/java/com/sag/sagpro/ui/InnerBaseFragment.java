@@ -23,7 +23,10 @@ import io.reactivex.disposables.Disposable;
 
 public abstract class InnerBaseFragment extends Fragment implements SingleObserver<JSONObject> {
 
-    @Override
+    /**
+     * @param view
+     * @param savedInstanceState
+     */
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         postRequest();
@@ -102,9 +105,8 @@ public abstract class InnerBaseFragment extends Fragment implements SingleObserv
 
 
     private ProgressDialog progressDialog;
-    private synchronized void showProgressDialog() {
+    protected synchronized void showProgressDialog() {
         progressDialog = new ProgressDialog(this.getContext());
-//        progressDialog.setTitle("请稍后");
         progressDialog.setMessage(getString(R.string.prompt_loading_dialog));
 //        progressDialog.setMax(100);
 //        progressDialog.setProgress(0);
@@ -112,7 +114,7 @@ public abstract class InnerBaseFragment extends Fragment implements SingleObserv
         progressDialog.show();
     }
 
-    private synchronized void dismissProgressDialog() {
+    protected synchronized void dismissProgressDialog() {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }

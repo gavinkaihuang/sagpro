@@ -26,6 +26,7 @@ import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderContent;
 import com.sag.sagpro.ui.products.placeholder.ProductPlaceholderItem;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
 import com.sag.sagpro.utils.LoggedInUserHelper;
+import com.sag.sagpro.utils.ParamsUtils;
 import com.sag.sagpro.utils.RX2AndroidNetworkingUtils;
 import com.sag.sagpro.utils.ToastUtils;
 import com.sag.sagpro.utils.URLLoadCallback;
@@ -152,7 +153,8 @@ public class ProductDetailFragment extends InnerBaseFragment {
 
     private void postRequestForDetails() {
         try {
-            JSONObject jsonObject = new JSONObject();
+//            JSONObject jsonObject = new JSONObject();
+            JSONObject jsonObject = ParamsUtils.getRequestParamsRoot(getContext());
             jsonObject.put("productid", productID);
 //            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
             RX2AndroidNetworkingUtils.postForData(ConstantData.PRODUCTS_DETAIL, jsonObject, this);
@@ -163,7 +165,8 @@ public class ProductDetailFragment extends InnerBaseFragment {
 
     private void postRequestForAddCart() {
         try {
-            JSONObject paramsObject = new JSONObject();
+//            JSONObject paramsObject = new JSONObject();
+            JSONObject paramsObject = ParamsUtils.getRequestParamsRoot(getContext());
             paramsObject.put("productid", productID);
             paramsObject.put("price", "100.0");
             paramsObject.put("number", binding.itemNoAdjustView.getValue());

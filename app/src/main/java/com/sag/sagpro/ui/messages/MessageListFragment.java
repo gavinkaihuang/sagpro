@@ -17,6 +17,7 @@ import com.sag.sagpro.ui.InnerBaseFragment;
 import com.sag.sagpro.ui.messages.placeholder.MessagePlaceholderContent;
 import com.sag.sagpro.ui.messages.placeholder.MessagePlaceholderItem;
 import com.sag.sagpro.utils.AndroidNetworkingUtils;
+import com.sag.sagpro.utils.ParamsUtils;
 import com.sag.sagpro.utils.RX2AndroidNetworkingUtils;
 import com.sag.sagpro.utils.RecyclerItemClickListener;
 import com.sag.sagpro.utils.UIUtils;
@@ -90,13 +91,14 @@ public class MessageListFragment extends InnerBaseFragment {
     public void postRequest() {
         super.postRequest();
         try {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("language", "en");
-            jsonObject.put("app", "Android");
-            jsonObject.put("version", "1.0.0");
-            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
+            JSONObject jsonObject = ParamsUtils.getRequestParamsRoot(getContext());
+//            JSONObject jsonObject = new JSONObject();
+//            jsonObject.put("language", "en");
+//            jsonObject.put("app", "Android");
+//            jsonObject.put("version", "1.0.0");
+//            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
             RX2AndroidNetworkingUtils.postForData(ConstantData.MESSAGES, jsonObject, this);
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

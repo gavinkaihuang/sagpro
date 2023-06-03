@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/xml_border_with_corner"
                 android:hint="@string/label_address_name_required"
+                android:singleLine="true"
                 android:lines="1" />
 
             <TextView
@@ -103,6 +104,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/xml_border_with_corner"
                 android:hint="@string/label_address_phone_required"
+                android:singleLine="true"
                 android:lines="1" />
 
             <TextView
@@ -111,6 +113,26 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone" />
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/edittext_icon_left"
+        android:paddingTop="@dimen/edittext_icon_topper"
+        android:paddingRight="@dimen/edittext_icon_left"
+        android:paddingBottom="@dimen/edittext_icon_footer">
+
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:text="@string/label_address_default" />
+
+        <CheckBox
+            android:id="@+id/defaultAddCB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <Button

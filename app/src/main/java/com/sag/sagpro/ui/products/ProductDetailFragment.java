@@ -112,36 +112,6 @@ public class ProductDetailFragment extends InnerBaseFragment {
 
 
 
-//    /**
-//     * Load data from server, than handle it
-//     */
-//    public void successURLLoadedCallBack(JSONObject result) {
-//        try {
-//            String code = result.getString(ConstantData.CODE);
-//            if (code.equalsIgnoreCase(ConstantData.CODE_SUCCESS)) {
-//                String service = result.getString(ConstantData.SERVICE);
-//                if ("addCart".equalsIgnoreCase(service)) {
-//                    handleAddToCartResult(result);
-//                } else if ("productDetail".equalsIgnoreCase(service)){
-//                    handleDetailResult(result);
-//                }
-//           } else {
-//                String message = result.getString(ConstantData.MSG);
-//                LogUtil.e("------------------" + message);
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-//
-//    public Exception failueURLLoadedCallBack(Exception exception) {
-//        return null;
-//    }
-
-
-
-
     /*
      * request data from server start
      */
@@ -176,62 +146,6 @@ public class ProductDetailFragment extends InnerBaseFragment {
             e.printStackTrace();
         }
     }
-//
-//    public JSONObject generateParams() {
-//        try {
-//            JSONObject jsonObject = new JSONObject();
-//            jsonObject.put("productid", productID);
-//            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
-//            return jsonObject;
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-
-//    public JSONObject generateAddToCartParams() {
-//        try {
-//            JSONObject jsonObject = new JSONObject();
-//            jsonObject.put("productid", productID);
-//            jsonObject.put("price", "100.0");
-//            jsonObject.put("number", binding.itemNoAdjustView.getValue());
-//            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
-//            return jsonObject;
-//        } catch (JSONException e) {
-//            LogUtil.e("-----------" + e.getMessage());
-//        }
-//        return null;
-//    }
-
-
-//    private void addToCartToServer() {
-//        //{"productid":"1001","price": 100.00,"number":"10","token":"$Pe!nmRFNhbfUdg9VD5CJWjZMls%uSoO"}
-//
-////        String number = binding.itemNoAdjustView.getValue();
-//        try {
-//            JSONObject jsonObject = new JSONObject();
-//            jsonObject.put("productid", productID);
-//            jsonObject.put("price", "100.0");
-//            jsonObject.put("number", binding.itemNoAdjustView.getValue());
-//            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
-//            AndroidNetworkingUtils.loadURL(ConstantData.ADD_TO_CART, "ADD_TO_CART", jsonObject, this);
-//        } catch (JSONException e) {
-//            LogUtil.e("-----------" + e.getMessage());
-//        }
-//    }
-//
-//    private void loadDataFromServer() {
-//        if (productID == null) return;
-//
-//        try {
-//            JSONObject jsonObject = new JSONObject();
-//            jsonObject.put("productid", productID);
-//            AndroidNetworkingUtils.loadURL(ConstantData.PRODUCTS_DETAIL, "PRODUCTS_DETAIL", jsonObject, this);
-//        } catch (JSONException e) {
-//            LogUtil.e("-----------" + e.getMessage());
-//        }
-//    }
-
 
     /**
      * Step 2

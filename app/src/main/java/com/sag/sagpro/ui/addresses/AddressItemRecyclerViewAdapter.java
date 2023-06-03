@@ -29,9 +29,6 @@ public class AddressItemRecyclerViewAdapter extends RecyclerView.Adapter<Address
         mValues = items;
     }
 
-//    public void addItem(PlaceholderItem item) {
-//        mValues.add(item);
-//    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -56,6 +53,10 @@ public class AddressItemRecyclerViewAdapter extends RecyclerView.Adapter<Address
     @Override
     public int getItemCount() {
         return mValues.size();
+    }
+
+    public PlaceholderItem getItem(int position) {
+        return mValues.get(position);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

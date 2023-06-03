@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sag.sagpro.BaseActivity;
 import com.sag.sagpro.ConstantData;
 import com.sag.sagpro.R;
 import com.sag.sagpro.activities.ProductDetailsActivity;
@@ -24,9 +25,11 @@ import com.sag.sagpro.databinding.FragmentProductItemListBinding;
 import com.sag.sagpro.ui.InnerBaseFragment;
 import com.sag.sagpro.ui.addresses.placeholder.AddressPlaceholderItem;
 import com.sag.sagpro.ui.placeholder.PlaceholderContent;
+import com.sag.sagpro.ui.placeholder.PlaceholderItem;
 import com.sag.sagpro.utils.LogUtils;
 import com.sag.sagpro.utils.ParamsUtils;
 import com.sag.sagpro.utils.RX2AndroidNetworkingUtils;
+import com.sag.sagpro.utils.RecyclerItemClickListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -71,6 +74,10 @@ public class AddressListFragment extends InnerBaseFragment {
                              Bundle savedInstanceState) {
 
         binding = FragmentAddressItemListBinding.inflate(inflater, container, false);
+
+        getActivity().setTitle(R.string.title_activity_address_list);
+        ((BaseActivity) getActivity()).showBackArraw(true);
+
         return binding.getRoot();
 //        binding = FragmentAddressItemBinding.inflate()
 //        View view = inflater.inflate(R.layout.fragment_address_item_list, container, false);
@@ -87,6 +94,30 @@ public class AddressListFragment extends InnerBaseFragment {
         RecyclerView recyclerView = (RecyclerView) binding.list;
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(itemRecyclerViewAdapter);
+
+        binding.list.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), binding.list, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                PlaceholderItem phi = itemRecyclerViewAdapter.getItem(position);
+                if (!(phi instanceof AddressPlaceholderItem))
+                    return;
+
+                AddressPlaceholderItem addPHI = (AddressPlaceholderItem) phi;
+//                String aid = addPHI.getAid();
+                Bundle bundle = new Bundle();
+                bundle.putString(AddressEditFragment.PARAMS_ADDRESS_ID, addPHI.getAid());
+                bundle.putString(AddressEditFragment.PARAMS_NAME, addPHI.getName());
+                bundle.putString(AddressEditFragment.PARAMS_ADDRESS, addPHI.getAddress());
+                bundle.putString(AddressEditFragment.PARAMS_PHONE, addPHI.getPhone());
+                bundle.putString(AddressEditFragment.PARAMS_CHOOSE, addPHI.getChoose());
+                Navigation.findNavController(view).navigate(R.id.item_navigation_address_edit, bundle);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                LogUtils.i("item " + position + " long clicked");
+            }
+        }));
 
         binding.addAddressBT.setOnClickListener(new View.OnClickListener() {
             @Override

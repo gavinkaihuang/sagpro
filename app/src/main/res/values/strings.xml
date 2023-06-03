@@ -63,6 +63,9 @@
     <!-- address -->
     <string name="title_activity_address_list">Address List</string>
     <string name="button_add_address">Add Address</string>
+    <string name="button_update_address">Update</string>
+    <string name="button_delete_address">Delete</string>
+
     <string name="label_address_name">Name *</string>
     <string name="label_address_name_required">Name required!</string>
     <string name="label_address_address">Address *</string>
@@ -72,6 +75,7 @@
     <string name="label_address_default">Set as default</string>
 
     <string name="title_activity_address_add">Address Add</string>
+    <string name="title_activity_address_edit">Address Edit</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 <!--    <string name="hello_blank_fragment">Hello blank fragment</string>-->

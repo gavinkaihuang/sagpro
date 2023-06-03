@@ -18,6 +18,12 @@
         android:label="@string/title_activity_address_add"
         tools:layout="@layout/fragment_address_add" />
 
+    <fragment
+        android:id="@+id/item_navigation_address_edit"
+        android:name="com.sag.sagpro.ui.addresses.AddressEditFragment"
+        android:label="@string/title_activity_address_add"
+        tools:layout="@layout/fragment_address_add" />
+
 <!--    <fragment-->
 <!--        android:id="@+id/item_navigation_regist"-->
 <!--        android:name="com.sag.sagpro.ui.regist.RegistFragment"-->

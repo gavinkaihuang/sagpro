@@ -1,27 +1,22 @@
 package com.sag.sagpro.ui.addresses;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.facebook.stetho.common.LogUtil;
 import com.sag.sagpro.BaseActivity;
 import com.sag.sagpro.ConstantData;
 import com.sag.sagpro.R;
-import com.sag.sagpro.activities.LoginActivity;
-import com.sag.sagpro.data.model.LoggedInUser;
 import com.sag.sagpro.databinding.FragmentAddressAddBinding;
-import com.sag.sagpro.databinding.FragmentLoginBinding;
+import com.sag.sagpro.databinding.FragmentAddressEditBinding;
 import com.sag.sagpro.ui.InnerBaseFragment;
-import com.sag.sagpro.utils.LoggedInUserHelper;
 import com.sag.sagpro.utils.ParamsUtils;
 import com.sag.sagpro.utils.RX2AndroidNetworkingUtils;
 
@@ -32,14 +27,23 @@ import org.json.JSONObject;
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
  */
-public class AddressAddFragment extends InnerBaseFragment {
+public class AddressEditFragment extends InnerBaseFragment {
 
+    public static final String PARAMS_ADDRESS_ID = "PARAMS_ADDRESS_ID";
+    public static final String PARAMS_NAME = "PARAMS_ADDRESS_NAME";
+    public static final String PARAMS_ADDRESS = "PARAMS_ADDRESS";
+    public static final String PARAMS_PHONE = "PARAMS_PHONE";
+    public static final String PARAMS_CHOOSE = "PARAMS_CHOOSE";
+    private FragmentAddressEditBinding binding;
+    private String aid = null;
+    private String name = null;
+    private String address = null;
+    private String phone = null;
+    private String choose = null;
 
-    private FragmentAddressAddBinding binding;
-
-    public AddressAddFragment() {
-        // Required empty public constructor
-    }
+//    public AddressEditFragment() {
+//        // Required empty public constructor
+//    }
 
 
     @Override
@@ -50,19 +54,34 @@ public class AddressAddFragment extends InnerBaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentAddressAddBinding.inflate(inflater, container, false);
 
-        getActivity().setTitle(R.string.title_activity_address_add);
+        if (getArguments() != null) {
+            aid = getArguments().getString(PARAMS_ADDRESS_ID);
+            name = getArguments().getString(PARAMS_NAME);
+            address = getArguments().getString(PARAMS_ADDRESS);
+            phone = getArguments().getString(PARAMS_PHONE);
+            choose = getArguments().getString(PARAMS_CHOOSE);
+        } else {
+            Navigation.findNavController(binding.updateAddressBT).navigate(R.id.item_navigation_address_list, null);
+        }
+
+        binding = FragmentAddressEditBinding.inflate(inflater, container, false);
+        binding.nameET.setText(name);
+        binding.addressET.setText(address);
+        binding.phoneET.setText(phone);
+        binding.defaultAddCB.setChecked("1".equals(choose) ? true : false);
+
+        getActivity().setTitle(R.string.title_activity_address_edit);
         ((BaseActivity) getActivity()).showBackArraw(true);
 
-       return binding.getRoot();
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.addAddressBT.setOnClickListener(new View.OnClickListener() {
+        binding.updateAddressBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -71,7 +90,14 @@ public class AddressAddFragment extends InnerBaseFragment {
                 String phone = binding.phoneET.getText().toString();
                 String isChecked = binding.defaultAddCB.isChecked() ? "1" : "0";
                 if (checkParams(name, address, phone))
-                    actionPostRequest(name, address, phone, isChecked);
+                    actionPostUpdateRequest(aid, name, address, phone, isChecked);
+            }
+        });
+
+        binding.deleteAddressBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actionPostDeleteRequest(aid);
             }
         });
 
@@ -102,18 +128,29 @@ public class AddressAddFragment extends InnerBaseFragment {
         return isPassed;
     }
 
-    private void actionPostRequest(String name, String address, String phone, String choose) {
+    private void actionPostDeleteRequest(String aid) {
         super.postRequest();
         try {
             JSONObject jsonObject = ParamsUtils.getRequestParamsRoot(getContext());
-//            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("aid", aid);
+
+            RX2AndroidNetworkingUtils.postForData(ConstantData.ADDRESS_DELETE, jsonObject, this);
+        } catch (JSONException e) {
+            LogUtil.e("-----------" + e.getMessage());
+        }
+    }
+
+    private void actionPostUpdateRequest(String aid, String name, String address, String phone, String choose) {
+        super.postRequest();
+        try {
+            JSONObject jsonObject = ParamsUtils.getRequestParamsRoot(getContext());
+            jsonObject.put("aid", aid);
             jsonObject.put("name", name);
             jsonObject.put("address", address);
             jsonObject.put("phone", phone);
             jsonObject.put("choose", choose);
 
-            RX2AndroidNetworkingUtils.postForData(ConstantData.ADDRESS_CREATE, jsonObject, this);
-//            AndroidNetworkingUtils.loadURL(ConstantData.SIGN_IN, "SIGN_IN", jsonObject, this);
+            RX2AndroidNetworkingUtils.postForData(ConstantData.ADDRESS_EDIT, jsonObject, this);
         } catch (JSONException e) {
             LogUtil.e("-----------" + e.getMessage());
         }
@@ -122,15 +159,35 @@ public class AddressAddFragment extends InnerBaseFragment {
     protected void handleResultForUI(final JSONObject result) {
 
 
-        Navigation.findNavController(binding.addAddressBT).navigate(R.id.item_navigation_address_list, null);
+        Navigation.findNavController(binding.updateAddressBT).navigate(R.id.item_navigation_address_list, null);
     }
 
-    @Override
-    public void onSuccess(JSONObject jsonObject) {
-        super.onSuccess(jsonObject);
-    }
+    /*
+     * request data from server start
+     */
 
-    //    private void handleResult(JSONObject result) {
+//    protected void postRequest() {
+//        super.postRequest();
+//        postRequestForDetails();
+//    }
+//
+//    private void postRequestForDetails() {
+//        try {
+//            JSONObject jsonObject = ParamsUtils.getRequestParamsRoot(getContext());
+//            jsonObject.put("productid", productID);
+////            jsonObject.put("token", LoggedInUserHelper.getToken(getActivity()));
+//            RX2AndroidNetworkingUtils.postForData(ConstantData.PRODUCTS_DETAIL, jsonObject, this);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    @Override
+//    public void onSuccess(JSONObject jsonObject) {
+//        super.onSuccess(jsonObject);
+//    }
+//
+//        private void handleResult(JSONObject result) {
 //        try {
 //            JSONObject jsonObject = result.getJSONObject(ConstantData.DATA);
 //

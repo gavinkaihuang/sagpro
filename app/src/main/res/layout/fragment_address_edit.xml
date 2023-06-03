@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.addresses.AddressAddFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/edittext_icon_left"
+        android:paddingTop="@dimen/edittext_icon_topper"
+        android:paddingRight="@dimen/edittext_icon_left"
+        android:paddingBottom="@dimen/edittext_icon_footer">
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:text="@string/label_address_name" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/nameET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/xml_border_with_corner"
+                android:singleLine="true"
+                android:lines="1" />
+
+            <TextView
+                android:id="@+id/labelNamePrompt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/button_red"
+                android:visibility="gone"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/edittext_icon_left"
+        android:paddingTop="@dimen/edittext_icon_topper"
+        android:paddingRight="@dimen/edittext_icon_left"
+        android:paddingBottom="@dimen/edittext_icon_footer">
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:text="@string/label_address_address" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/addressET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/xml_border_with_corner"
+                android:gravity="top"
+                android:lines="3" />
+
+            <TextView
+                android:id="@+id/labelAddressPrompt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/button_red"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/edittext_icon_left"
+        android:paddingTop="@dimen/edittext_icon_topper"
+        android:paddingRight="@dimen/edittext_icon_left"
+        android:paddingBottom="@dimen/edittext_icon_footer">
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:text="@string/label_address_phone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/phoneET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/xml_border_with_corner"
+                android:singleLine="true"
+                android:lines="1" />
+
+            <TextView
+                android:id="@+id/labelPhonePrompt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/button_red"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/edittext_icon_left"
+        android:paddingTop="@dimen/edittext_icon_topper"
+        android:paddingRight="@dimen/edittext_icon_left"
+        android:paddingBottom="@dimen/edittext_icon_footer">
+
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:text="@string/label_address_default" />
+
+        <CheckBox
+            android:id="@+id/defaultAddCB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/updateAddressBT"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_large_height"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/margin_12x"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/xml_common_button"
+            android:enabled="true"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:text="@string/button_update_address"
+            android:textAppearance="@style/TextStyle_18_4" />
+
+        <Button
+            android:id="@+id/deleteAddressBT"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_large_height"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/margin_12x"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/xml_common_button"
+            android:enabled="true"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:text="@string/button_delete_address"
+            android:textAppearance="@style/TextStyle_18_4" />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

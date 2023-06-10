@@ -62,6 +62,8 @@
     <!-- cart pages -->
     <string name="prompt_set_address" tools:ignore="MissingTranslation">Set your address</string>
     <string name="button_set_address" tools:ignore="MissingTranslation">Set</string>
+    <string name="label_unit" tools:ignore="MissingTranslation">USD</string>
+    <string name="label_pay" tools:ignore="MissingTranslation">Pay</string>
 
     <!-- address -->
     <string name="title_activity_address_list" tools:ignore="MissingTranslation">Address List</string>

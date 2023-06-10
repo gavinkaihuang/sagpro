@@ -42,6 +42,7 @@ import com.paypal.checkout.shipping.ShippingChangeActions;
 import com.paypal.checkout.shipping.ShippingChangeData;
 import com.sag.sagpro.ConstantData;
 import com.sag.sagpro.R;
+import com.sag.sagpro.activities.AddressActivity;
 import com.sag.sagpro.databinding.FragmentCartItemBinding;
 import com.sag.sagpro.databinding.FragmentCartItemListBinding;
 import com.sag.sagpro.ui.InnerBaseFragment;
@@ -119,65 +120,81 @@ public class CartListFragment extends InnerBaseFragment {
 
         adapter = new MyCartListRecyclerViewAdapter(getPlaceholderContentInstant().ITEMS);
         binding.list.setAdapter(adapter);
-        binding.payPalButton.setup(new CreateOrder() {
-                                       @Override
-                                       public void create(@NotNull CreateOrderActions createOrderActions) {
-                                           ArrayList<PurchaseUnit> purchaseUnits = new ArrayList<>();
-                                           purchaseUnits.add(
-                                                   new PurchaseUnit.Builder()
-                                                           .amount(
-                                                                   new Amount.Builder()
-                                                                           .currencyCode(CurrencyCode.USD)
-                                                                           .value("10.00")
-                                                                           .build()
-                                                           )
-                                                           .build()
-                                           );
-                                           Order order = new Order(
-                                                   OrderIntent.CAPTURE,
-                                                   new AppContext.Builder()
-                                                           .userAction(UserAction.PAY_NOW)
-                                                           .build(),
-                                                   purchaseUnits
-                                           );
-                                           createOrderActions.create(order, (CreateOrderActions.OnOrderCreated) null);
-                                       }
-                                   },
-                new OnApprove() {
-                    @Override
-                    public void onApprove(@NotNull Approval approval) {
-                        approval.getOrderActions().capture(new OnCaptureComplete() {
-                            @Override
-                            public void onCaptureComplete(@NotNull CaptureOrderResult result) {
-                                Log.i("CaptureOrder", String.format("CaptureOrderResult: %s", result));
-                                if (result instanceof CaptureOrderResult.Success) {
-                                    //ORDER IS SUCCESS
-                                } else {
-                                    //TODO
+//        binding.payPalButton.setup(new CreateOrder() {
+//                                       @Override
+//                                       public void create(@NotNull CreateOrderActions createOrderActions) {
+//                                           ArrayList<PurchaseUnit> purchaseUnits = new ArrayList<>();
+//                                           purchaseUnits.add(
+//                                                   new PurchaseUnit.Builder()
+//                                                           .amount(
+//                                                                   new Amount.Builder()
+//                                                                           .currencyCode(CurrencyCode.USD)
+//                                                                           .value("10.00")
+//                                                                           .build()
+//                                                           )
+//                                                           .build()
+//                                           );
+//                                           Order order = new Order(
+//                                                   OrderIntent.CAPTURE,
+//                                                   new AppContext.Builder()
+//                                                           .userAction(UserAction.PAY_NOW)
+//                                                           .build(),
+//                                                   purchaseUnits
+//                                           );
+//                                           createOrderActions.create(order, (CreateOrderActions.OnOrderCreated) null);
+//                                       }
+//                                   },
+//                new OnApprove() {
+//                    @Override
+//                    public void onApprove(@NotNull Approval approval) {
+//                        approval.getOrderActions().capture(new OnCaptureComplete() {
+//                            @Override
+//                            public void onCaptureComplete(@NotNull CaptureOrderResult result) {
+//                                Log.i("CaptureOrder", String.format("CaptureOrderResult: %s", result));
+//                                if (result instanceof CaptureOrderResult.Success) {
+//                                    //ORDER IS SUCCESS
+//                                } else {
+//                                    //TODO
+//
+//                                }
+//                            }
+//                        });
+//                    }
+//                },
+//                new OnShippingChange() {
+//                    @Override
+//                    public void onShippingChanged(@NonNull ShippingChangeData shippingChangeData, @NonNull ShippingChangeActions shippingChangeActions) {
+//
+//                    }
+//                },
+//                new OnCancel() {
+//                    @Override
+//                    public void onCancel() {
+//                        Log.d("onCancel", "Buyer cancelled the paypal experience.");
+//                    }
+//                },
+//                new OnError() {
+//                    @Override
+//                    public void onError(@NonNull ErrorInfo errorInfo) {
+//                        Log.d("OnError", errorInfo.toString());
+//                    }
+//                });
 
-                                }
-                            }
-                        });
-                    }
-                },
-                new OnShippingChange() {
-                    @Override
-                    public void onShippingChanged(@NonNull ShippingChangeData shippingChangeData, @NonNull ShippingChangeActions shippingChangeActions) {
+        binding.setAddressTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), AddressActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(ProductListFragment.PARAMS_CID, cid);
+                intent.putExtras(bundle);
 
-                    }
-                },
-                new OnCancel() {
-                    @Override
-                    public void onCancel() {
-                        Log.d("onCancel", "Buyer cancelled the paypal experience.");
-                    }
-                },
-                new OnError() {
-                    @Override
-                    public void onError(@NonNull ErrorInfo errorInfo) {
-                        Log.d("OnError", errorInfo.toString());
-                    }
-                });
+                registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                    Intent data = result.getData();
+
+                }).launch(intent);
+            }
+        });
 
     }
 

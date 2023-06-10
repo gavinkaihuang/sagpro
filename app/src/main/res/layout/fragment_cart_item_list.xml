@@ -35,6 +35,7 @@
 
 
         <TextView
+            android:id="@+id/setAddressTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -47,10 +48,10 @@
         android:id="@+id/promptTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_small"
         android:text="Total:"
+        android:layout_margin="@dimen/margin_8x"
         android:textAppearance="@style/TextStyle_Prompt"
-        app:layout_constraintTop_toTopOf="@+id/payButton" />
+        app:layout_constraintBottom_toBottomOf="@+id/payButton"/>
 
     <TextView
         android:id="@+id/priceTextView"
@@ -67,43 +68,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_small"
-        android:text="USD"
+        android:text="@string/label_unit"
         android:textAppearance="@style/TextStyle_Prompt"
         app:layout_constraintStart_toEndOf="@+id/priceTextView"
         app:layout_constraintTop_toTopOf="@+id/promptTextView" />
-<!--
+
     <Button
         android:id="@+id/payButton"
         android:layout_width="@dimen/button_long_width"
         android:layout_height="wrap_content"
         android:background="@drawable/xml_common_button"
-        android:text="PayPal"
+        android:text="@string/label_pay"
         android:textAppearance="@style/TextStyle_Button_Text_WHITE"
-        android:layout_marginTop="@dimen/margin_small"
+        android:layout_margin="@dimen/margin_8x"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
 
-        -->
-<!--    <com.paypal.checkout.paymentbutton.PaymentButtonContainer-->
-<!--        android:id="@+id/payButton"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:paypal_button_color="silver"-->
-<!--        app:paypal_button_label="pay"-->
-<!--        app:paypal_button_shape="rectangle"-->
-<!--        app:paypal_button_size="large"-->
-<!--        app:paypal_button_enabled="true"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"/>-->
-
-
-    <com.paypal.checkout.paymentbutton.PayPalButton
-        android:id="@+id/payPalButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -112,7 +93,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/payPalButton"
+        app:layout_constraintBottom_toTopOf="@+id/payButton"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         tools:context=".ui.carts.CartListFragment"
         tools:listitem="@layout/fragment_cart_item" />

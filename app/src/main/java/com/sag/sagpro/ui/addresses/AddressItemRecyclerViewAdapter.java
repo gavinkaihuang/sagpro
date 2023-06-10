@@ -3,7 +3,9 @@ package com.sag.sagpro.ui.addresses;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sag.sagpro.databinding.FragmentAddressItemBinding;
@@ -42,10 +44,13 @@ public class AddressItemRecyclerViewAdapter extends RecyclerView.Adapter<Address
         AddressPlaceholderItem item = (AddressPlaceholderItem) mValues.get(position);
 
         holder.mItem = mValues.get(position);
-        if (item.getChoose().equals("1")) {
-            holder.nameView.setText(item.getName() + " (default)");
-        } else
-            holder.nameView.setText(item.getName());
+
+        if (item.getChoose().equals("1"))
+            holder.defaultIV.setVisibility(View.VISIBLE);
+//            holder.nameView.setText(item.getName() + " (default)");
+        else
+            holder.defaultIV.setVisibility(View.GONE);
+        holder.nameView.setText(item.getName());
         holder.addressView.setText(item.getAddress());
         holder.phoneView.setText(item.getPhone());
     }
@@ -63,6 +68,7 @@ public class AddressItemRecyclerViewAdapter extends RecyclerView.Adapter<Address
         public final TextView nameView;
         public final TextView addressView;
         public final TextView phoneView;
+        public final ImageView defaultIV;
         public PlaceholderItem mItem;
 
         public ViewHolder(FragmentAddressItemBinding binding) {
@@ -70,6 +76,7 @@ public class AddressItemRecyclerViewAdapter extends RecyclerView.Adapter<Address
             nameView = binding.nameTV;
             addressView = binding.addressTV;
             phoneView = binding.phoneTV;
+            defaultIV = binding.defaultIV;
         }
 
         @Override

@@ -46,6 +46,7 @@ import com.sag.sagpro.activities.AddressActivity;
 import com.sag.sagpro.databinding.FragmentCartItemBinding;
 import com.sag.sagpro.databinding.FragmentCartItemListBinding;
 import com.sag.sagpro.ui.InnerBaseFragment;
+import com.sag.sagpro.ui.addresses.AddressEditFragment;
 import com.sag.sagpro.ui.messages.placeholder.MessagePlaceholderContent;
 import com.sag.sagpro.ui.messages.placeholder.MessagePlaceholderItem;
 import com.sag.sagpro.ui.products.MyProductItemRecyclerViewAdapter;
@@ -103,9 +104,17 @@ public class CartListFragment extends InnerBaseFragment {
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == Activity.RESULT_OK) {
                 Intent data = result.getData();
+                data.getStringExtra(AddressEditFragment.PARAMS_NAME);
+                System.out.println(data);
                 // 处理返回的数据
             }
         });
+
+//        registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+//            Intent data = result.getData();
+//            LogUtils.i();
+//
+//        }).launch(null);
     }
 
     @Override
@@ -180,19 +189,20 @@ public class CartListFragment extends InnerBaseFragment {
 //                    }
 //                });
 
-        binding.setAddressTV.setOnClickListener(new View.OnClickListener() {
+        binding.setAddressLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), AddressActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString(ProductListFragment.PARAMS_CID, cid);
+                bundle.putString(AddressActivity.PARAMS_RETURN_ADDRESS, "1");
                 intent.putExtras(bundle);
 
-                registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-                    Intent data = result.getData();
-
-                }).launch(intent);
+//                registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+//                    Intent data = result.getData();
+//
+//                }).launch(intent);
+                launcher.launch(intent);
             }
         });
 

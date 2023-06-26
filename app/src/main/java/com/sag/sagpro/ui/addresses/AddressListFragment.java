@@ -1,5 +1,8 @@
 package com.sag.sagpro.ui.addresses;
 
+import static android.app.Activity.RESULT_OK;
+import static com.sag.sagpro.activities.AddressActivity.PARAMS_RETURN_ADDRESS;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +21,7 @@ import android.view.ViewGroup;
 import com.sag.sagpro.BaseActivity;
 import com.sag.sagpro.ConstantData;
 import com.sag.sagpro.R;
+import com.sag.sagpro.activities.AddressActivity;
 import com.sag.sagpro.activities.ProductDetailsActivity;
 import com.sag.sagpro.databinding.FragmentAddressItemBinding;
 import com.sag.sagpro.databinding.FragmentAddressItemListBinding;
@@ -45,6 +49,7 @@ public class AddressListFragment extends InnerBaseFragment {
     private AddressItemRecyclerViewAdapter itemRecyclerViewAdapter = null;
     private FragmentAddressItemListBinding binding = null;
     NavController navController = null;
+    boolean isReturnAddress = false;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -57,9 +62,6 @@ public class AddressListFragment extends InnerBaseFragment {
     @SuppressWarnings("unused")
     public static AddressListFragment newInstance() {
         AddressListFragment fragment = new AddressListFragment();
-//        Bundle args = new Bundle();
-//        args.putInt(ARG_COLUMN_COUNT, columnCount);
-//        fragment.setArguments(args);
         return fragment;
     }
 
@@ -67,6 +69,16 @@ public class AddressListFragment extends InnerBaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActivity().setTitle(getResources().getString(R.string.title_activity_address_list));
+
+        Bundle args = getArguments();
+        if (args != null) {
+            isReturnAddress = args.getString(PARAMS_RETURN_ADDRESS) == null ? false:true;
+        }
+//        Intent intent =  getIntent();
+//        Bundle bundles = intent.getExtras();
+//        boolean isReturnAddress = savedInstanceState.getString(AddressActivity.PARAMS_RETURN_ADDRESS) == null ? false : true;
+////        boolean isReturnAddress = savedInstanceState.getStringExtra(PARAMS_RETURN_ADDRESS) == null ? false : true;
+//        LogUtils.i("AddressListFragment return address is " + isReturnAddress);
     }
 
     @Override
@@ -103,14 +115,26 @@ public class AddressListFragment extends InnerBaseFragment {
                     return;
 
                 AddressPlaceholderItem addPHI = (AddressPlaceholderItem) phi;
-//                String aid = addPHI.getAid();
-                Bundle bundle = new Bundle();
-                bundle.putString(AddressEditFragment.PARAMS_ADDRESS_ID, addPHI.getAid());
-                bundle.putString(AddressEditFragment.PARAMS_NAME, addPHI.getName());
-                bundle.putString(AddressEditFragment.PARAMS_ADDRESS, addPHI.getAddress());
-                bundle.putString(AddressEditFragment.PARAMS_PHONE, addPHI.getPhone());
-                bundle.putString(AddressEditFragment.PARAMS_CHOOSE, addPHI.getChoose());
-                Navigation.findNavController(view).navigate(R.id.item_navigation_address_edit, bundle);
+                if (isReturnAddress) {
+                    //for address select
+                    Intent intent = new Intent();
+                    intent.putExtra(AddressEditFragment.PARAMS_ADDRESS_ID, addPHI.getAid());
+                    intent.putExtra(AddressEditFragment.PARAMS_NAME, addPHI.getName());
+                    intent.putExtra(AddressEditFragment.PARAMS_ADDRESS, addPHI.getAddress());
+                    intent.putExtra(AddressEditFragment.PARAMS_PHONE, addPHI.getPhone());
+                    intent.putExtra(AddressEditFragment.PARAMS_CHOOSE, addPHI.getChoose());
+                    getActivity().setResult(RESULT_OK, intent);
+                    getActivity().finish();
+
+                } else {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(AddressEditFragment.PARAMS_ADDRESS_ID, addPHI.getAid());
+                    bundle.putString(AddressEditFragment.PARAMS_NAME, addPHI.getName());
+                    bundle.putString(AddressEditFragment.PARAMS_ADDRESS, addPHI.getAddress());
+                    bundle.putString(AddressEditFragment.PARAMS_PHONE, addPHI.getPhone());
+                    bundle.putString(AddressEditFragment.PARAMS_CHOOSE, addPHI.getChoose());
+                    Navigation.findNavController(view).navigate(R.id.item_navigation_address_edit, bundle);
+                }
             }
 
             @Override
@@ -135,6 +159,7 @@ public class AddressListFragment extends InnerBaseFragment {
             }
         });
     }
+
 
     /*
      * request data from server start

@@ -9,7 +9,7 @@
     >
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/setAddressLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -94,7 +94,7 @@
         android:layout_height="0dp"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/payButton"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/setAddressLinearLayout"
         tools:context=".ui.carts.CartListFragment"
         tools:listitem="@layout/fragment_cart_item" />
 
